@@ -408,6 +408,42 @@ img { max-width: 100%; display: block; }
 .compare .no { color: var(--red); font-weight: 700; margin-right: 6px; }
 .compare .mid { color: var(--amber); font-weight: 700; margin-right: 6px; }
 
+/* ---------- Plans / subscriptions ---------- */
+.plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
+.price-card { padding: 38px 32px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+.plan-tagline { color: var(--text-dim); font-size: 0.92rem; margin-top: 10px; }
+.price {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1;
+  margin: 24px 0 6px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.price-per { font-size: 0.95rem; font-weight: 500; color: var(--text-dim); letter-spacing: 0; }
+.price-from { font-size: 0.9rem; font-weight: 500; color: var(--text-dim); }
+.plan-includes {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 16px;
+}
+.price-card .card-list { margin: 14px 0 30px; flex: 1; }
+.btn-block { justify-content: center; width: 100%; margin-top: auto; }
+.plans-note {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  max-width: 640px;
+  margin: 44px auto 0;
+}
+.plans-note a { color: var(--accent); }
+.plans-note a:hover { text-decoration: underline; }
+
 /* ---------- Testimonials ---------- */
 .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .quote { padding: 34px 30px 30px; display: flex; flex-direction: column; }
@@ -535,7 +571,7 @@ img { max-width: 100%; display: block; }
   .bento-wide { grid-column: span 2; grid-row: auto; }
 }
 @media (max-width: 960px) {
-  .cards-3, .quotes { grid-template-columns: 1fr; max-width: 540px; margin-left: auto; margin-right: auto; }
+  .cards-3, .quotes, .plans { grid-template-columns: 1fr; max-width: 540px; margin-left: auto; margin-right: auto; }
   .problem-layout { grid-template-columns: 1fr; gap: 44px; }
   .problem-sticky { position: static; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
