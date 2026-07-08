@@ -4,35 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Estara AI</title>
-  <meta name="description" content="Estara AI helps businesses design intelligent workflows, automate operations, and build custom software that scales. AI consulting, software development and workflow automation — London, UK." />
+  <meta name="description" content="Estara AI designs intelligent workflows, automates operations, and builds custom software that scales. 1,500+ hours saved for clients. AI consulting, software development and workflow automation — London, UK." />
   <meta property="og:title" content="Estara AI — We Engineer Competitive Advantages" />
-  <meta property="og:description" content="AI consulting, custom software and automated workflows that deliver measurable ROI." />
+  <meta property="og:description" content="AI consulting, custom software and automated workflows. 1,500+ hours saved, 35+ projects delivered." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://estaraai.com/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <!-- Favicon: place your logo PNG at assets/logo.png (falls back to your current CDN copy) -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="apple-touch-icon" href="assets/logo.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
+  <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
 
   <!-- ======= NAV ======= -->
   <header class="nav" id="nav">
     <div class="nav-inner">
       <a href="#top" class="logo">
-        <img src="assets/logo.png" onerror="this.onerror=null;this.src='https://cdn.cmsfly.com/69ba79c7c237270012a59d03/images/IMG_2898-pgKWj.png'" alt="Estara AI logo" class="logo-img" />
+        <img src="assets/logo.png" alt="Estara AI logo" class="logo-img" />
         Estara<span class="logo-accent">AI</span>
       </a>
       <nav class="nav-links" id="navLinks">
         <a href="#services">Services</a>
+        <a href="#why">Why us</a>
         <a href="#process">Process</a>
-        <a href="#testimonials">Clients</a>
+        <a href="#compare">Compare</a>
         <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
       </nav>
-      <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary btn-nav">Book a call</a>
+      <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary btn-nav magnetic">Book a call</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
   </header>
@@ -40,76 +42,120 @@
   <!-- ======= HERO ======= -->
   <section class="hero" id="top">
     <canvas id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-grid" aria-hidden="true"></div>
     <div class="hero-glow hero-glow-1" aria-hidden="true"></div>
     <div class="hero-glow hero-glow-2" aria-hidden="true"></div>
     <div class="hero-content">
       <div class="hero-badge reveal">
         <span class="pulse-dot" aria-hidden="true"></span>
-        Accepting new clients for Q3 2026
+        Accepting new clients for Q3 2026 — limited capacity
       </div>
-      <h1 class="reveal">We don't implement AI.<br /><span class="gradient-text">We engineer competitive advantages.</span></h1>
-      <p class="hero-sub reveal">Estara AI designs intelligent workflows, automates operations, and builds custom software that actually scales — so your business moves faster than the competition.</p>
+      <h1 class="hero-title">
+        <span class="word">Your</span> <span class="word">competitors</span> <span class="word">are</span> <span class="word">already</span> <span class="word serif-accent">automating.</span><br />
+        <span class="word">We</span> <span class="word">make</span> <span class="word">sure</span> <span class="word">you</span> <span class="word gradient-text">win&nbsp;anyway.</span>
+      </h1>
+      <p class="hero-sub reveal">Estara AI engineers intelligent workflows, custom software and AI systems that cut costs, kill busywork, and compound your advantage — built for your business, not off a shelf.</p>
       <div class="hero-ctas reveal">
-        <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Book a free strategy call <span class="arrow" aria-hidden="true">&rarr;</span></a>
-        <a href="#services" class="btn btn-ghost btn-lg">Explore our services</a>
+        <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary btn-lg magnetic">Book a free strategy call <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="#services" class="btn btn-ghost btn-lg">See what we build</a>
       </div>
+      <p class="hero-microcopy reveal">30 minutes. No pitch, no pressure — leave with a plan whether you hire us or not.</p>
       <div class="hero-stats reveal">
-        <div class="stat"><span class="stat-num" data-count="30">0</span><span class="stat-unit">min</span><span class="stat-label">Free consultation</span></div>
+        <div class="stat"><span class="stat-num"><span data-count="1500">0</span>+</span><span class="stat-label">Hours saved for clients</span></div>
         <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat"><span class="stat-num" data-count="3">0</span><span class="stat-unit">core</span><span class="stat-label">Service disciplines</span></div>
+        <div class="stat"><span class="stat-num"><span data-count="35">0</span>+</span><span class="stat-label">Projects delivered</span></div>
         <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat"><span class="stat-num" data-count="100">0</span><span class="stat-unit">%</span><span class="stat-label">Tailored to your business</span></div>
+        <div class="stat"><span class="stat-num"><span data-count="100">0</span>%</span><span class="stat-label">Bespoke — nothing off the shelf</span></div>
       </div>
     </div>
     <div class="scroll-hint" aria-hidden="true"><span></span></div>
   </section>
 
+  <!-- ======= TECH STRIP ======= -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>OpenAI</span><span class="dot"></span><span>Anthropic</span><span class="dot"></span><span>Python</span><span class="dot"></span><span>AWS</span><span class="dot"></span><span>Make</span><span class="dot"></span><span>Zapier</span><span class="dot"></span><span>React</span><span class="dot"></span><span>Node.js</span><span class="dot"></span><span>PostgreSQL</span><span class="dot"></span><span>LangChain</span><span class="dot"></span>
+      <span>OpenAI</span><span class="dot"></span><span>Anthropic</span><span class="dot"></span><span>Python</span><span class="dot"></span><span>AWS</span><span class="dot"></span><span>Make</span><span class="dot"></span><span>Zapier</span><span class="dot"></span><span>React</span><span class="dot"></span><span>Node.js</span><span class="dot"></span><span>PostgreSQL</span><span class="dot"></span><span>LangChain</span><span class="dot"></span>
+    </div>
+  </div>
+
+  <!-- ======= PROBLEM ======= -->
+  <section class="section" id="problem">
+    <div class="container">
+      <div class="problem-layout">
+        <div class="problem-sticky">
+          <span class="eyebrow reveal">The cost of waiting</span>
+          <h2 class="reveal">Every week without automation is <span class="serif-accent">margin</span> you hand to competitors.</h2>
+          <p class="reveal problem-lead">Most businesses know AI matters. Very few know where it actually pays. That gap is where we work.</p>
+          <div class="reveal"><a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary magnetic">Find your gap — free <span class="arrow" aria-hidden="true">&rarr;</span></a></div>
+        </div>
+        <div class="problem-cards">
+          <div class="pain-card spotlight reveal">
+            <div class="pain-num">01</div>
+            <h3>Your team drowns in busywork</h3>
+            <p>Copy-pasting between systems, chasing approvals, re-keying data. Hours of skilled salary spent on work a machine should do — every single day.</p>
+          </div>
+          <div class="pain-card spotlight reveal">
+            <div class="pain-num">02</div>
+            <h3>Off-the-shelf tools don't fit</h3>
+            <p>You've tried the SaaS stack. Now you run eleven subscriptions that almost work, held together with spreadsheets and hope.</p>
+          </div>
+          <div class="pain-card spotlight reveal">
+            <div class="pain-num">03</div>
+            <h3>"AI strategy" that never ships</h3>
+            <p>Decks, workshops, roadmaps — and nothing in production. We're engineers first: if it doesn't ship and save you money, it doesn't count.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ======= SERVICES ======= -->
-  <section class="section" id="services">
+  <section class="section section-alt" id="services">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow">What we do</span>
-        <h2>Three disciplines.<br /><span class="gradient-text">One outcome: your growth.</span></h2>
-        <p>From strategy to shipped software, Estara AI has your back every step of the way.</p>
+        <span class="eyebrow">What we build</span>
+        <h2>Three disciplines. One outcome: <span class="serif-accent">your growth.</span></h2>
+        <p>From strategy to shipped software — designed, built and maintained by the same team.</p>
       </div>
       <div class="cards-3">
-        <article class="card reveal">
+        <article class="card spotlight reveal">
           <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.1-2.5 5.4-.7.8-1 1.6-1 2.6H8.5c0-1-.3-1.8-1-2.6C6.2 13.1 5 11.4 5 9a7 7 0 0 1 7-7z"/><path d="M9 21h6M10 24h4"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.1-2.5 5.4-.7.8-1 1.6-1 2.6H8.5c0-1-.3-1.8-1-2.6C6.2 13.1 5 11.4 5 9a7 7 0 0 1 7-7z"/><path d="M9 21h6"/></svg>
           </div>
           <h3>AI Consulting</h3>
-          <p>Practical, results-driven AI strategy. We identify high-impact use cases, cut through the hype, and turn complex technology into real business value — with a clear roadmap from day one.</p>
+          <p>We audit your operations, find where AI genuinely pays, and hand you a prioritised roadmap — practical use cases ranked by ROI, not hype.</p>
           <ul class="card-list">
-            <li>High-impact use case discovery</li>
-            <li>Implementation &amp; optimisation</li>
-            <li>Actionable, focused roadmaps</li>
+            <li>Operations &amp; data audit</li>
+            <li>Use cases ranked by ROI</li>
+            <li>Clear build-vs-buy calls</li>
           </ul>
           <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="card-link">Discuss your strategy <span aria-hidden="true">&rarr;</span></a>
         </article>
-        <article class="card card-featured reveal">
+        <article class="card spotlight card-featured reveal">
           <div class="card-badge">Most requested</div>
           <div class="card-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h13"/><circle cx="20" cy="12" r="1.6"/><circle cx="19.5" cy="17" r="1.6"/><circle cx="21" cy="7" r="1.6" fill="currentColor" stroke="none"/></svg>
           </div>
           <h3>Workflow Automation</h3>
-          <p>We analyse your current processes, then reimagine them with smart tools and automation — saving hours of manual work, reducing errors, and helping your business scale without the strain.</p>
+          <p>We map your processes end-to-end, then rebuild them with automation and AI — so quotes go out in minutes, data moves itself, and your team does the work only humans can.</p>
           <ul class="card-list">
-            <li>Process analysis &amp; redesign</li>
+            <li>Process mapping &amp; redesign</li>
             <li>End-to-end automation builds</li>
-            <li>Data-driven optimisation</li>
+            <li>Measured in hours saved</li>
           </ul>
           <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="card-link">Automate your operations <span aria-hidden="true">&rarr;</span></a>
         </article>
-        <article class="card reveal">
+        <article class="card spotlight reveal">
           <div class="card-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-5 6 5 6M16 6l5 6-5 6M13.5 4l-3 16"/></svg>
           </div>
           <h3>Software Development</h3>
-          <p>Reliable, scalable software engineered for your exact needs — custom applications, system integrations, or modernising existing platforms. Built for performance, security and the long term.</p>
+          <p>Custom applications, integrations and platform modernisation — engineered for performance, security and the long haul. Built to fit your business exactly.</p>
           <ul class="card-list">
             <li>Custom application builds</li>
             <li>System integration</li>
-            <li>Platform modernisation</li>
+            <li>Secure, scalable, maintained</li>
           </ul>
           <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="card-link">Scope your build <span aria-hidden="true">&rarr;</span></a>
         </article>
@@ -117,47 +163,132 @@
     </div>
   </section>
 
-  <!-- ======= MARQUEE ======= -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>AI Strategy</span><span class="dot"></span><span>Workflow Automation</span><span class="dot"></span><span>Custom Software</span><span class="dot"></span><span>System Integration</span><span class="dot"></span><span>Process Optimisation</span><span class="dot"></span><span>AI Implementation</span><span class="dot"></span>
-      <span>AI Strategy</span><span class="dot"></span><span>Workflow Automation</span><span class="dot"></span><span>Custom Software</span><span class="dot"></span><span>System Integration</span><span class="dot"></span><span>Process Optimisation</span><span class="dot"></span><span>AI Implementation</span><span class="dot"></span>
-    </div>
-  </div>
-
-  <!-- ======= PROCESS ======= -->
-  <section class="section" id="process">
+  <!-- ======= WHY ESTARA (BENTO) ======= -->
+  <section class="section" id="why">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow">How it works</span>
-        <h2>From first call to <span class="gradient-text">shipped &amp; scaling</span></h2>
-        <p>A proven three-step engagement — clear timelines, no surprises.</p>
+        <span class="eyebrow">Why Estara</span>
+        <h2>We don't implement AI.<br /><span class="gradient-text">We engineer competitive advantages.</span></h2>
       </div>
-      <div class="steps">
-        <div class="step reveal">
-          <div class="step-num">01</div>
-          <div class="step-body">
-            <h3>Discover &amp; Identify</h3>
-            <p>We take a deep dive into your business — systems, workflows, and processes — to find the inefficiencies, bottlenecks and high-impact opportunities where AI and automation deliver the most value.</p>
+      <div class="bento">
+        <div class="bento-tile bento-wide spotlight reveal">
+          <h3>Engineers, not middlemen</h3>
+          <p>You talk directly to the people building your system. No account managers, no outsourced dev teams, no translation loss — decisions get made in the room, and quality stays under one roof.</p>
+          <div class="bento-visual" aria-hidden="true">
+            <div class="code-line"><span class="code-key">workflow</span>.automate(<span class="code-str">"invoicing"</span>)</div>
+            <div class="code-line"><span class="code-key">hours_saved</span> += <span class="code-num">12</span> <span class="code-comment">// per week</span></div>
+            <div class="code-line"><span class="code-key">deploy</span>(<span class="code-str">"production"</span>) <span class="code-ok">✓ shipped</span></div>
           </div>
         </div>
-        <div class="step reveal">
-          <div class="step-num">02</div>
-          <div class="step-body">
-            <h3>Design &amp; Build</h3>
-            <p>We design and develop tailored solutions that fit seamlessly into your business — AI implementation, custom software, or restructured workflows — built for performance and long-term reliability.</p>
+        <div class="bento-tile spotlight reveal">
+          <div class="bento-stat"><span data-count="1500">0</span>+</div>
+          <h3>Hours saved</h3>
+          <p>Measured across client operations — real time returned to real teams.</p>
+        </div>
+        <div class="bento-tile spotlight reveal">
+          <div class="bento-stat"><span data-count="35">0</span>+</div>
+          <h3>Projects delivered</h3>
+          <p>Across consulting, automation and full custom software builds.</p>
+        </div>
+        <div class="bento-tile spotlight reveal">
+          <h3>ROI before invoices</h3>
+          <p>Every engagement starts by quantifying the value. If the numbers don't work, we'll tell you — before you spend a penny.</p>
+        </div>
+        <div class="bento-tile spotlight reveal">
+          <h3>Fully insured &amp; secure</h3>
+          <p>Professional Indemnity, Public &amp; Product Liability and Cyber cover. Your data handled to production-grade security standards.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= PROCESS (TIMELINE) ======= -->
+  <section class="section section-alt" id="process">
+    <div class="container container-narrow">
+      <div class="section-head reveal">
+        <span class="eyebrow">How it works</span>
+        <h2>From first call to <span class="serif-accent">shipped &amp; scaling</span></h2>
+      </div>
+      <div class="timeline" id="timeline">
+        <div class="timeline-line" aria-hidden="true"><span id="timelineFill"></span></div>
+        <div class="tl-step reveal">
+          <div class="tl-node" aria-hidden="true">01</div>
+          <div class="tl-body">
+            <h3>Discover &amp; Identify <span class="tl-tag">Week 1</span></h3>
+            <p>A deep dive into your systems, workflows and numbers. We find the bottlenecks and rank the opportunities by ROI — so we attack the highest-value problem first.</p>
           </div>
         </div>
-        <div class="step reveal">
-          <div class="step-num">03</div>
-          <div class="step-body">
-            <h3>Optimise &amp; Scale</h3>
-            <p>Once live, we refine your systems to deliver consistent results. As you grow, we continue to enhance and adapt — helping you scale without added complexity or operational strain.</p>
+        <div class="tl-step reveal">
+          <div class="tl-node" aria-hidden="true">02</div>
+          <div class="tl-body">
+            <h3>Design &amp; Build <span class="tl-tag">Weeks 2–6</span></h3>
+            <p>We design and build the solution — AI implementation, automation or custom software — with weekly demos so you see progress, not promises.</p>
+          </div>
+        </div>
+        <div class="tl-step reveal">
+          <div class="tl-node" aria-hidden="true">03</div>
+          <div class="tl-body">
+            <h3>Optimise &amp; Scale <span class="tl-tag">Ongoing</span></h3>
+            <p>Once live, we measure, refine and extend. As you grow, your systems grow with you — without added complexity or headcount.</p>
           </div>
         </div>
       </div>
       <div class="section-cta reveal">
-        <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Start with step one — it's free <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary btn-lg magnetic">Start with step one — it's free <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= COMPARISON ======= -->
+  <section class="section" id="compare">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">The honest comparison</span>
+        <h2>Three ways to get this done. <span class="serif-accent">One of them works.</span></h2>
+      </div>
+      <div class="compare-wrap reveal">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="compare-hero">Estara AI</th>
+              <th>Typical agency</th>
+              <th>DIY / in-house</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Who does the work</td>
+              <td class="compare-hero"><span class="yes">✓</span> Senior engineers, directly</td>
+              <td><span class="no">✕</span> Juniors behind an account manager</td>
+              <td><span class="mid">~</span> Your team, on top of their day job</td>
+            </tr>
+            <tr>
+              <td>Time to first result</td>
+              <td class="compare-hero"><span class="yes">✓</span> Weeks</td>
+              <td><span class="mid">~</span> Months of discovery first</td>
+              <td><span class="no">✕</span> Months of trial &amp; error</td>
+            </tr>
+            <tr>
+              <td>Built for your business</td>
+              <td class="compare-hero"><span class="yes">✓</span> 100% bespoke</td>
+              <td><span class="mid">~</span> Templated, rebranded</td>
+              <td><span class="mid">~</span> Limited by tool knowledge</td>
+            </tr>
+            <tr>
+              <td>ROI accountability</td>
+              <td class="compare-hero"><span class="yes">✓</span> Quantified before we start</td>
+              <td><span class="no">✕</span> Billed by the hour, regardless</td>
+              <td><span class="no">✕</span> Hidden in lost productivity</td>
+            </tr>
+            <tr>
+              <td>After launch</td>
+              <td class="compare-hero"><span class="yes">✓</span> Optimised &amp; maintained</td>
+              <td><span class="no">✕</span> New statement of work</td>
+              <td><span class="no">✕</span> Breaks when the builder leaves</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -174,20 +305,20 @@
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Client results</span>
-        <h2>Don't take our word for it. <span class="gradient-text">Take theirs.</span></h2>
+        <h2>Don't take our word for it. <span class="serif-accent">Take theirs.</span></h2>
       </div>
       <div class="quotes">
-        <figure class="quote reveal">
+        <figure class="quote spotlight reveal">
           <div class="quote-mark" aria-hidden="true">&ldquo;</div>
           <blockquote>[Client quote goes here — e.g. "Estara automated our entire onboarding process and saved our team 15 hours a week."]</blockquote>
           <figcaption><strong>[Client Name]</strong><span>[Role, Company]</span></figcaption>
         </figure>
-        <figure class="quote reveal">
+        <figure class="quote spotlight reveal">
           <div class="quote-mark" aria-hidden="true">&ldquo;</div>
           <blockquote>[Client quote goes here — e.g. "The custom platform they built has transformed how we operate. Worth every penny."]</blockquote>
           <figcaption><strong>[Client Name]</strong><span>[Role, Company]</span></figcaption>
         </figure>
-        <figure class="quote reveal">
+        <figure class="quote spotlight reveal">
           <div class="quote-mark" aria-hidden="true">&ldquo;</div>
           <blockquote>[Client quote goes here — e.g. "Clear communication, fast delivery, and real measurable ROI within the first month."]</blockquote>
           <figcaption><strong>[Client Name]</strong><span>[Role, Company]</span></figcaption>
@@ -201,32 +332,32 @@
     <div class="container container-narrow">
       <div class="section-head reveal">
         <span class="eyebrow">FAQ</span>
-        <h2>Questions? <span class="gradient-text">Answers.</span></h2>
+        <h2>Questions? <span class="serif-accent">Answers.</span></h2>
       </div>
       <div class="faq-list">
         <details class="faq-item reveal">
           <summary>What types of businesses do you work with?<span class="faq-icon" aria-hidden="true"></span></summary>
-          <p>We work with startups, scale-ups, and established businesses across a wide range of industries. Whether you're looking to experiment with AI or need a fully engineered solution, we tailor our approach to fit your stage and goals.</p>
+          <p>Startups, scale-ups and established businesses across a wide range of industries. Whether you're experimenting with AI or need a fully engineered solution, we tailor our approach to your stage and goals.</p>
         </details>
         <details class="faq-item reveal">
           <summary>How do you identify the right AI solutions for our business?<span class="faq-icon" aria-hidden="true"></span></summary>
-          <p>We start by understanding your processes, data, and objectives. From there, we identify high-impact opportunities where AI can deliver measurable value — focusing on practical use cases rather than unnecessary complexity.</p>
+          <p>We start with your processes, data and objectives, then identify the opportunities where AI delivers measurable value — practical use cases ranked by ROI, never complexity for its own sake.</p>
         </details>
         <details class="faq-item reveal">
           <summary>Do you build custom software or use existing tools?<span class="faq-icon" aria-hidden="true"></span></summary>
-          <p>Both. We evaluate whether a custom-built solution or existing platforms will best meet your needs. Our goal is always to deliver the most effective, scalable, and cost-efficient outcome.</p>
+          <p>Both. We make an honest build-vs-buy call for every problem. The goal is the most effective, scalable and cost-efficient outcome — not the most billable one.</p>
         </details>
         <details class="faq-item reveal">
           <summary>How long does a typical project take?<span class="faq-icon" aria-hidden="true"></span></summary>
-          <p>Timelines vary with scope. Smaller workflow improvements can take a few weeks, while larger software or AI implementations may take several months. We provide clear timelines upfront and keep you informed throughout.</p>
+          <p>Smaller workflow automations ship in a few weeks; larger software or AI builds can take several months. Either way you get clear timelines upfront and weekly demos throughout.</p>
         </details>
         <details class="faq-item reveal">
           <summary>Can you improve our existing systems and workflows?<span class="faq-icon" aria-hidden="true"></span></summary>
-          <p>Absolutely. We often work with existing systems — identifying inefficiencies and enhancing them with better design, automation, and integration, without requiring a full rebuild unless necessary.</p>
+          <p>Absolutely — most of our work enhances what you already have with better design, automation and integration. Full rebuilds only when they're genuinely justified.</p>
         </details>
         <details class="faq-item reveal">
-          <summary>What makes your approach different?<span class="faq-icon" aria-hidden="true"></span></summary>
-          <p>We focus on real business outcomes, not just technical solutions. That means prioritising simplicity, scalability, and measurable impact — ensuring everything we build actually supports your growth.</p>
+          <summary>What does the free strategy call involve?<span class="faq-icon" aria-hidden="true"></span></summary>
+          <p>Thirty minutes on your operations and goals. You leave with a focused plan and honest recommendations — whether or not you work with us. No pitch deck, no pressure.</p>
         </details>
       </div>
     </div>
@@ -236,19 +367,24 @@
   <section class="cta-banner reveal" id="book">
     <div class="cta-glow" aria-hidden="true"></div>
     <div class="container">
-      <h2>Ready to build <span class="gradient-text">smarter systems?</span></h2>
-      <p>Book a free 30-minute strategy call. Leave with a focused plan and actionable recommendations — no obligation.</p>
-      <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary btn-xl">Book your free call now <span class="arrow" aria-hidden="true">&rarr;</span></a>
-      <span class="cta-note">Fully insured — Professional Indemnity, Public &amp; Product Liability, Cyber Liability.</span>
+      <span class="eyebrow">Free 30-minute strategy call</span>
+      <h2>Walk away with a plan.<br /><span class="gradient-text">Whether you hire us or not.</span></h2>
+      <ul class="cta-list">
+        <li>A review of your current workflows and systems</li>
+        <li>Your highest-ROI automation opportunities, identified</li>
+        <li>Honest recommendations — including "don't build this"</li>
+      </ul>
+      <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary btn-xl magnetic">Book your free call now <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      <span class="cta-note">Limited Q3 capacity · Fully insured — Professional Indemnity, Public &amp; Product Liability, Cyber Liability</span>
     </div>
   </section>
 
-  <!-- ======= CONTACT / FOOTER ======= -->
+  <!-- ======= FOOTER ======= -->
   <footer class="footer" id="contact">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="#top" class="logo"><img src="assets/logo.png" onerror="this.onerror=null;this.src='https://cdn.cmsfly.com/69ba79c7c237270012a59d03/images/IMG_2898-pgKWj.png'" alt="Estara AI logo" class="logo-img" />Estara<span class="logo-accent">AI</span></a>
+          <a href="#top" class="logo"><img src="assets/logo.png" alt="Estara AI logo" class="logo-img" />Estara<span class="logo-accent">AI</span></a>
           <p>AI consulting, custom software and workflow automation. We engineer competitive advantages.</p>
         </div>
         <div class="footer-col">
@@ -259,8 +395,9 @@
         <div class="footer-col">
           <h4>Explore</h4>
           <a href="#services">Services</a>
+          <a href="#why">Why us</a>
           <a href="#process">Process</a>
-          <a href="#testimonials">Clients</a>
+          <a href="#compare">Compare</a>
           <a href="#faq">FAQ</a>
         </div>
         <div class="footer-col">
