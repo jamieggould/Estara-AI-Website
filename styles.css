@@ -20,7 +20,6 @@
   --radius: 20px;
   --font-display: "Space Grotesk", sans-serif;
   --font-body: "Inter", sans-serif;
-  --font-serif: "Instrument Serif", serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -57,18 +56,6 @@ img { max-width: 100%; display: block; }
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-}
-.serif-accent {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: 0;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  padding-right: 0.06em; /* italic overhang */
 }
 
 .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
