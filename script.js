@@ -1,6 +1,8 @@
 /* ============================================================
-   ESTARA AI — script.js
-   Hero particle network, scroll reveals, nav, counters.
+   ESTARA AI — script.js  (v2, premium)
+   Progress bar · nav · hero word reveal · particle canvas ·
+   scroll reveals · counters · spotlight cards · magnetic
+   buttons · timeline fill
    ============================================================ */
 
 (function () {
@@ -8,13 +10,22 @@
 
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---------- Scroll progress bar ---------- */
+  var progressBar = document.getElementById("progressBar");
+  function updateProgress() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    progressBar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
+  }
+
   /* ---------- Sticky nav ---------- */
   var nav = document.getElementById("nav");
   function onScroll() {
     nav.classList.toggle("scrolled", window.scrollY > 24);
+    updateProgress();
+    updateTimeline();
   }
   window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
 
   /* ---------- Mobile menu ---------- */
   var toggle = document.getElementById("navToggle");
@@ -25,6 +36,16 @@
   links.addEventListener("click", function (e) {
     if (e.target.tagName === "A") links.classList.remove("open");
   });
+
+  /* ---------- Hero word-by-word reveal ---------- */
+  var words = document.querySelectorAll(".hero-title .word");
+  if (reducedMotion) {
+    words.forEach(function (w) { w.classList.add("in"); });
+  } else {
+    words.forEach(function (w, i) {
+      setTimeout(function () { w.classList.add("in"); }, 250 + i * 90);
+    });
+  }
 
   /* ---------- Scroll reveal ---------- */
   var revealEls = document.querySelectorAll(".reveal");
@@ -49,14 +70,14 @@
   var counters = document.querySelectorAll("[data-count]");
   function animateCounter(el) {
     var target = parseInt(el.getAttribute("data-count"), 10);
-    if (reducedMotion) { el.textContent = target; return; }
-    var duration = 1400;
+    if (reducedMotion) { el.textContent = target.toLocaleString(); return; }
+    var duration = 1600;
     var start = null;
     function tick(ts) {
       if (!start) start = ts;
       var progress = Math.min((ts - start) / duration, 1);
       var eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(target * eased);
+      el.textContent = Math.round(target * eased).toLocaleString();
       if (progress < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
@@ -75,7 +96,47 @@
     );
     counters.forEach(function (el) { cio.observe(el); });
   } else {
-    counters.forEach(function (el) { el.textContent = el.getAttribute("data-count"); });
+    counters.forEach(function (el) {
+      el.textContent = parseInt(el.getAttribute("data-count"), 10).toLocaleString();
+    });
+  }
+
+  /* ---------- Spotlight cards (mouse-tracked glow) ---------- */
+  if (!reducedMotion) {
+    document.querySelectorAll(".spotlight").forEach(function (card) {
+      card.addEventListener("mousemove", function (e) {
+        var rect = card.getBoundingClientRect();
+        card.style.setProperty("--mx", (e.clientX - rect.left) + "px");
+        card.style.setProperty("--my", (e.clientY - rect.top) + "px");
+      });
+    });
+  }
+
+  /* ---------- Magnetic buttons ---------- */
+  if (!reducedMotion && window.matchMedia("(pointer: fine)").matches) {
+    document.querySelectorAll(".magnetic").forEach(function (btn) {
+      var strength = 0.25;
+      btn.addEventListener("mousemove", function (e) {
+        var rect = btn.getBoundingClientRect();
+        var dx = e.clientX - (rect.left + rect.width / 2);
+        var dy = e.clientY - (rect.top + rect.height / 2);
+        btn.style.transform = "translate(" + dx * strength + "px," + dy * strength + "px)";
+      });
+      btn.addEventListener("mouseleave", function () {
+        btn.style.transform = "";
+      });
+    });
+  }
+
+  /* ---------- Timeline fill on scroll ---------- */
+  var timeline = document.getElementById("timeline");
+  var timelineFill = document.getElementById("timelineFill");
+  function updateTimeline() {
+    if (!timeline || !timelineFill) return;
+    var rect = timeline.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var progress = (vh * 0.75 - rect.top) / rect.height;
+    timelineFill.style.height = Math.max(0, Math.min(1, progress)) * 100 + "%";
   }
 
   /* ---------- Hero particle network ---------- */
@@ -163,4 +224,6 @@
     window.addEventListener("resize", resize);
     requestAnimationFrame(draw);
   }
+
+  onScroll();
 })();
