@@ -1,8 +1,7 @@
 /* ============================================================
-   ESTARA AI — script.js  (v2, premium)
-   Progress bar · nav · hero word reveal · particle canvas ·
-   scroll reveals · counters · spotlight cards · magnetic
-   buttons · timeline fill
+   ESTARA AI — script.js  (v3, refined)
+   Nav · mobile menu · scroll reveals · counters ·
+   timeline fill · hero particle network
    ============================================================ */
 
 (function () {
@@ -10,19 +9,10 @@
 
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- Scroll progress bar ---------- */
-  var progressBar = document.getElementById("progressBar");
-  function updateProgress() {
-    var h = document.documentElement;
-    var max = h.scrollHeight - h.clientHeight;
-    progressBar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
-  }
-
   /* ---------- Sticky nav ---------- */
   var nav = document.getElementById("nav");
   function onScroll() {
     nav.classList.toggle("scrolled", window.scrollY > 24);
-    updateProgress();
     updateTimeline();
   }
   window.addEventListener("scroll", onScroll, { passive: true });
@@ -36,16 +26,6 @@
   links.addEventListener("click", function (e) {
     if (e.target.tagName === "A") links.classList.remove("open");
   });
-
-  /* ---------- Hero word-by-word reveal ---------- */
-  var words = document.querySelectorAll(".hero-title .word");
-  if (reducedMotion) {
-    words.forEach(function (w) { w.classList.add("in"); });
-  } else {
-    words.forEach(function (w, i) {
-      setTimeout(function () { w.classList.add("in"); }, 250 + i * 90);
-    });
-  }
 
   /* ---------- Scroll reveal ---------- */
   var revealEls = document.querySelectorAll(".reveal");
@@ -98,33 +78,6 @@
   } else {
     counters.forEach(function (el) {
       el.textContent = parseInt(el.getAttribute("data-count"), 10).toLocaleString();
-    });
-  }
-
-  /* ---------- Spotlight cards (mouse-tracked glow) ---------- */
-  if (!reducedMotion) {
-    document.querySelectorAll(".spotlight").forEach(function (card) {
-      card.addEventListener("mousemove", function (e) {
-        var rect = card.getBoundingClientRect();
-        card.style.setProperty("--mx", (e.clientX - rect.left) + "px");
-        card.style.setProperty("--my", (e.clientY - rect.top) + "px");
-      });
-    });
-  }
-
-  /* ---------- Magnetic buttons ---------- */
-  if (!reducedMotion && window.matchMedia("(pointer: fine)").matches) {
-    document.querySelectorAll(".magnetic").forEach(function (btn) {
-      var strength = 0.25;
-      btn.addEventListener("mousemove", function (e) {
-        var rect = btn.getBoundingClientRect();
-        var dx = e.clientX - (rect.left + rect.width / 2);
-        var dy = e.clientY - (rect.top + rect.height / 2);
-        btn.style.transform = "translate(" + dx * strength + "px," + dy * strength + "px)";
-      });
-      btn.addEventListener("mouseleave", function () {
-        btn.style.transform = "";
-      });
     });
   }
 
@@ -185,7 +138,7 @@
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(0, 212, 255, 0.55)";
+        ctx.fillStyle = "rgba(139, 168, 255, 0.55)";
         ctx.fill();
 
         for (var j = i + 1; j < particles.length; j++) {
@@ -197,7 +150,7 @@
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = "rgba(91, 108, 255," + (0.28 * (1 - dist / LINK_DIST)) + ")";
+            ctx.strokeStyle = "rgba(124, 156, 245," + (0.28 * (1 - dist / LINK_DIST)) + ")";
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -211,7 +164,7 @@
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(mouse.x, mouse.y);
-            ctx.strokeStyle = "rgba(0, 212, 255," + (0.35 * (1 - mdist / 160)) + ")";
+            ctx.strokeStyle = "rgba(139, 168, 255," + (0.35 * (1 - mdist / 160)) + ")";
             ctx.lineWidth = 1;
             ctx.stroke();
           }
