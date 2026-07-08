@@ -171,6 +171,12 @@ img { max-width: 100%; display: block; }
 }
 .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
 
+.hero-title { font-size: clamp(2.2rem, 3.8vw, 2.95rem); }
+.hero-line { white-space: nowrap; }
+@media (max-width: 700px) {
+  .hero-line { white-space: normal; }
+}
+
 .hero-sub { color: var(--text-dim); font-size: clamp(1.02rem, 1.9vw, 1.18rem); max-width: 640px; margin: 26px auto 0; }
 .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
 .hero-microcopy { color: var(--text-dim); font-size: 0.85rem; margin-top: 18px; opacity: 0.85; }
