@@ -108,11 +108,17 @@
             <p class="pcard-note">Need more hours this month? <a href="mailto:support@estaraai.com">Get in touch</a> and we'll sort it.</p>
           </section>
 
+          <!-- Files -->
+          <section class="pcard panel">
+            <div class="pcard-head"><h2>Files &amp; deliverables</h2></div>
+            <div class="list" id="filesList"><p class="empty">No files shared yet.</p></div>
+          </section>
+
           <!-- Plan benefits -->
-          <section class="pcard panel pcard-plan">
+          <section class="pcard panel pcard-plan pcard-wide">
             <div class="pcard-head"><h2>What your plan includes</h2></div>
             <div class="benefit-grid" id="benefitsList"><p class="empty">Loading…</p></div>
-            <p class="pcard-note">Monthly and quarterly items reset automatically each period — you'll see the date whenever one is delivered.</p>
+            <p class="pcard-note">Anything marked "due" can be booked right here — pick a date and we'll confirm it. Monthly and quarterly items reset automatically each period.</p>
           </section>
 
           <!-- Project updates -->
@@ -140,11 +146,6 @@
             <div class="list" id="ticketsList"><p class="empty">No support requests yet.</p></div>
           </section>
 
-          <!-- Files -->
-          <section class="pcard panel">
-            <div class="pcard-head"><h2>Files &amp; deliverables</h2></div>
-            <div class="list" id="filesList"><p class="empty">No files shared yet.</p></div>
-          </section>
         </div>
       </div>
     </main>
@@ -152,18 +153,82 @@
     <!-- ---- ADMIN PANEL ---- -->
     <main class="pmain" id="adminView" hidden>
       <div class="pcontainer">
-        <div class="phead">
-          <h1>Admin panel</h1>
-          <p>Manage clients, plans, updates, support and files.</p>
+
+        <!-- Admin: client list -->
+        <div id="adminListView">
+          <div class="phead">
+            <h1>Clients</h1>
+            <p>Click a client to see where they're at, book work in and post updates.</p>
+          </div>
+          <div class="client-grid" id="clientList"><p class="empty">Loading&hellip;</p></div>
+
+          <section class="pcard panel admin-settings">
+            <div class="pcard-head"><h2>Booking calendar link <span class="chip chip-dim">optional</span></h2></div>
+            <form id="bookingUrlForm" class="inline-form">
+              <label for="bookingUrlInput">Calendar URL</label>
+              <input type="url" id="bookingUrlInput" placeholder="e.g. your Google Calendar appointment page or Calendly link" />
+              <div class="form-ok" id="bookingUrlOk" hidden></div>
+              <button type="submit" class="btn btn-primary btn-sm">Save link</button>
+            </form>
+            <p class="pcard-note">If set, clients booking a session also get a &ldquo;pick an exact time&rdquo; link that opens this page. Leave blank to keep bookings inside the portal only.</p>
+          </section>
+
+          <p class="admin-bar-note">New client logins are created in Supabase &rarr; Authentication &rarr; Add user &mdash; they appear here automatically.</p>
         </div>
 
-        <div class="admin-bar panel">
-          <label for="clientSelect">Client</label>
-          <select id="clientSelect"></select>
-          <span class="admin-bar-note">Create new client logins in Supabase &rarr; Authentication &rarr; Add user. They appear here automatically.</span>
+        <!-- Admin: single client -->
+        <div id="adminDetailView" hidden>
+        <button class="btn btn-ghost btn-sm back-btn" id="backToClientsBtn">&larr; All clients</button>
+        <div class="phead">
+          <h1 id="adminClientName">Client</h1>
+          <p id="adminClientMeta"></p>
         </div>
 
         <div class="pgrid">
+          <!-- Where they're at -->
+          <section class="pcard panel pcard-wide">
+            <div class="pcard-head">
+              <h2>Where they're at</h2>
+              <span class="chip chip-accent" id="adminClientPlan">&mdash;</span>
+            </div>
+            <div class="usage">
+              <div class="usage-row">
+                <span>Development hours this month</span>
+                <strong id="adminHoursText">0 / 0</strong>
+              </div>
+              <div class="usage-bar"><span id="adminHoursBar"></span></div>
+              <div class="usage-row usage-row-2">
+                <span>Automations delivered this month</span>
+                <strong id="adminAutosText">0 / 0</strong>
+              </div>
+            </div>
+            <div class="benefit-grid" id="adminBenefitStatus"><p class="empty">Loading&hellip;</p></div>
+          </section>
+
+          <!-- Booking requests -->
+          <section class="pcard panel">
+            <div class="pcard-head"><h2>Booking requests</h2></div>
+            <div class="list" id="adminBookingsList"><p class="empty">No booking requests.</p></div>
+          </section>
+
+          <!-- Post update -->
+          <section class="pcard panel">
+            <div class="pcard-head"><h2>Post an update to their dashboard</h2></div>
+            <form id="adminUpdateForm" class="inline-form">
+              <label for="adminUpdateTitle">Title</label>
+              <input type="text" id="adminUpdateTitle" maxlength="120" required />
+              <label for="adminUpdateBody">Details</label>
+              <textarea id="adminUpdateBody" rows="3" required></textarea>
+              <label for="adminUpdateStatus">Status</label>
+              <select id="adminUpdateStatus">
+                <option value="planned">Planned</option>
+                <option value="in_progress" selected>In progress</option>
+                <option value="done">Done</option>
+              </select>
+              <button type="submit" class="btn btn-primary btn-sm">Post update</button>
+            </form>
+            <div class="list" id="adminUpdatesList"></div>
+          </section>
           <!-- Client details -->
           <section class="pcard panel">
             <div class="pcard-head"><h2>Client details &amp; plan</h2></div>
@@ -213,25 +278,6 @@
             <div class="list" id="adminBenefitLog"></div>
           </section>
 
-          <!-- Post update -->
-          <section class="pcard panel">
-            <div class="pcard-head"><h2>Post a project update</h2></div>
-            <form id="adminUpdateForm" class="inline-form">
-              <label for="adminUpdateTitle">Title</label>
-              <input type="text" id="adminUpdateTitle" maxlength="120" required />
-              <label for="adminUpdateBody">Details</label>
-              <textarea id="adminUpdateBody" rows="3" required></textarea>
-              <label for="adminUpdateStatus">Status</label>
-              <select id="adminUpdateStatus">
-                <option value="planned">Planned</option>
-                <option value="in_progress" selected>In progress</option>
-                <option value="done">Done</option>
-              </select>
-              <button type="submit" class="btn btn-primary btn-sm">Post update</button>
-            </form>
-            <div class="list" id="adminUpdatesList"></div>
-          </section>
-
           <!-- Tickets -->
           <section class="pcard panel">
             <div class="pcard-head"><h2>Support requests</h2></div>
@@ -253,6 +299,7 @@
             <div class="list" id="adminFilesList"></div>
           </section>
         </div>
+        </div><!-- /adminDetailView -->
       </div>
     </main>
   </div>
