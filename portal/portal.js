@@ -1,5 +1,5 @@
 /* ============================================================
-   ESTARA AI PORTAL — portal.js  (v3 — sign-in lock bypass)
+   ESTARA AI PORTAL — portal.js  (v4 — direct sign-in flow)
    Auth (Supabase) · client dashboard · admin panel
    ============================================================ */
 
@@ -21,6 +21,10 @@
   function $(id) { return document.getElementById(id); }
 
   if (!configured) { show("viewConfig"); return; }
+
+  // Did the user arrive from a password-reset email? (must be read from the
+  // URL before createClient, which consumes the hash)
+  var isRecovery = /type=recovery/.test(window.location.hash);
 
   // Custom no-op lock: avoids a known supabase-js issue where the shared
   // cross-tab navigator lock leaves sign-in hanging forever.
@@ -117,38 +121,26 @@
     return true; // "once" / "adhoc": any entry counts
   }
 
-  /* ---------- Auth flow ---------- */
+  /* ---------- Auth flow (direct, no event listeners) ---------- */
   var loadedUserId = null;
-  sb.auth.onAuthStateChange(function (event, session) {
-    if (event === "PASSWORD_RECOVERY") {
+
+  // On page load: restore an existing session, handle password-reset links,
+  // or show the login form. Sign-in itself is handled by the form below.
+  sb.auth.getSession().then(function (res) {
+    var session = res.data ? res.data.session : null;
+    if (isRecovery && session && session.user) {
       recoveryMode = true;
       show("viewRecovery");
       return;
     }
-    if (recoveryMode) return; // stay on the set-new-password form
     if (session && session.user) {
-      if (loadedUserId === session.user.id) return; // already loaded (token refresh etc.)
-      loadedUserId = session.user.id;
-      // Defer: making Supabase calls directly inside this callback can
-      // deadlock the auth client's internal lock (sign-in never resolves).
-      var u = session.user;
-      setTimeout(function () { loadApp(u); }, 0);
-    } else {
-      loadedUserId = null;
-      show("viewLogin");
-    }
-  });
-
-  sb.auth.getSession().then(function (res) {
-    var session = res.data ? res.data.session : null;
-    if (recoveryMode) return;
-    if (session && session.user) {
-      if (loadedUserId === session.user.id) return;
       loadedUserId = session.user.id;
       loadApp(session.user);
-    } else if (!loadedUserId) {
+    } else {
       show("viewLogin");
     }
+  }).catch(function () {
+    show("viewLogin");
   });
 
   /* ---------- Login ---------- */
@@ -184,9 +176,11 @@
         return;
       }
       var user = res.data && res.data.user;
-      if (user && loadedUserId !== user.id) {
+      if (user) {
         loadedUserId = user.id;
         loadApp(user);
+      } else {
+        setMsg($("loginError"), "Sign-in didn't complete — please try again.");
       }
     }).catch(function (err) {
       settled = true;
@@ -243,6 +237,7 @@
   $("signOutBtn").addEventListener("click", function () {
     sb.auth.signOut().then(function () {
       profile = null; isAdmin = false; inAdminView = false;
+      loadedUserId = null;
       show("viewLogin");
     });
   });
