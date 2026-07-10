@@ -201,7 +201,7 @@ form .btn { margin-top: 22px; }
 .phead h1 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin-bottom: 6px; }
 .phead p { color: var(--text-dim); font-size: 0.98rem; }
 
-.pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
 .pcard-plan { grid-column: 1 / -1; }
 .pcard { padding: 30px 30px 32px; }
 .pcard-head {
@@ -250,6 +250,9 @@ form .btn { margin-top: 22px; }
   border-radius: 12px;
   padding: 14px 16px;
 }
+/* If there's an odd number of benefits, the last one spans the full row
+   so nothing floats on its own. */
+.benefit-grid .benefit:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .benefit-head {
   display: flex;
   align-items: center;
