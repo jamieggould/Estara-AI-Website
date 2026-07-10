@@ -258,6 +258,58 @@ form .btn { margin-top: 22px; }
 }
 .benefit-label { font-family: var(--font-display); font-weight: 600; font-size: 0.92rem; }
 .benefit-detail { color: var(--text-dim); font-size: 0.82rem; margin-top: 5px; }
+.benefit-booked { color: var(--accent); }
+.benefit-actions { margin-top: 12px; }
+
+/* Wide cards span both columns so the grid stays symmetrical */
+.pcard-wide { grid-column: 1 / -1; }
+
+/* ---------- Booking form (inside a benefit card) ---------- */
+.book-form { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+.book-form label { margin-top: 10px; }
+.book-form .form-row { margin-top: 12px; }
+.label-optional { text-transform: none; letter-spacing: 0; font-weight: 400; }
+.book-cal-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--accent);
+}
+.book-cal-link:hover { text-decoration: underline; }
+
+/* ---------- Admin client list ---------- */
+.client-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.client-grid .empty { color: var(--text-dim); grid-column: 1 / -1; }
+.client-card {
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  padding: 20px 22px;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.client-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.client-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.client-card-name { font-family: var(--font-display); font-weight: 600; font-size: 1.02rem; }
+.client-card-you { color: var(--text-dim); font-weight: 400; font-size: 0.85rem; }
+.client-card-co { color: var(--text-dim); font-size: 0.85rem; margin-top: 6px; }
+.client-card-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.back-btn { margin-bottom: 18px; }
+.admin-settings { margin-bottom: 18px; }
+@media (max-width: 640px) {
+  .client-grid { grid-template-columns: 1fr; }
+}
 
 /* ---------- Chips ---------- */
 .chip {
