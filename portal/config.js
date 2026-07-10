@@ -7,6 +7,6 @@
    ============================================================ */
 
 window.PORTAL_CONFIG = {
-  SUPABASE_URL: "PASTE-YOUR-PROJECT-URL-HERE",       // e.g. https://abcdefgh.supabase.co
-  SUPABASE_ANON_KEY: "PASTE-YOUR-ANON-KEY-HERE"      // the long "anon / public" key
+  SUPABASE_URL: "https://zfptwkvuicwjafvvdvwo.supabase.co",       // e.g. https://abcdefgh.supabase.co
+  SUPABASE_ANON_KEY: "sb_publishable_nEJcGtIK5XWcxxdXyUvtGg_za3e_yZ2"      // the long "anon / public" key
 };
