@@ -1,5 +1,5 @@
 /* ============================================================
-   ESTARA AI PORTAL — portal.js  (v2 — sign-in fix)
+   ESTARA AI PORTAL — portal.js  (v3 — sign-in lock bypass)
    Auth (Supabase) · client dashboard · admin panel
    ============================================================ */
 
@@ -22,7 +22,13 @@
 
   if (!configured) { show("viewConfig"); return; }
 
-  var sb = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
+  // Custom no-op lock: avoids a known supabase-js issue where the shared
+  // cross-tab navigator lock leaves sign-in hanging forever.
+  var sb = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY, {
+    auth: {
+      lock: function (_name, _timeout, fn) { return fn(); }
+    }
+  });
 
   /* ---------- State ---------- */
   var profile = null;        // my profile row
