@@ -112,6 +112,7 @@
   }
 
   /* ---------- Auth flow ---------- */
+  var loadedUserId = null;
   sb.auth.onAuthStateChange(function (event, session) {
     if (event === "PASSWORD_RECOVERY") {
       recoveryMode = true;
@@ -120,8 +121,14 @@
     }
     if (recoveryMode) return; // stay on the set-new-password form
     if (session && session.user) {
-      loadApp(session.user);
+      if (loadedUserId === session.user.id) return; // already loaded (token refresh etc.)
+      loadedUserId = session.user.id;
+      // Defer: making Supabase calls directly inside this callback can
+      // deadlock the auth client's internal lock (sign-in never resolves).
+      var u = session.user;
+      setTimeout(function () { loadApp(u); }, 0);
     } else {
+      loadedUserId = null;
       show("viewLogin");
     }
   });
@@ -129,8 +136,13 @@
   sb.auth.getSession().then(function (res) {
     var session = res.data ? res.data.session : null;
     if (recoveryMode) return;
-    if (session && session.user) loadApp(session.user);
-    else show("viewLogin");
+    if (session && session.user) {
+      if (loadedUserId === session.user.id) return;
+      loadedUserId = session.user.id;
+      loadApp(session.user);
+    } else if (!loadedUserId) {
+      show("viewLogin");
+    }
   });
 
   /* ---------- Login ---------- */
