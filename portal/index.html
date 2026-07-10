@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estara AI Portal</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="any" href="/assets/logo.png?v=2" />
+  <link rel="stylesheet" href="portal.css" />
+</head>
+<body>
+
+  <!-- ======= LOGIN VIEW ======= -->
+  <div class="auth-wrap" id="viewLogin" hidden>
+    <div class="auth-card panel">
+      <a href="/" class="logo"><img src="/assets/logo.png" alt="Estara AI logo" class="logo-img" />Estara<span class="logo-accent">AI</span></a>
+      <h1>Client Portal</h1>
+      <p class="auth-sub">Sign in with the account we've set up for you.</p>
+      <form id="loginForm">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" autocomplete="email" required />
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" autocomplete="current-password" required />
+        <div class="form-error" id="loginError" hidden></div>
+        <button type="submit" class="btn btn-primary btn-block" id="loginBtn">Sign in</button>
+      </form>
+      <button class="link-btn" id="forgotBtn">Forgot your password?</button>
+      <p class="auth-note">Accounts are created by Estara AI for active clients. Need one? <a href="mailto:support@estaraai.com">support@estaraai.com</a></p>
+    </div>
+  </div>
+
+  <!-- ======= FORGOT PASSWORD VIEW ======= -->
+  <div class="auth-wrap" id="viewForgot" hidden>
+    <div class="auth-card panel">
+      <a href="/" class="logo"><img src="/assets/logo.png" alt="Estara AI logo" class="logo-img" />Estara<span class="logo-accent">AI</span></a>
+      <h1>Reset password</h1>
+      <p class="auth-sub">Enter your account email and we'll send you a reset link.</p>
+      <form id="forgotForm">
+        <label for="forgotEmail">Email</label>
+        <input type="email" id="forgotEmail" autocomplete="email" required />
+        <div class="form-error" id="forgotError" hidden></div>
+        <div class="form-ok" id="forgotOk" hidden></div>
+        <button type="submit" class="btn btn-primary btn-block" id="forgotSendBtn">Send reset link</button>
+      </form>
+      <button class="link-btn" id="backToLoginBtn">&larr; Back to sign in</button>
+    </div>
+  </div>
+
+  <!-- ======= SET NEW PASSWORD VIEW (from reset email) ======= -->
+  <div class="auth-wrap" id="viewRecovery" hidden>
+    <div class="auth-card panel">
+      <a href="/" class="logo"><img src="/assets/logo.png" alt="Estara AI logo" class="logo-img" />Estara<span class="logo-accent">AI</span></a>
+      <h1>Set a new password</h1>
+      <p class="auth-sub">Choose a new password for your account.</p>
+      <form id="recoveryForm">
+        <label for="newPassword">New password</label>
+        <input type="password" id="newPassword" autocomplete="new-password" minlength="8" required />
+        <label for="newPassword2">Confirm new password</label>
+        <input type="password" id="newPassword2" autocomplete="new-password" minlength="8" required />
+        <div class="form-error" id="recoveryError" hidden></div>
+        <button type="submit" class="btn btn-primary btn-block" id="recoveryBtn">Save new password</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======= PORTAL APP ======= -->
+  <div id="viewApp" hidden>
+    <header class="pnav">
+      <div class="pnav-inner">
+        <a href="/" class="logo"><img src="/assets/logo.png" alt="Estara AI logo" class="logo-img" />Estara<span class="logo-accent">AI</span><span class="pnav-tag">Portal</span></a>
+        <div class="pnav-right">
+          <button class="btn btn-ghost btn-sm" id="adminToggleBtn" hidden>Admin panel</button>
+          <span class="pnav-user" id="navUser"></span>
+          <button class="btn btn-ghost btn-sm" id="signOutBtn">Sign out</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ---- CLIENT DASHBOARD ---- -->
+    <main class="pmain" id="clientView">
+      <div class="pcontainer">
+        <div class="phead">
+          <h1 id="welcomeTitle">Welcome</h1>
+          <p id="welcomeSub">Here's where your work with Estara AI stands.</p>
+        </div>
+
+        <div class="pgrid">
+          <!-- Plan & usage -->
+          <section class="pcard panel pcard-plan">
+            <div class="pcard-head">
+              <h2>Your plan</h2>
+              <span class="chip chip-accent" id="planName">—</span>
+            </div>
+            <div class="usage">
+              <div class="usage-row">
+                <span>Development hours this month</span>
+                <strong id="hoursText">0 / 0</strong>
+              </div>
+              <div class="usage-bar"><span id="hoursBar"></span></div>
+              <div class="usage-row usage-row-2">
+                <span>Automations delivered this month</span>
+                <strong id="autosText">0 / 0</strong>
+              </div>
+            </div>
+            <p class="pcard-note">Need more hours this month? <a href="mailto:support@estaraai.com">Get in touch</a> and we'll sort it.</p>
+          </section>
+
+          <!-- Plan benefits -->
+          <section class="pcard panel pcard-plan">
+            <div class="pcard-head"><h2>What your plan includes</h2></div>
+            <div class="benefit-grid" id="benefitsList"><p class="empty">Loading…</p></div>
+            <p class="pcard-note">Monthly and quarterly items reset automatically each period — you'll see the date whenever one is delivered.</p>
+          </section>
+
+          <!-- Project updates -->
+          <section class="pcard panel">
+            <div class="pcard-head"><h2>Project updates</h2></div>
+            <div class="list" id="updatesList"><p class="empty">No updates yet — they'll appear here as work progresses.</p></div>
+          </section>
+
+          <!-- Support -->
+          <section class="pcard panel">
+            <div class="pcard-head">
+              <h2>Support</h2>
+              <button class="btn btn-primary btn-sm" id="newTicketBtn">New request</button>
+            </div>
+            <form id="ticketForm" class="inline-form" hidden>
+              <label for="ticketSubject">Subject</label>
+              <input type="text" id="ticketSubject" maxlength="120" required />
+              <label for="ticketBody">What do you need?</label>
+              <textarea id="ticketBody" rows="4" required></textarea>
+              <div class="form-row">
+                <button type="submit" class="btn btn-primary btn-sm">Send request</button>
+                <button type="button" class="btn btn-ghost btn-sm" id="ticketCancelBtn">Cancel</button>
+              </div>
+            </form>
+            <div class="list" id="ticketsList"><p class="empty">No support requests yet.</p></div>
+          </section>
+
+          <!-- Files -->
+          <section class="pcard panel">
+            <div class="pcard-head"><h2>Files &amp; deliverables</h2></div>
+            <div class="list" id="filesList"><p class="empty">No files shared yet.</p></div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- ---- ADMIN PANEL ---- -->
+    <main class="pmain" id="adminView" hidden>
+      <div class="pcontainer">
+        <div class="phead">
+          <h1>Admin panel</h1>
+          <p>Manage clients, plans, updates, support and files.</p>
+        </div>
+
+        <div class="admin-bar panel">
+          <label for="clientSelect">Client</label>
+          <select id="clientSelect"></select>
+          <span class="admin-bar-note">Create new client logins in Supabase &rarr; Authentication &rarr; Add user. They appear here automatically.</span>
+        </div>
+
+        <div class="pgrid">
+          <!-- Client details -->
+          <section class="pcard panel">
+            <div class="pcard-head"><h2>Client details &amp; plan</h2></div>
+            <form id="adminProfileForm" class="inline-form">
+              <div class="form-2col">
+                <div><label for="adminName">Name</label><input type="text" id="adminName" /></div>
+                <div><label for="adminCompany">Company</label><input type="text" id="adminCompany" /></div>
+              </div>
+              <div class="form-2col">
+                <div>
+                  <label for="adminPlan">Plan</label>
+                  <select id="adminPlan">
+                    <option>AI Essentials</option>
+                    <option>AI Growth</option>
+                    <option>AI Partner</option>
+                    <option>Project client</option>
+                  </select>
+                </div>
+                <div><label for="adminMonthlyHours">Hours included / month</label><input type="number" id="adminMonthlyHours" min="0" step="1" /></div>
+              </div>
+              <div class="form-2col">
+                <div><label for="adminHoursUsed">Hours used this month</label><input type="number" id="adminHoursUsed" min="0" step="0.5" /></div>
+                <div><label for="adminAutosIncluded">Automations included</label><input type="number" id="adminAutosIncluded" min="0" step="1" /></div>
+              </div>
+              <div class="form-2col">
+                <div><label for="adminAutosDelivered">Automations delivered</label><input type="number" id="adminAutosDelivered" min="0" step="1" /></div>
+                <div></div>
+              </div>
+              <div class="form-error" id="adminProfileError" hidden></div>
+              <div class="form-ok" id="adminProfileOk" hidden></div>
+              <button type="submit" class="btn btn-primary btn-sm">Save client</button>
+            </form>
+          </section>
+
+          <!-- Log a benefit delivery -->
+          <section class="pcard panel">
+            <div class="pcard-head"><h2>Log a plan benefit</h2></div>
+            <form id="adminBenefitForm" class="inline-form">
+              <label for="adminBenefitKey">Benefit</label>
+              <select id="adminBenefitKey"></select>
+              <div class="form-2col">
+                <div><label for="adminBenefitDate">Delivered on</label><input type="date" id="adminBenefitDate" required /></div>
+                <div><label for="adminBenefitNote">Note (optional)</label><input type="text" id="adminBenefitNote" maxlength="200" /></div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm">Log delivery</button>
+            </form>
+            <div class="list" id="adminBenefitLog"></div>
+          </section>
+
+          <!-- Post update -->
+          <section class="pcard panel">
+            <div class="pcard-head"><h2>Post a project update</h2></div>
+            <form id="adminUpdateForm" class="inline-form">
+              <label for="adminUpdateTitle">Title</label>
+              <input type="text" id="adminUpdateTitle" maxlength="120" required />
+              <label for="adminUpdateBody">Details</label>
+              <textarea id="adminUpdateBody" rows="3" required></textarea>
+              <label for="adminUpdateStatus">Status</label>
+              <select id="adminUpdateStatus">
+                <option value="planned">Planned</option>
+                <option value="in_progress" selected>In progress</option>
+                <option value="done">Done</option>
+              </select>
+              <button type="submit" class="btn btn-primary btn-sm">Post update</button>
+            </form>
+            <div class="list" id="adminUpdatesList"></div>
+          </section>
+
+          <!-- Tickets -->
+          <section class="pcard panel">
+            <div class="pcard-head"><h2>Support requests</h2></div>
+            <div class="list" id="adminTicketsList"><p class="empty">No requests for this client.</p></div>
+          </section>
+
+          <!-- Files -->
+          <section class="pcard panel">
+            <div class="pcard-head"><h2>Files &amp; deliverables</h2></div>
+            <form id="adminFileForm" class="inline-form">
+              <label for="adminFileName">File name</label>
+              <input type="text" id="adminFileName" maxlength="120" required />
+              <label for="adminFileUrl">Link (Dropbox, Drive, etc.)</label>
+              <input type="url" id="adminFileUrl" required />
+              <label for="adminFileNote">Note (optional)</label>
+              <input type="text" id="adminFileNote" maxlength="200" />
+              <button type="submit" class="btn btn-primary btn-sm">Share file</button>
+            </form>
+            <div class="list" id="adminFilesList"></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ======= LOADING ======= -->
+  <div class="auth-wrap" id="viewLoading">
+    <div class="loader" aria-label="Loading"></div>
+  </div>
+
+  <!-- ======= NOT CONFIGURED ======= -->
+  <div class="auth-wrap" id="viewConfig" hidden>
+    <div class="auth-card panel">
+      <a href="/" class="logo"><img src="/assets/logo.png" alt="Estara AI logo" class="logo-img" />Estara<span class="logo-accent">AI</span></a>
+      <h1>Portal not configured yet</h1>
+      <p class="auth-sub">Supabase keys haven't been added to <code>portal/config.js</code>. See <code>PORTAL-SETUP.md</code> in the repo.</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="config.js"></script>
+  <script src="portal.js"></script>
+</body>
+</html>
