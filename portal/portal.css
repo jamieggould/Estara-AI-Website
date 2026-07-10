@@ -92,6 +92,10 @@ code { font-size: 0.85em; color: var(--accent); }
 }
 .link-btn:hover { text-decoration: underline; }
 
+/* Only one "view" is shown at a time — this makes the hidden attribute win
+   over any display rules below (flex/grid would otherwise override it). */
+[hidden] { display: none !important; }
+
 /* ---------- Auth screens ---------- */
 .auth-wrap {
   min-height: 100vh;
