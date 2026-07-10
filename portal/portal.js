@@ -1,5 +1,5 @@
 /* ============================================================
-   ESTARA AI PORTAL — portal.js  (v4 — direct sign-in flow)
+   ESTARA AI PORTAL — portal.js  (v5 — client list admin + bookings)
    Auth (Supabase) · client dashboard · admin panel
    ============================================================ */
 
@@ -41,6 +41,7 @@
   var selectedClientId = null;
   var inAdminView = false;
   var recoveryMode = false;
+  var settings = {};         // portal settings (e.g. booking_url)
 
   /* ---------- Helpers ---------- */
   function esc(s) {
@@ -75,22 +76,22 @@
      type "included" = always-on as part of the plan
      Hours & automations are tracked separately by the usage counters. */
   var BENEFITS = {
-    checkin_call:        { label: "Monthly AI check-in call",              type: "logged", period: "month" },
+    checkin_call:        { label: "Monthly AI check-in call",              type: "logged", period: "month",   book: true },
     recommendations:     { label: "AI & tooling recommendations",          type: "logged", period: "adhoc" },
-    business_review:     { label: "Monthly business review",               type: "logged", period: "month" },
+    business_review:     { label: "Monthly business review",               type: "logged", period: "month",   book: true },
     priority_email:      { label: "Priority email support",                type: "included" },
     systems_support:     { label: "Support for systems we've built you",   type: "included" },
     discounted_rates:    { label: "Discounted rates on project work",      type: "included" },
-    onboarding_call:     { label: "Actionable onboarding call",            type: "logged", period: "once" },
+    onboarding_call:     { label: "Actionable onboarding call",            type: "logged", period: "once",    book: true },
     client_portal:       { label: "Your Estara client portal",             type: "included" },
     workflow_improve:    { label: "Workflow & automation improvements",    type: "logged", period: "adhoc" },
-    strategy_session:    { label: "Monthly strategy session",              type: "logged", period: "month" },
-    quarterly_roadmap:   { label: "Quarterly AI roadmap",                  type: "logged", period: "quarter" },
+    strategy_session:    { label: "Monthly strategy session",              type: "logged", period: "month",   book: true },
+    quarterly_roadmap:   { label: "Quarterly AI roadmap",                  type: "logged", period: "quarter", book: true },
     fast_turnaround:     { label: "Faster turnaround & priority support",  type: "included" },
     support_chatbot:     { label: "Custom AI support chatbot",             type: "logged", period: "once" },
     branded_portal:      { label: "Custom-branded portal dashboard",       type: "included" },
-    consulting:          { label: "Ongoing consulting",                    type: "logged", period: "adhoc" },
-    roadmap_reviews:     { label: "Roadmap planning & performance reviews", type: "logged", period: "quarter" },
+    consulting:          { label: "Ongoing consulting",                    type: "logged", period: "adhoc",   book: true },
+    roadmap_reviews:     { label: "Roadmap planning & performance reviews", type: "logged", period: "quarter", book: true },
     ooh_support:         { label: "Out-of-hours support, first in queue",  type: "included" }
   };
   var PLAN_KEYS = {
@@ -104,7 +105,7 @@
   function benefitsForPlan(plan) {
     return (PLAN_KEYS[plan] || []).map(function (k) {
       var b = BENEFITS[k];
-      return { key: k, label: b.label, type: b.type, period: b.period || null };
+      return { key: k, label: b.label, type: b.type, period: b.period || null, book: !!b.book };
     });
   }
   function samePeriod(dateStr, period) {
@@ -253,14 +254,19 @@
       }
       profile = res.data;
       isAdmin = !!profile.is_admin;
-      $("navUser").textContent = profile.full_name || profile.email;
-      $("adminToggleBtn").hidden = !isAdmin;
-      show("viewApp");
-      if (isAdmin) {
-        enterAdminView(); // admin lands on the admin panel
-      } else {
-        enterClientView();
-      }
+      // Load portal settings (booking calendar link etc.), then show the app.
+      sb.from("settings").select("*").then(function (s) {
+        settings = {};
+        (s.data || []).forEach(function (r) { settings[r.key] = r.value; });
+        $("navUser").textContent = profile.full_name || profile.email;
+        $("adminToggleBtn").hidden = !isAdmin;
+        show("viewApp");
+        if (isAdmin) {
+          enterAdminView(); // admin lands on the admin panel
+        } else {
+          enterClientView();
+        }
+      });
     });
   }
 
@@ -282,6 +288,8 @@
     inAdminView = true;
     $("clientView").hidden = true;
     $("adminView").hidden = false;
+    $("adminDetailView").hidden = true;
+    $("adminListView").hidden = false;
     $("adminToggleBtn").textContent = "My dashboard";
     loadClients();
   }
@@ -301,53 +309,120 @@
     $("hoursBar").style.width = (mh > 0 ? Math.min(100, (hu / mh) * 100) : 0) + "%";
     $("autosText").textContent = (Number(p.automations_delivered) || 0) + " / " + (Number(p.automations_included) || 0);
 
-    fetchBenefits(p.id, p.plan, $("benefitsList"));
+    fetchBenefits(p.id, p.plan, $("benefitsList"), false);
     fetchUpdates(p.id, $("updatesList"), false);
     fetchTickets(p.id, $("ticketsList"), false);
     fetchFiles(p.id, $("filesList"), false);
   }
 
-  /* ---------- Plan benefits (client) ---------- */
-  function fetchBenefits(clientId, plan, listEl) {
+  /* ---------- Plan benefits (client dashboard + admin status) ---------- */
+  function bookingStatusHtml(bk) {
+    if (bk.status === "confirmed") {
+      return '<p class="benefit-detail benefit-booked">Booked' +
+        (bk.preferred_date ? " for " + fmtDate(bk.preferred_date) : "") + ".</p>";
+    }
+    return '<p class="benefit-detail benefit-booked">Requested' +
+      (bk.preferred_date ? " for " + fmtDate(bk.preferred_date) : "") +
+      " — we’ll confirm shortly.</p>";
+  }
+
+  function fetchBenefits(clientId, plan, listEl, forAdmin) {
     var defs = benefitsForPlan(plan);
     if (!defs.length) {
-      listEl.innerHTML = '<p class="empty">You’re set up as a project client — work is scoped per project rather than as a monthly plan.</p>';
+      listEl.innerHTML = forAdmin
+        ? '<p class="empty">Project client — no plan benefits to track.</p>'
+        : '<p class="empty">You’re set up as a project client — work is scoped per project rather than as a monthly plan.</p>';
       return;
     }
     sb.from("benefit_log").select("*").eq("client_id", clientId)
       .order("delivered_on", { ascending: false })
       .then(function (res) {
         var logs = res.data || [];
-        listEl.innerHTML = defs.map(function (b) {
-          var mine = logs.filter(function (l) { return l.benefit_key === b.key; });
-          var latest = mine[0] || null;
-          var chip, detail = "";
-          if (b.type === "included") {
-            chip = '<span class="chip chip-green">Active</span>';
-            detail = "Included in your plan — always on.";
-          } else if (b.period === "adhoc") {
-            chip = mine.length
-              ? '<span class="chip chip-accent">' + mine.length + " delivered</span>"
-              : '<span class="chip chip-dim">Ongoing</span>';
-            detail = latest ? "Last: " + fmtDate(latest.delivered_on) + (latest.note ? " — " + esc(latest.note) : "") : "Delivered as and when needed.";
-          } else if (b.period === "once") {
-            var doneOnce = !!latest;
-            chip = doneOnce ? '<span class="chip chip-green">Completed</span>' : '<span class="chip chip-dim">Upcoming</span>';
-            detail = doneOnce ? fmtDate(latest.delivered_on) + (latest.note ? " — " + esc(latest.note) : "") : "We’ll arrange this with you.";
-          } else {
-            var word = b.period === "quarter" ? "quarter" : "month";
-            var done = latest && samePeriod(latest.delivered_on, b.period);
-            chip = done
-              ? '<span class="chip chip-green">Done this ' + word + "</span>"
-              : '<span class="chip chip-amber">Due this ' + word + "</span>";
-            detail = latest ? "Last: " + fmtDate(latest.delivered_on) + (latest.note ? " — " + esc(latest.note) : "") : "Not delivered yet.";
-          }
-          return '<div class="benefit">' +
-            '<div class="benefit-head"><span class="benefit-label">' + esc(b.label) + "</span>" + chip + "</div>" +
-            '<p class="benefit-detail">' + detail + "</p>" +
-          "</div>";
-        }).join("");
+        sb.from("bookings").select("*").eq("client_id", clientId)
+          .order("created_at", { ascending: false })
+          .then(function (bres) {
+            var bookings = bres.data || [];
+            renderBenefitGrid(listEl, defs, logs, bookings, forAdmin);
+          });
       });
+  }
+
+  function renderBenefitGrid(listEl, defs, logs, bookings, forAdmin) {
+    listEl.innerHTML = defs.map(function (b) {
+      var mine = logs.filter(function (l) { return l.benefit_key === b.key; });
+      var latest = mine[0] || null;
+      var activeBk = null;
+      for (var i = 0; i < bookings.length; i++) {
+        var bk = bookings[i];
+        if (bk.benefit_key === b.key && (bk.status === "requested" || bk.status === "confirmed")) {
+          activeBk = bk; break;
+        }
+      }
+      var chip, detail = "", outstanding = false;
+      if (b.type === "included") {
+        chip = '<span class="chip chip-green">Active</span>';
+        detail = forAdmin ? "Included in the plan — always on." : "Included in your plan — always on.";
+      } else if (b.period === "adhoc") {
+        chip = mine.length
+          ? '<span class="chip chip-accent">' + mine.length + " delivered</span>"
+          : '<span class="chip chip-dim">Ongoing</span>';
+        detail = latest ? "Last: " + fmtDate(latest.delivered_on) + (latest.note ? " — " + esc(latest.note) : "") : "Delivered as and when needed.";
+        outstanding = true; // can always book more ad-hoc sessions
+      } else if (b.period === "once") {
+        var doneOnce = !!latest;
+        chip = doneOnce ? '<span class="chip chip-green">Completed</span>' : '<span class="chip chip-dim">Upcoming</span>';
+        detail = doneOnce
+          ? fmtDate(latest.delivered_on) + (latest.note ? " — " + esc(latest.note) : "")
+          : (forAdmin ? "Not delivered yet." : "We’ll arrange this with you.");
+        outstanding = !doneOnce;
+      } else {
+        var word = b.period === "quarter" ? "quarter" : "month";
+        var done = latest && samePeriod(latest.delivered_on, b.period);
+        chip = done
+          ? '<span class="chip chip-green">Done this ' + word + "</span>"
+          : '<span class="chip chip-amber">Due this ' + word + "</span>";
+        detail = latest ? "Last: " + fmtDate(latest.delivered_on) + (latest.note ? " — " + esc(latest.note) : "") : "Not delivered yet.";
+        outstanding = !done;
+      }
+      var extra = "";
+      if (b.type === "logged" && b.book && outstanding) {
+        if (activeBk) {
+          extra = bookingStatusHtml(activeBk);
+        } else if (!forAdmin) {
+          extra = '<div class="benefit-actions">' +
+            '<button type="button" class="btn btn-primary btn-sm" data-action="benefit-book" data-key="' + esc(b.key) + '">Book this</button>' +
+          "</div>";
+        }
+      }
+      return '<div class="benefit" data-benefit="' + esc(b.key) + '">' +
+        '<div class="benefit-head"><span class="benefit-label">' + esc(b.label) + "</span>" + chip + "</div>" +
+        '<p class="benefit-detail">' + detail + "</p>" +
+        extra +
+      "</div>";
+    }).join("");
+  }
+
+  /* ---------- Booking (client) ---------- */
+  function bookFormHtml(key) {
+    var def = BENEFITS[key] || { label: "Session" };
+    var today = new Date().toISOString().slice(0, 10);
+    return '<form class="book-form" data-key="' + esc(key) + '">' +
+      '<label>Preferred date</label>' +
+      '<input type="date" name="date" min="' + today + '" required />' +
+      '<label>Anything we should cover? <span class="label-optional">(optional)</span></label>' +
+      '<input type="text" name="note" maxlength="200" placeholder="' + esc(def.label) + '" />' +
+      '<div class="form-row">' +
+        '<button type="submit" class="btn btn-primary btn-sm">Request booking</button>' +
+        '<button type="button" class="btn btn-ghost btn-sm" data-action="book-cancel">Cancel</button>' +
+      "</div>" +
+      (settings.booking_url
+        ? '<a class="book-cal-link" href="' + esc(settings.booking_url) + '" target="_blank" rel="noopener">Prefer to pick an exact time? Open our calendar &rarr;</a>'
+        : "") +
+    "</form>";
+  }
+
+  function refreshClientBenefits() {
+    fetchBenefits(profile.id, profile.plan, $("benefitsList"), false);
   }
 
   /* ---------- Updates ---------- */
@@ -479,6 +554,23 @@
 
   /* ---------- Shared list actions (event delegation) ---------- */
   document.addEventListener("submit", function (e) {
+    var bform = e.target.closest("form.book-form");
+    if (bform) {
+      e.preventDefault();
+      var key = bform.getAttribute("data-key");
+      var date = bform.querySelector('input[name="date"]').value;
+      var note = bform.querySelector('input[name="note"]').value.trim();
+      if (!key || !date) return;
+      sb.from("bookings").insert({
+        client_id: profile.id,
+        benefit_key: key,
+        preferred_date: date,
+        note: note
+      }).then(function (res) {
+        if (!res.error) refreshClientBenefits();
+      });
+      return;
+    }
     var form = e.target.closest('form[data-action="reply"]');
     if (!form) return;
     e.preventDefault();
@@ -495,10 +587,46 @@
   });
 
   document.addEventListener("click", function (e) {
+    var card = e.target.closest(".client-card[data-id]");
+    if (card) { openAdminClient(card.getAttribute("data-id")); return; }
+
     var btn = e.target.closest("button[data-action]");
     if (!btn) return;
     var action = btn.getAttribute("data-action");
     var id = btn.getAttribute("data-id");
+
+    if (action === "benefit-book") {
+      var wrap = btn.closest(".benefit");
+      var actions = wrap.querySelector(".benefit-actions");
+      if (actions) actions.innerHTML = bookFormHtml(btn.getAttribute("data-key"));
+      return;
+    }
+    if (action === "book-cancel") { refreshClientBenefits(); return; }
+
+    if (action === "booking-confirm") {
+      sb.from("bookings").update({ status: "confirmed" }).eq("id", Number(id))
+        .then(refreshAdminBookingViews);
+    }
+    if (action === "booking-decline") {
+      sb.from("bookings").update({ status: "declined" }).eq("id", Number(id))
+        .then(refreshAdminBookingViews);
+    }
+    if (action === "booking-done") {
+      var key = btn.getAttribute("data-key");
+      var when = btn.getAttribute("data-date") || new Date().toISOString().slice(0, 10);
+      sb.from("benefit_log").insert({
+        client_id: selectedClientId, benefit_key: key, delivered_on: when
+      }).then(function () {
+        return sb.from("bookings").update({ status: "done" }).eq("id", Number(id));
+      }).then(function () {
+        refreshAdminBookingViews();
+        fetchAdminBenefitLog(selectedClientId);
+      });
+    }
+    if (action === "booking-delete") {
+      sb.from("bookings").delete().eq("id", Number(id))
+        .then(refreshAdminBookingViews);
+    }
 
     if (action === "ticket-resolve" || action === "ticket-reopen") {
       sb.from("tickets").update({ status: action === "ticket-resolve" ? "resolved" : "open" })
@@ -529,30 +657,56 @@
   }
 
   /* ============================================================
-     ADMIN PANEL
+     ADMIN PANEL — client list
      ============================================================ */
-  function loadClients() {
-    sb.from("profiles").select("*").order("created_at", { ascending: true })
-      .then(function (res) {
-        clients = res.data || [];
-        var sel = $("clientSelect");
-        sel.innerHTML = clients.map(function (c) {
-          var label = (c.full_name || c.email) + (c.company ? " — " + c.company : "") + (c.is_admin ? " (admin)" : "");
-          return '<option value="' + esc(c.id) + '">' + esc(label) + "</option>";
-        }).join("");
-        var keep = clients.some(function (c) { return c.id === selectedClientId; });
-        selectedClientId = keep ? selectedClientId : (clients.length ? clients[0].id : null);
-        if (selectedClientId) {
-          sel.value = selectedClientId;
-          renderAdminClient();
-        }
+  function dueCount(c, logs) {
+    return benefitsForPlan(c.plan).filter(function (b) {
+      if (b.type !== "logged" || (b.period !== "month" && b.period !== "quarter")) return false;
+      return !logs.some(function (l) {
+        return l.client_id === c.id && l.benefit_key === b.key && samePeriod(l.delivered_on, b.period);
       });
+    }).length;
   }
 
-  $("clientSelect").addEventListener("change", function () {
-    selectedClientId = this.value;
-    renderAdminClient();
-  });
+  function loadClients() {
+    Promise.all([
+      sb.from("profiles").select("*").order("created_at", { ascending: true }),
+      sb.from("benefit_log").select("client_id, benefit_key, delivered_on"),
+      sb.from("tickets").select("client_id, status"),
+      sb.from("bookings").select("client_id, status")
+    ]).then(function (rs) {
+      clients = rs[0].data || [];
+      var logs = rs[1].data || [];
+      var tks  = rs[2].data || [];
+      var bks  = rs[3].data || [];
+      $("bookingUrlInput").value = settings.booking_url || "";
+
+      if (!clients.length) {
+        $("clientList").innerHTML = '<p class="empty">No clients yet.</p>';
+        return;
+      }
+      $("clientList").innerHTML = clients.map(function (c) {
+        var due = dueCount(c, logs);
+        var open = tks.filter(function (t) { return t.client_id === c.id && t.status === "open"; }).length;
+        var reqs = bks.filter(function (b) { return b.client_id === c.id && b.status === "requested"; }).length;
+        var mh = Number(c.monthly_hours) || 0;
+        var hu = Number(c.hours_used) || 0;
+        var chips = "";
+        if (reqs) chips += '<span class="chip chip-accent">' + reqs + " booking request" + (reqs > 1 ? "s" : "") + "</span>";
+        if (due)  chips += '<span class="chip chip-amber">' + due + " due</span>";
+        if (open) chips += '<span class="chip chip-amber">' + open + " open ticket" + (open > 1 ? "s" : "") + "</span>";
+        if (!chips) chips = '<span class="chip chip-green">All caught up</span>';
+        return '<button type="button" class="client-card panel" data-id="' + esc(c.id) + '">' +
+          '<div class="client-card-top">' +
+            '<span class="client-card-name">' + esc(c.full_name || c.email) + (c.is_admin ? ' <span class="client-card-you">(you)</span>' : "") + "</span>" +
+            '<span class="chip chip-dim">' + esc(c.plan || "—") + "</span>" +
+          "</div>" +
+          '<p class="client-card-co">' + esc(c.company || c.email) + " &middot; " + hu + " / " + mh + " hrs used</p>" +
+          '<div class="client-card-meta">' + chips + "</div>" +
+        "</button>";
+      }).join("");
+    });
+  }
 
   function selectedClient() {
     for (var i = 0; i < clients.length; i++) {
@@ -561,9 +715,42 @@
     return null;
   }
 
+  /* ---------- Admin: open one client ---------- */
+  function openAdminClient(id) {
+    if (!isAdmin) return;
+    selectedClientId = id;
+    $("adminListView").hidden = true;
+    $("adminDetailView").hidden = false;
+    window.scrollTo(0, 0);
+    renderAdminClient();
+  }
+
+  $("backToClientsBtn").addEventListener("click", function () {
+    $("adminDetailView").hidden = true;
+    $("adminListView").hidden = false;
+    loadClients(); // refresh the at-a-glance numbers
+  });
+
+  function refreshAdminBookingViews() {
+    var c = selectedClient();
+    if (!c) return;
+    fetchAdminBookings(c.id);
+    fetchBenefits(c.id, c.plan, $("adminBenefitStatus"), true);
+  }
+
   function renderAdminClient() {
     var c = selectedClient();
     if (!c) return;
+    $("adminClientName").textContent = c.full_name || c.email;
+    $("adminClientMeta").textContent = (c.company ? c.company + " · " : "") + c.email;
+    $("adminClientPlan").textContent = c.plan || "—";
+    var mh = Number(c.monthly_hours) || 0;
+    var hu = Number(c.hours_used) || 0;
+    $("adminHoursText").textContent = hu + " / " + mh;
+    $("adminHoursBar").style.width = (mh > 0 ? Math.min(100, (hu / mh) * 100) : 0) + "%";
+    $("adminAutosText").textContent = (Number(c.automations_delivered) || 0) + " / " + (Number(c.automations_included) || 0);
+    fetchBenefits(c.id, c.plan, $("adminBenefitStatus"), true);
+    fetchAdminBookings(c.id);
     $("adminName").value = c.full_name || "";
     $("adminCompany").value = c.company || "";
     $("adminPlan").value = c.plan || "AI Essentials";
@@ -579,6 +766,61 @@
     fetchTickets(c.id, $("adminTicketsList"), true);
     fetchFiles(c.id, $("adminFilesList"), true);
   }
+
+  /* ---------- Booking requests (admin) ---------- */
+  function fetchAdminBookings(clientId) {
+    sb.from("bookings").select("*").eq("client_id", clientId)
+      .order("created_at", { ascending: false }).limit(30)
+      .then(function (res) {
+        var rows = res.data || [];
+        if (!rows.length) {
+          $("adminBookingsList").innerHTML = '<p class="empty">No booking requests from this client.</p>';
+          return;
+        }
+        var chipMap = {
+          requested: '<span class="chip chip-amber">Requested</span>',
+          confirmed: '<span class="chip chip-accent">Confirmed</span>',
+          done:      '<span class="chip chip-green">Delivered</span>',
+          declined:  '<span class="chip chip-dim">Declined</span>'
+        };
+        $("adminBookingsList").innerHTML = rows.map(function (b) {
+          var def = BENEFITS[b.benefit_key];
+          var actions = "";
+          if (b.status === "requested") {
+            actions =
+              '<button class="btn btn-primary btn-sm" data-action="booking-confirm" data-id="' + b.id + '">Confirm</button>' +
+              '<button class="btn btn-ghost btn-sm" data-action="booking-decline" data-id="' + b.id + '">Decline</button>';
+          } else if (b.status === "confirmed") {
+            actions =
+              '<button class="btn btn-primary btn-sm" data-action="booking-done" data-id="' + b.id + '" data-key="' + esc(b.benefit_key) + '" data-date="' + esc(b.preferred_date || "") + '">Mark delivered</button>' +
+              '<button class="btn btn-ghost btn-sm" data-action="booking-decline" data-id="' + b.id + '">Cancel it</button>';
+          } else {
+            actions = '<button class="btn btn-ghost btn-sm" data-action="booking-delete" data-id="' + b.id + '">Remove</button>';
+          }
+          return '<div class="item">' +
+            '<div class="item-head"><h3>' + esc(def ? def.label : b.benefit_key) + "</h3>" + (chipMap[b.status] || "") + "</div>" +
+            '<p class="item-body">' +
+              (b.preferred_date ? "Preferred date: " + fmtDate(b.preferred_date) : "No date given") +
+              (b.note ? " — “" + esc(b.note) + "”" : "") +
+            "</p>" +
+            '<p class="item-date">Requested ' + fmtDate(b.created_at) + "</p>" +
+            '<div class="item-actions">' + actions + "</div>" +
+          "</div>";
+        }).join("");
+      });
+  }
+
+  /* ---------- Booking calendar link (admin setting) ---------- */
+  $("bookingUrlForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var url = $("bookingUrlInput").value.trim();
+    setMsg($("bookingUrlOk"), "");
+    sb.from("settings").upsert({ key: "booking_url", value: url }).then(function (res) {
+      if (res.error) { setMsg($("bookingUrlOk"), "Couldn't save: " + res.error.message); return; }
+      settings.booking_url = url;
+      setMsg($("bookingUrlOk"), url ? "Saved — clients will now see your calendar link." : "Cleared — bookings stay in the portal.");
+    });
+  });
 
   /* ---------- Benefit logging (admin) ---------- */
   function renderBenefitOptions(plan) {
@@ -644,13 +886,17 @@
       automations_delivered: Number($("adminAutosDelivered").value) || 0
     }).eq("id", selectedClientId).then(function (res) {
       if (res.error) { setMsg($("adminProfileError"), res.error.message); return; }
-      setMsg($("adminProfileOk"), "Saved.");
-      loadClients();
-      if (selectedClientId === profile.id) {
-        sb.from("profiles").select("*").eq("id", profile.id).single().then(function (r) {
-          if (r.data) profile = r.data;
-        });
-      }
+      // Refresh local copy so the header/status update immediately
+      sb.from("profiles").select("*").eq("id", selectedClientId).single().then(function (r) {
+        if (r.data) {
+          for (var i = 0; i < clients.length; i++) {
+            if (clients[i].id === selectedClientId) { clients[i] = r.data; break; }
+          }
+          if (selectedClientId === profile.id) profile = r.data;
+          renderAdminClient();
+          setMsg($("adminProfileOk"), "Saved.");
+        }
+      });
     });
   });
 
