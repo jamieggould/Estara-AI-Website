@@ -1,5 +1,5 @@
 /* ============================================================
-   ESTARA AI PORTAL — portal.js
+   ESTARA AI PORTAL — portal.js  (v2 — sign-in fix)
    Auth (Supabase) · client dashboard · admin panel
    ============================================================ */
 
@@ -152,19 +152,40 @@
     setMsg($("loginError"), "");
     btn.disabled = true;
     btn.textContent = "Signing in…";
+    var settled = false;
+    function resetBtn() {
+      btn.disabled = false;
+      btn.textContent = "Sign in";
+    }
+    // Watchdog: never leave the button stuck
+    setTimeout(function () {
+      if (!settled) {
+        resetBtn();
+        setMsg($("loginError"), "That took too long — please try again.");
+      }
+    }, 10000);
     sb.auth.signInWithPassword({
       email: $("loginEmail").value.trim(),
       password: $("loginPassword").value
     }).then(function (res) {
-      btn.disabled = false;
-      btn.textContent = "Sign in";
+      settled = true;
+      resetBtn();
       if (res.error) {
         var msg = /invalid/i.test(res.error.message)
           ? "Incorrect email or password."
           : res.error.message;
         setMsg($("loginError"), msg);
+        return;
       }
-      // success is handled by onAuthStateChange
+      var user = res.data && res.data.user;
+      if (user && loadedUserId !== user.id) {
+        loadedUserId = user.id;
+        loadApp(user);
+      }
+    }).catch(function (err) {
+      settled = true;
+      resetBtn();
+      setMsg($("loginError"), "Sign-in failed: " + (err && err.message ? err.message : "unknown error"));
     });
   });
 
