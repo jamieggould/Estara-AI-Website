@@ -1,5 +1,5 @@
 /* ============================================================
-   ESTARA AI PORTAL — portal.js  (v5 — client list admin + bookings)
+   ESTARA AI PORTAL — portal.js  (v6 — expert hours, no automations counter)
    Auth (Supabase) · client dashboard · admin panel
    ============================================================ */
 
@@ -74,13 +74,13 @@
      type "logged"   = delivered on dates, tracked in benefit_log
                        (period: month / quarter / once / adhoc)
      type "included" = always-on as part of the plan
-     Hours & automations are tracked separately by the usage counters. */
+     Expert hours are tracked separately by the usage counter. */
   var BENEFITS = {
     checkin_call:        { label: "Monthly AI check-in call",              type: "logged", period: "month",   book: true },
     recommendations:     { label: "AI & tooling recommendations",          type: "logged", period: "adhoc" },
     business_review:     { label: "Monthly business review",               type: "logged", period: "month",   book: true },
     priority_email:      { label: "Priority email support",                type: "included" },
-    systems_support:     { label: "Support for systems we've built you",   type: "included" },
+    systems_support:     { label: "Ongoing maintenance for built systems", type: "included" },
     discounted_rates:    { label: "Discounted rates on project work",      type: "included" },
     onboarding_call:     { label: "Actionable onboarding call",            type: "logged", period: "once",    book: true },
     client_portal:       { label: "Your Estara client portal",             type: "included" },
@@ -92,14 +92,18 @@
     branded_portal:      { label: "Custom-branded portal dashboard",       type: "included" },
     consulting:          { label: "Ongoing consulting",                    type: "logged", period: "adhoc",   book: true },
     roadmap_reviews:     { label: "Roadmap planning & performance reviews", type: "logged", period: "quarter", book: true },
-    ooh_support:         { label: "Out-of-hours support, first in queue",  type: "included" }
+    ooh_support:         { label: "Out-of-hours support, first in queue",  type: "included" },
+    team_training:       { label: "Quarterly team AI training session",    type: "logged", period: "quarter", book: true }
   };
   var PLAN_KEYS = {
-    "AI Essentials": ["checkin_call", "recommendations", "business_review", "priority_email", "systems_support", "discounted_rates"],
+    "AI Essentials": ["checkin_call", "recommendations", "business_review", "priority_email", "systems_support", "discounted_rates",
+                      "client_portal", "team_training"],
     "AI Growth": ["checkin_call", "recommendations", "business_review", "priority_email", "systems_support", "discounted_rates",
-                  "onboarding_call", "client_portal", "workflow_improve", "strategy_session", "quarterly_roadmap", "fast_turnaround"],
+                  "client_portal", "team_training",
+                  "onboarding_call", "workflow_improve", "strategy_session", "quarterly_roadmap", "fast_turnaround"],
     "AI Partner": ["checkin_call", "recommendations", "business_review", "priority_email", "systems_support", "discounted_rates",
-                   "onboarding_call", "client_portal", "workflow_improve", "strategy_session", "quarterly_roadmap", "fast_turnaround",
+                   "client_portal", "team_training",
+                   "onboarding_call", "workflow_improve", "strategy_session", "quarterly_roadmap", "fast_turnaround",
                    "support_chatbot", "branded_portal", "consulting", "roadmap_reviews", "ooh_support"]
   };
   function benefitsForPlan(plan) {
@@ -307,7 +311,6 @@
     var hu = Number(p.hours_used) || 0;
     $("hoursText").textContent = hu + " / " + mh;
     $("hoursBar").style.width = (mh > 0 ? Math.min(100, (hu / mh) * 100) : 0) + "%";
-    $("autosText").textContent = (Number(p.automations_delivered) || 0) + " / " + (Number(p.automations_included) || 0);
 
     fetchBenefits(p.id, p.plan, $("benefitsList"), false);
     fetchUpdates(p.id, $("updatesList"), false);
@@ -748,7 +751,6 @@
     var hu = Number(c.hours_used) || 0;
     $("adminHoursText").textContent = hu + " / " + mh;
     $("adminHoursBar").style.width = (mh > 0 ? Math.min(100, (hu / mh) * 100) : 0) + "%";
-    $("adminAutosText").textContent = (Number(c.automations_delivered) || 0) + " / " + (Number(c.automations_included) || 0);
     fetchBenefits(c.id, c.plan, $("adminBenefitStatus"), true);
     fetchAdminBookings(c.id);
     $("adminName").value = c.full_name || "";
@@ -756,8 +758,6 @@
     $("adminPlan").value = c.plan || "AI Essentials";
     $("adminMonthlyHours").value = c.monthly_hours != null ? c.monthly_hours : 0;
     $("adminHoursUsed").value = c.hours_used != null ? c.hours_used : 0;
-    $("adminAutosIncluded").value = c.automations_included != null ? c.automations_included : 0;
-    $("adminAutosDelivered").value = c.automations_delivered != null ? c.automations_delivered : 0;
     setMsg($("adminProfileError"), "");
     setMsg($("adminProfileOk"), "");
     renderBenefitOptions(c.plan);
@@ -881,9 +881,7 @@
       company: $("adminCompany").value.trim(),
       plan: $("adminPlan").value,
       monthly_hours: Number($("adminMonthlyHours").value) || 0,
-      hours_used: Number($("adminHoursUsed").value) || 0,
-      automations_included: Number($("adminAutosIncluded").value) || 0,
-      automations_delivered: Number($("adminAutosDelivered").value) || 0
+      hours_used: Number($("adminHoursUsed").value) || 0
     }).eq("id", selectedClientId).then(function (res) {
       if (res.error) { setMsg($("adminProfileError"), res.error.message); return; }
       // Refresh local copy so the header/status update immediately
