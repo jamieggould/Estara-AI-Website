@@ -121,14 +121,14 @@ img { max-width: 100%; display: block; }
 .logo {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.45rem;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   letter-spacing: -0.02em;
 }
 .logo-accent { color: var(--accent); }
-.logo-img { height: 32px; width: auto; }
+.logo-img { height: 40px; width: auto; }
 .footer .logo-img { height: 36px; }
 .nav-links { display: flex; gap: 30px; margin-left: auto; }
 .nav-links a { color: var(--text-dim); font-size: 0.92rem; font-weight: 500; transition: color 0.2s; }
