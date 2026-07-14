@@ -104,6 +104,12 @@
             <p class="pcard-note">Your hours cover whatever you need &mdash; automation, software, integrations or advice. Need more this month? <a href="mailto:support@estaraai.com">Get in touch</a> and we'll sort it.</p>
           </section>
 
+          <!-- Current projects -->
+          <section class="pcard panel pcard-wide">
+            <div class="pcard-head"><h2>Current projects</h2></div>
+            <div class="project-list" id="projectsList"><p class="empty">No projects on the go right now.</p></div>
+          </section>
+
           <!-- Plan benefits -->
           <section class="pcard panel pcard-plan pcard-wide">
             <div class="pcard-head"><h2>What your plan includes</h2></div>
@@ -159,6 +165,35 @@
           <div class="client-grid" id="clientList"><p class="empty">Loading&hellip;</p></div>
 
           <section class="pcard panel admin-settings">
+            <div class="pcard-head"><h2>Add a new client</h2></div>
+            <form id="newClientForm" class="inline-form">
+              <div class="form-2col">
+                <div><label for="newClientEmail">Email (their login)</label><input type="email" id="newClientEmail" required /></div>
+                <div><label for="newClientPassword">Temporary password</label><input type="text" id="newClientPassword" minlength="8" required /></div>
+              </div>
+              <div class="form-2col">
+                <div><label for="newClientName">Name</label><input type="text" id="newClientName" /></div>
+                <div><label for="newClientCompany">Company</label><input type="text" id="newClientCompany" /></div>
+              </div>
+              <div class="form-2col">
+                <div>
+                  <label for="newClientPlan">Plan</label>
+                  <select id="newClientPlan">
+                    <option>AI Essentials</option>
+                    <option>AI Growth</option>
+                    <option>AI Partner</option>
+                  </select>
+                </div>
+                <div><label for="newClientHours">Expert hours / month</label><input type="number" id="newClientHours" min="0" step="1" value="1" /></div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm" id="newClientSubmit">Create client</button>
+              <div class="form-error" id="newClientError" hidden></div>
+              <div class="form-ok" id="newClientOk" hidden></div>
+              <p class="pcard-note">Send them the email and password &mdash; they can log in straight away and change the password with &ldquo;Forgot password&rdquo; whenever they like.</p>
+            </form>
+          </section>
+
+          <section class="pcard panel admin-settings">
             <div class="pcard-head"><h2>Booking calendar link <span class="chip chip-dim">optional</span></h2></div>
             <form id="bookingUrlForm" class="inline-form">
               <label for="bookingUrlInput">Calendar URL</label>
@@ -169,7 +204,7 @@
             <p class="pcard-note">If set, clients booking a session also get a &ldquo;pick an exact time&rdquo; link that opens this page. Leave blank to keep bookings inside the portal only.</p>
           </section>
 
-          <p class="admin-bar-note">New client logins are created in Supabase &rarr; Authentication &rarr; Add user &mdash; they appear here automatically.</p>
+          <p class="admin-bar-note">New clients appear in the list above the moment you create them.</p>
         </div>
 
         <!-- Admin: single client -->
@@ -195,6 +230,38 @@
               <div class="usage-bar"><span id="adminHoursBar"></span></div>
             </div>
             <div class="benefit-grid" id="adminBenefitStatus"><p class="empty">Loading&hellip;</p></div>
+          </section>
+
+          <!-- Projects -->
+          <section class="pcard panel pcard-wide">
+            <div class="pcard-head"><h2>Current projects</h2></div>
+            <form id="adminProjectForm" class="inline-form">
+              <input type="hidden" id="adminProjectId" value="" />
+              <div class="form-2col">
+                <div><label for="adminProjectName">Project name</label><input type="text" id="adminProjectName" maxlength="120" required /></div>
+                <div><label for="adminProjectDue">Target date <span class="label-optional">(optional)</span></label><input type="date" id="adminProjectDue" /></div>
+              </div>
+              <label for="adminProjectDesc">Details</label>
+              <textarea id="adminProjectDesc" rows="3" required></textarea>
+              <div class="form-2col">
+                <div>
+                  <label for="adminProjectStatus">Status</label>
+                  <select id="adminProjectStatus">
+                    <option value="planned">Planned</option>
+                    <option value="in_progress" selected>In progress</option>
+                    <option value="review">In review</option>
+                    <option value="done">Done</option>
+                  </select>
+                </div>
+                <div><label for="adminProjectProgress">Progress (%)</label><input type="number" id="adminProjectProgress" min="0" max="100" step="5" value="0" /></div>
+              </div>
+              <div class="form-row">
+                <button type="submit" class="btn btn-primary btn-sm" id="adminProjectSubmit">Add project</button>
+                <button type="button" class="btn btn-ghost btn-sm" id="adminProjectCancel" hidden>Cancel edit</button>
+              </div>
+              <div class="form-error" id="adminProjectError" hidden></div>
+            </form>
+            <div class="project-list" id="adminProjectsList"><p class="empty">No projects yet.</p></div>
           </section>
 
           <!-- Booking requests -->
