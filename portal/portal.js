@@ -1,5 +1,5 @@
 /* ============================================================
-   ESTARA AI PORTAL — portal.js  (v6 — expert hours, no automations counter)
+   ESTARA AI PORTAL — portal.js  (v7 — current projects + add clients)
    Auth (Supabase) · client dashboard · admin panel
    ============================================================ */
 
@@ -312,6 +312,7 @@
     $("hoursText").textContent = hu + " / " + mh;
     $("hoursBar").style.width = (mh > 0 ? Math.min(100, (hu / mh) * 100) : 0) + "%";
 
+    fetchProjects(p.id, $("projectsList"), false);
     fetchBenefits(p.id, p.plan, $("benefitsList"), false);
     fetchUpdates(p.id, $("updatesList"), false);
     fetchTickets(p.id, $("ticketsList"), false);
@@ -446,6 +447,42 @@
             (admin ? '<div class="item-actions">' +
               '<button class="btn btn-ghost btn-sm" data-action="update-status" data-id="' + u.id + '" data-status="' + esc(u.status) + '">Next status</button>' +
               '<button class="btn btn-ghost btn-sm" data-action="update-delete" data-id="' + u.id + '">Delete</button>' +
+            "</div>" : "") +
+          "</div>";
+        }).join("");
+      });
+  }
+
+  /* ---------- Projects ---------- */
+  var adminProjects = [];
+  var PROJECT_CHIPS = {
+    planned:     '<span class="chip chip-dim">Planned</span>',
+    in_progress: '<span class="chip chip-accent">In progress</span>',
+    review:      '<span class="chip chip-amber">In review</span>',
+    done:        '<span class="chip chip-green">Done</span>'
+  };
+  function fetchProjects(clientId, listEl, admin) {
+    sb.from("projects").select("*").eq("client_id", clientId)
+      .order("created_at", { ascending: false })
+      .then(function (res) {
+        var rows = res.data || [];
+        if (admin) adminProjects = rows;
+        if (!rows.length) {
+          listEl.innerHTML = '<p class="empty">' + (admin ? "No projects yet — add one above." : "No projects on the go right now.") + "</p>";
+          return;
+        }
+        listEl.innerHTML = rows.map(function (p) {
+          var pct = Math.max(0, Math.min(100, Number(p.progress) || 0));
+          return '<div class="project">' +
+            '<div class="project-head"><h3 class="project-name">' + esc(p.name) + "</h3>" + (PROJECT_CHIPS[p.status] || "") + "</div>" +
+            (p.description ? '<p class="project-desc">' + esc(p.description) + "</p>" : "") +
+            '<div class="usage-bar"><span style="width:' + pct + '%"></span></div>' +
+            '<p class="project-meta">' + pct + "% complete" +
+              (p.due_date ? " &middot; target " + fmtDate(p.due_date) : "") +
+              " &middot; started " + fmtDate(p.created_at) + "</p>" +
+            (admin ? '<div class="item-actions">' +
+              '<button class="btn btn-ghost btn-sm" data-action="project-edit" data-id="' + p.id + '">Edit</button>' +
+              '<button class="btn btn-ghost btn-sm" data-action="project-delete" data-id="' + p.id + '">Remove</button>' +
             "</div>" : "") +
           "</div>";
         }).join("");
@@ -652,6 +689,15 @@
       sb.from("benefit_log").delete().eq("id", Number(id))
         .then(function () { fetchAdminBenefitLog(selectedClientId); });
     }
+    if (action === "project-edit") {
+      for (var i = 0; i < adminProjects.length; i++) {
+        if (String(adminProjects[i].id) === id) { fillProjectForm(adminProjects[i]); break; }
+      }
+    }
+    if (action === "project-delete") {
+      sb.from("projects").delete().eq("id", Number(id))
+        .then(function () { fetchProjects(selectedClientId, $("adminProjectsList"), true); });
+    }
   });
 
   function refreshTicketLists() {
@@ -762,6 +808,8 @@
     setMsg($("adminProfileOk"), "");
     renderBenefitOptions(c.plan);
     fetchAdminBenefitLog(c.id);
+    resetProjectForm();
+    fetchProjects(c.id, $("adminProjectsList"), true);
     fetchUpdates(c.id, $("adminUpdatesList"), true);
     fetchTickets(c.id, $("adminTicketsList"), true);
     fetchFiles(c.id, $("adminFilesList"), true);
@@ -809,6 +857,39 @@
         }).join("");
       });
   }
+
+  /* ---------- Add a new client (admin) ---------- */
+  var PLAN_DEFAULT_HOURS = { "AI Essentials": 1, "AI Growth": 12, "AI Partner": 30 };
+  $("newClientPlan").addEventListener("change", function () {
+    $("newClientHours").value = PLAN_DEFAULT_HOURS[this.value] != null ? PLAN_DEFAULT_HOURS[this.value] : 0;
+  });
+  $("newClientForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    setMsg($("newClientError"), "");
+    setMsg($("newClientOk"), "");
+    var btn = $("newClientSubmit");
+    btn.disabled = true;
+    btn.textContent = "Creating…";
+    sb.functions.invoke("create-client", {
+      body: {
+        email: $("newClientEmail").value.trim(),
+        password: $("newClientPassword").value,
+        full_name: $("newClientName").value.trim(),
+        company: $("newClientCompany").value.trim(),
+        plan: $("newClientPlan").value,
+        monthly_hours: Number($("newClientHours").value) || 0
+      }
+    }).then(function (res) {
+      btn.disabled = false;
+      btn.textContent = "Create client";
+      var err = (res.data && res.data.error) || (res.error && res.error.message);
+      if (err) { setMsg($("newClientError"), err); return; }
+      $("newClientForm").reset();
+      $("newClientHours").value = PLAN_DEFAULT_HOURS[$("newClientPlan").value] || 1;
+      setMsg($("newClientOk"), "Client created — send them their email and password so they can log in.");
+      loadClients();
+    });
+  });
 
   /* ---------- Booking calendar link (admin setting) ---------- */
   $("bookingUrlForm").addEventListener("submit", function (e) {
@@ -895,6 +976,53 @@
           setMsg($("adminProfileOk"), "Saved.");
         }
       });
+    });
+  });
+
+  /* ---------- Projects (admin) ---------- */
+  function resetProjectForm() {
+    $("adminProjectId").value = "";
+    $("adminProjectName").value = "";
+    $("adminProjectDesc").value = "";
+    $("adminProjectStatus").value = "in_progress";
+    $("adminProjectProgress").value = 0;
+    $("adminProjectDue").value = "";
+    $("adminProjectSubmit").textContent = "Add project";
+    $("adminProjectCancel").hidden = true;
+    setMsg($("adminProjectError"), "");
+  }
+  function fillProjectForm(p) {
+    $("adminProjectId").value = p.id;
+    $("adminProjectName").value = p.name || "";
+    $("adminProjectDesc").value = p.description || "";
+    $("adminProjectStatus").value = p.status || "in_progress";
+    $("adminProjectProgress").value = Number(p.progress) || 0;
+    $("adminProjectDue").value = p.due_date || "";
+    $("adminProjectSubmit").textContent = "Save changes";
+    $("adminProjectCancel").hidden = false;
+    $("adminProjectName").focus();
+  }
+  $("adminProjectCancel").addEventListener("click", resetProjectForm);
+  $("adminProjectForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!selectedClientId) return;
+    setMsg($("adminProjectError"), "");
+    var payload = {
+      name: $("adminProjectName").value.trim(),
+      description: $("adminProjectDesc").value.trim(),
+      status: $("adminProjectStatus").value,
+      progress: Math.max(0, Math.min(100, Number($("adminProjectProgress").value) || 0)),
+      due_date: $("adminProjectDue").value || null
+    };
+    var editId = $("adminProjectId").value;
+    if (!editId) payload.client_id = selectedClientId;
+    var q = editId
+      ? sb.from("projects").update(payload).eq("id", Number(editId))
+      : sb.from("projects").insert(payload);
+    q.then(function (res) {
+      if (res.error) { setMsg($("adminProjectError"), res.error.message); return; }
+      resetProjectForm();
+      fetchProjects(selectedClientId, $("adminProjectsList"), true);
     });
   });
 
