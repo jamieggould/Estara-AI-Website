@@ -1,5 +1,5 @@
 /* ============================================================
-   ESTARA AI PORTAL — portal.js  (v7 — current projects + add clients)
+   ESTARA AI PORTAL — portal.js  (v8 — new plan names + benefits)
    Auth (Supabase) · client dashboard · admin panel
    ============================================================ */
 
@@ -76,36 +76,36 @@
      type "included" = always-on as part of the plan
      Expert hours are tracked separately by the usage counter. */
   var BENEFITS = {
-    checkin_call:        { label: "Monthly AI check-in call",              type: "logged", period: "month",   book: true },
-    recommendations:     { label: "AI & tooling recommendations",          type: "logged", period: "adhoc" },
+    checkin_call:        { label: "Monthly AI strategy session",           type: "logged", period: "month",   book: true },
+    recommendations:     { label: "Ongoing AI & software recommendations", type: "logged", period: "adhoc" },
     business_review:     { label: "Monthly business review",               type: "logged", period: "month",   book: true },
-    priority_email:      { label: "Priority email support",                type: "included" },
-    systems_support:     { label: "Ongoing maintenance for built systems", type: "included" },
-    discounted_rates:    { label: "Discounted rates on project work",      type: "included" },
-    onboarding_call:     { label: "Actionable onboarding call",            type: "logged", period: "once",    book: true },
-    client_portal:       { label: "Your Estara client portal",             type: "included" },
-    workflow_improve:    { label: "Workflow & automation improvements",    type: "logged", period: "adhoc" },
-    strategy_session:    { label: "Monthly strategy session",              type: "logged", period: "month",   book: true },
+    priority_email:      { label: "Email guidance — 2 business day response target", type: "included" },
+    systems_support:     { label: "Routine maintenance for eligible Estara-built systems", type: "included" },
+    discounted_rates:    { label: "Preferential access to additional delivery capacity", type: "included" },
+    onboarding_call:     { label: "Initial workflow & opportunity assessment", type: "logged", period: "once",    book: true },
+    client_portal:       { label: "Estara client workspace",               type: "included" },
+    workflow_improve:    { label: "Automation, integrations & internal tools", type: "logged", period: "adhoc" },
+    strategy_session:    { label: "Monthly strategy & delivery review",    type: "logged", period: "month",   book: true },
     quarterly_roadmap:   { label: "Quarterly AI roadmap",                  type: "logged", period: "quarter", book: true },
-    fast_turnaround:     { label: "Faster turnaround & priority support",  type: "included" },
-    support_chatbot:     { label: "Custom AI support chatbot",             type: "logged", period: "once" },
-    branded_portal:      { label: "Custom-branded portal dashboard",       type: "included" },
-    consulting:          { label: "Ongoing consulting",                    type: "logged", period: "adhoc",   book: true },
-    roadmap_reviews:     { label: "Roadmap planning & performance reviews", type: "logged", period: "quarter", book: true },
-    ooh_support:         { label: "Out-of-hours support, first in queue",  type: "included" },
-    team_training:       { label: "Quarterly team AI training session",    type: "logged", period: "quarter", book: true }
+    fast_turnaround:     { label: "Priority technical support — 1 business day response target", type: "included" },
+    support_chatbot:     { label: "Custom AI assistant (subject to agreed scope)", type: "logged", period: "once" },
+    branded_portal:      { label: "Branded client workspace for requests, progress & reporting", type: "included" },
+    consulting:          { label: "Proactive opportunity identification",  type: "logged", period: "adhoc",   book: true },
+    roadmap_reviews:     { label: "Monthly delivery & roadmap reviews + quarterly planning", type: "logged", period: "quarter", book: true },
+    ooh_support:         { label: "Enhanced support — 4 business hour response target", type: "included" },
+    team_training:       { label: "Quarterly team enablement session",     type: "logged", period: "quarter", book: true }
   };
   var PLAN_KEYS = {
-    "AI Essentials": ["checkin_call", "recommendations", "business_review", "priority_email", "systems_support", "discounted_rates",
-                      "client_portal", "team_training"],
-    "AI Growth": ["checkin_call", "recommendations", "business_review", "priority_email", "systems_support", "discounted_rates",
-                  "client_portal", "team_training",
-                  "onboarding_call", "workflow_improve", "strategy_session", "quarterly_roadmap", "fast_turnaround"],
-    "AI Partner": ["checkin_call", "recommendations", "business_review", "priority_email", "systems_support", "discounted_rates",
-                   "client_portal", "team_training",
-                   "onboarding_call", "workflow_improve", "strategy_session", "quarterly_roadmap", "fast_turnaround",
-                   "support_chatbot", "branded_portal", "consulting", "roadmap_reviews", "ooh_support"]
+    "AI Advisory": ["checkin_call", "recommendations", "team_training", "client_portal",
+                    "priority_email", "systems_support", "discounted_rates"],
+    "AI Growth": ["onboarding_call", "workflow_improve", "strategy_session", "quarterly_roadmap",
+                  "fast_turnaround", "team_training", "client_portal", "systems_support", "discounted_rates"],
+    "Fractional AI Department": ["consulting", "roadmap_reviews", "support_chatbot", "branded_portal",
+                                 "ooh_support", "team_training", "client_portal", "systems_support", "discounted_rates"]
   };
+  // Legacy plan names (existing rows in the database) map to the nearest new plan.
+  PLAN_KEYS["AI Essentials"] = PLAN_KEYS["AI Advisory"];
+  PLAN_KEYS["AI Partner"] = PLAN_KEYS["Fractional AI Department"];
   function benefitsForPlan(plan) {
     return (PLAN_KEYS[plan] || []).map(function (k) {
       var b = BENEFITS[k];
@@ -801,7 +801,7 @@
     fetchAdminBookings(c.id);
     $("adminName").value = c.full_name || "";
     $("adminCompany").value = c.company || "";
-    $("adminPlan").value = c.plan || "AI Essentials";
+    $("adminPlan").value = c.plan || "AI Advisory";
     $("adminMonthlyHours").value = c.monthly_hours != null ? c.monthly_hours : 0;
     $("adminHoursUsed").value = c.hours_used != null ? c.hours_used : 0;
     setMsg($("adminProfileError"), "");
@@ -859,7 +859,7 @@
   }
 
   /* ---------- Add a new client (admin) ---------- */
-  var PLAN_DEFAULT_HOURS = { "AI Essentials": 1, "AI Growth": 12, "AI Partner": 30 };
+  var PLAN_DEFAULT_HOURS = { "AI Advisory": 0, "AI Growth": 10, "Fractional AI Department": 24 };
   $("newClientPlan").addEventListener("change", function () {
     $("newClientHours").value = PLAN_DEFAULT_HOURS[this.value] != null ? PLAN_DEFAULT_HOURS[this.value] : 0;
   });
@@ -885,7 +885,8 @@
       var err = (res.data && res.data.error) || (res.error && res.error.message);
       if (err) { setMsg($("newClientError"), err); return; }
       $("newClientForm").reset();
-      $("newClientHours").value = PLAN_DEFAULT_HOURS[$("newClientPlan").value] || 1;
+      var defHours = PLAN_DEFAULT_HOURS[$("newClientPlan").value];
+      $("newClientHours").value = defHours != null ? defHours : 0;
       setMsg($("newClientOk"), "Client created — send them their email and password so they can log in.");
       loadClients();
     });
