@@ -96,12 +96,12 @@
             </div>
             <div class="usage">
               <div class="usage-row">
-                <span>Expert hours this month</span>
+                <span>Delivery capacity this month</span>
                 <strong id="hoursText">0 / 0</strong>
               </div>
               <div class="usage-bar"><span id="hoursBar"></span></div>
             </div>
-            <p class="pcard-note">Your hours cover whatever you need &mdash; automation, software, integrations or advice. Need more this month? <a href="mailto:support@estaraai.com">Get in touch</a> and we'll sort it.</p>
+            <p class="pcard-note">Your capacity covers whatever you need &mdash; automation, software, integrations or advice. Need more this month? <a href="mailto:support@estaraai.com">Get in touch</a> and we'll sort it.</p>
           </section>
 
           <!-- Current projects -->
@@ -179,12 +179,12 @@
                 <div>
                   <label for="newClientPlan">Plan</label>
                   <select id="newClientPlan">
-                    <option>AI Essentials</option>
+                    <option>AI Advisory</option>
                     <option>AI Growth</option>
-                    <option>AI Partner</option>
+                    <option>Fractional AI Department</option>
                   </select>
                 </div>
-                <div><label for="newClientHours">Expert hours / month</label><input type="number" id="newClientHours" min="0" step="1" value="1" /></div>
+                <div><label for="newClientHours">Capacity hours / month</label><input type="number" id="newClientHours" min="0" step="1" value="0" /></div>
               </div>
               <button type="submit" class="btn btn-primary btn-sm" id="newClientSubmit">Create client</button>
               <div class="form-error" id="newClientError" hidden></div>
@@ -224,7 +224,7 @@
             </div>
             <div class="usage">
               <div class="usage-row">
-                <span>Expert hours this month</span>
+                <span>Delivery capacity this month</span>
                 <strong id="adminHoursText">0 / 0</strong>
               </div>
               <div class="usage-bar"><span id="adminHoursBar"></span></div>
@@ -300,10 +300,14 @@
                 <div>
                   <label for="adminPlan">Plan</label>
                   <select id="adminPlan">
-                    <option>AI Essentials</option>
+                    <option>AI Advisory</option>
                     <option>AI Growth</option>
-                    <option>AI Partner</option>
+                    <option>Fractional AI Department</option>
                     <option>Project client</option>
+                    <!-- Legacy plan names: hidden from the dropdown, but still display
+                         correctly if an existing client was set up on an old plan -->
+                    <option hidden>AI Essentials</option>
+                    <option hidden>AI Partner</option>
                   </select>
                 </div>
                 <div><label for="adminMonthlyHours">Hours included / month</label><input type="number" id="adminMonthlyHours" min="0" step="1" /></div>
