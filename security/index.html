@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security & Data — Estara AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="any" href="/assets/logo.png?v=2" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="nav scrolled">
+    <div class="nav-inner">
+      <a href="/" class="logo"><img src="/assets/logo.png" alt="Estara AI logo" class="logo-img" />Estara<span class="logo-accent">AI</span></a>
+    </div>
+  </header>
+  <main class="legal-main">
+    <div class="container container-narrow">
+      <a href="/" class="legal-back">&larr; Back to estaraai.com</a>
+      <h1>Security & Data</h1>
+      <p class="legal-updated">Last updated: 21 July 2026</p>
+
+      <p>Clients trust us with access to their systems and data. This page describes the controls we actually use — no vague claims. If you need specifics for a vendor assessment, email <a href="mailto:hello@estaraai.com">hello@estaraai.com</a>.</p>
+
+      <h2>Access management</h2>
+      <ul>
+        <li>Unique, named accounts — no shared logins — with access limited to what each engagement requires.</li>
+        <li>Multi-factor authentication enabled wherever the service supports it.</li>
+        <li>Client-granted access is removed at the end of an engagement, or immediately on request.</li>
+      </ul>
+
+      <h2>Credential handling</h2>
+      <ul>
+        <li>Credentials and API keys are stored in encrypted password/secret managers — never in plain text, shared documents or source code repositories.</li>
+        <li>Where possible we ask clients to grant scoped access rather than share passwords.</li>
+      </ul>
+
+      <h2>Encryption and infrastructure</h2>
+      <ul>
+        <li>Services we build and use encrypt data in transit (TLS); data at rest is encrypted by the managed cloud providers we build on.</li>
+        <li>We build on reputable managed cloud platforms (for example Render and Supabase); hosting regions are confirmed per project based on client requirements.</li>
+        <li>Backups for systems we operate are handled through the managed providers' backup facilities, with restoration options confirmed per project.</li>
+      </ul>
+
+      <h2>Development practices</h2>
+      <ul>
+        <li>Secure development practices: changes are tested before deployment, secrets are kept out of code, and production access is restricted.</li>
+        <li>Systems are documented and handed over so clients aren't dependent on any single person's memory.</li>
+      </ul>
+
+      <h2>Data protection</h2>
+      <ul>
+        <li>GDPR-aware data handling: minimum necessary access, defined retention, and deletion or return of client data at the end of an engagement unless agreed otherwise.</li>
+        <li>Where we process personal data on a client's behalf, we do so under the client's instructions; a list of relevant subprocessors is available on request.</li>
+      </ul>
+
+      <h2>Incident response</h2>
+      <p>If we become aware of a security incident affecting client data or a client system we operate, we notify the affected client without undue delay, contain the issue, and support any notification obligations that apply under UK GDPR.</p>
+
+      <h2>Insurance</h2>
+      <p>Estara AI Ltd holds Professional Indemnity, Public &amp; Product Liability and Cyber Liability insurance. Documentation is available on request.</p>
+
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>&copy; 2026 Estara AI Ltd &middot; Registered in England and Wales</span>
+        <span><a href="/privacy/">Privacy</a> &middot; <a href="/terms/">Terms</a> &middot; <a href="/cancellation-and-payment-terms/">Cancellation &amp; Payment</a> &middot; <a href="/security/">Security</a> &middot; <a href="/cookie-policy/">Cookies</a></span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
