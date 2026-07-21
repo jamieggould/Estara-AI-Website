@@ -816,3 +816,16 @@ section[id], footer[id], .plan-details { scroll-margin-top: 92px; }
   .project-prices { padding: 26px 20px; }
   .legal-main { padding: 120px 0 70px; }
 }
+
+/* ---------- v5 additions: trust "and more" + plan effective rate ---------- */
+.trust-more { font-style: italic; opacity: 0.65; font-weight: 400; }
+.plan-rate {
+  font-size: 0.82rem;
+  color: var(--accent);
+  margin-top: 10px;
+  padding: 7px 12px;
+  border: 1px solid rgba(124, 156, 245, 0.25);
+  background: rgba(124, 156, 245, 0.07);
+  border-radius: 8px;
+  display: inline-block;
+}
