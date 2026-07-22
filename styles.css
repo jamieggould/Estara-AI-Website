@@ -128,7 +128,7 @@ img { max-width: 100%; display: block; }
   letter-spacing: -0.02em;
 }
 .logo-accent { color: var(--accent); }
-.logo-img { height: 40px; width: auto; }
+.logo-img { height: 48px; width: auto; }
 .footer .logo-img { height: 36px; }
 .nav-links { display: flex; gap: 30px; margin-left: auto; }
 .nav-links a { color: var(--text-dim); font-size: 0.92rem; font-weight: 500; transition: color 0.2s; }
@@ -817,18 +817,30 @@ section[id], footer[id], .plan-details { scroll-margin-top: 92px; }
   .legal-main { padding: 120px 0 70px; }
 }
 
-/* ---------- v5 additions: trust "and more" + plan effective rate ---------- */
+/* ---------- v5 additions: trust "and more" ---------- */
 .trust-more { font-style: italic; opacity: 0.65; font-weight: 400; }
-.plan-rate {
-  font-size: 0.82rem;
-  color: var(--accent);
-  margin-top: 10px;
-  padding: 7px 12px;
-  border: 1px solid rgba(124, 156, 245, 0.25);
-  background: rgba(124, 156, 245, 0.07);
-  border-radius: 8px;
-  display: inline-block;
+
+/* ---------- v8: case study summary cards ---------- */
+.case-sum { padding: 34px 30px; display: flex; flex-direction: column; }
+.case-sum h3 { font-size: 1.3rem; margin-top: 14px; }
+.case-sum .case-client { margin-top: 3px; }
+.case-sum .card-link { margin-top: auto; padding-top: 18px; }
+.case-visual {
+  margin: 20px 0 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(10, 17, 40, 0.55);
+  padding: 14px;
 }
+.case-visual svg { width: 100%; height: auto; display: block; }
+.case-metric {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--accent);
+  line-height: 1.45;
+}
+.case-sum-desc { color: var(--text-dim); font-size: 0.92rem; margin-top: 10px; }
 
 /* ---------- v6: navy aurora background ---------- */
 body::before {
@@ -849,4 +861,16 @@ body::before {
 }
 @media (prefers-reduced-motion: reduce) {
   body::before { animation: none; }
+}
+
+/* ---------- v7: fine grain texture (sits on top of the aurora glow) ---------- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
 }
