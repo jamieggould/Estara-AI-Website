@@ -22,9 +22,8 @@
   <!-- ======= NAV ======= -->
   <header class="nav" id="nav">
     <div class="nav-inner">
-      <a href="#top" class="logo">
+      <a href="#top" class="logo" aria-label="Estara AI — home">
         <img src="assets/logo.png" alt="Estara AI logo" class="logo-img" />
-        Estara<span class="logo-accent">AI</span>
       </a>
       <nav class="nav-links" id="navLinks">
         <a href="#services">Services</a>
@@ -48,7 +47,7 @@
     <div class="hero-content">
       <div class="hero-badge reveal">
         <span class="pulse-dot" aria-hidden="true"></span>
-        AI &amp; software consultancy · London, UK · Taking on new clients for Q3 2026
+        AI &amp; software consultancy · London, UK · Limited onboarding availability for new clients
       </div>
       <h1 class="hero-title reveal">Custom AI and software that removes the work <span class="accent">slowing your business down.</span></h1>
       <p class="hero-sub reveal">Estara designs and builds intelligent workflows, internal tools and custom software that reduce manual work, lower operating costs and help growing businesses scale — strategy and implementation from one accountable partner.</p>
@@ -57,11 +56,13 @@
         <a href="#work" class="btn btn-ghost btn-lg">View our work</a>
       </div>
       <p class="hero-microcopy reveal">Free, 30 minutes. We'll discuss your biggest operational bottleneck and agree the most sensible next step — whether or not that's us.</p>
-      <!-- ✏️ CONFIRM: these two figures were carried over from the previous site. Keep only if you can stand behind them. -->
+      <!-- ✏️ Stats wording is deliberately precise: "estimated annual hours" (projected yearly savings) and
+           "systems, automations & workflow improvements" (counts individual deliverables, not 35 separate clients).
+           If you can evidence stronger claims, tighten the wording — never the other way round. -->
       <div class="hero-stats reveal">
-        <div class="stat"><span class="stat-num">1,500+</span><span class="stat-label">Hours of manual work removed</span></div>
+        <div class="stat"><span class="stat-num">1,500+</span><span class="stat-label">Estimated annual hours of manual work removed</span></div>
         <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat"><span class="stat-num">35+</span><span class="stat-label">Projects delivered</span></div>
+        <div class="stat"><span class="stat-num">35+</span><span class="stat-label">Systems, automations &amp; workflow improvements delivered</span></div>
         <div class="stat-divider" aria-hidden="true"></div>
         <div class="stat"><span class="stat-num stat-num-text">Tailored</span><span class="stat-label">Custom-built where it matters, proven tools where appropriate</span></div>
       </div>
@@ -87,11 +88,14 @@
     </div>
   </section>
 
-  <!-- ======= TECH STRIP ======= -->
-  <div class="tech-strip" aria-label="Technologies we work with">
+  <!-- ======= VALUE STRIP ======= -->
+  <div class="tech-strip" aria-label="How Estara works">
     <div class="container tech-strip-inner">
-      <span class="tech-label">Built with</span>
-      <span>OpenAI</span><span>Anthropic</span><span>Python</span><span>AWS</span><span>Make</span><span>Zapier</span><span>React</span><span>Node.js</span><span>PostgreSQL</span><span>LangChain</span>
+      <span>UK-based &amp; fully insured</span>
+      <span>Founder-led delivery</span>
+      <span>Strategy through implementation</span>
+      <span>GDPR-aware development</span>
+      <span>Build &amp; maintain — not just advise</span>
     </div>
   </div>
 
@@ -132,7 +136,7 @@
     <div class="container">      <div class="section-head reveal">
         <span class="eyebrow">What we do</span>
         <h2>Strategy and implementation, from one accountable partner.</h2>
-        <p>Advice, automation and custom software — designed, built and maintained by the same person you deal with.</p>
+        <p>Advice, automation and custom software — delivered under one accountable technical lead from discovery through ongoing support.</p>
       </div>
       <div class="cards-3">
         <article class="card panel reveal">
@@ -185,15 +189,9 @@
     </div>
   </section>
 
-  <!-- ======= WORK / CASE STUDIES ======= -->
-  <!--
-    ✏️ CASE STUDIES — what to add when you have it:
-    · Delivery timescale (e.g. "First release live in 6 weeks")
-    · The specific tools/systems integrated (CRM names, accounting software, etc.)
-    · A screenshot per case study (add <img> inside .case-body, ask the client first)
-    · Any figure the client will sign off (e.g. "approx. 10 hours/week saved")
-    Everything currently written is supported by the client testimonials below.
-  -->
+  <!-- ======= WORK / CASE STUDIES (summaries — full pages live at /work/...) ======= -->
+  <!-- ✏️ Each card's diagram can be swapped for a cropped, anonymised screenshot of the real
+       system when the client approves one — upload to assets/ and replace the <svg> with an <img>. -->
   <section class="section" id="work">
     <div class="container">
       <div class="section-head reveal">
@@ -202,84 +200,81 @@
         <p>Exact commercial figures stay confidential — these results are shared with each client's permission.</p>
       </div>
 
-      <article class="case panel reveal">
-        <div class="case-head">
+      <div class="cards-3 cases-grid">
+        <article class="case-sum panel reveal">
           <span class="case-tag">Workflow automation &amp; custom software</span>
           <h3>Material Reuse Group</h3>
           <p class="case-client">Sustainable construction materials — UK</p>
-        </div>
-        <div class="case-body">
-          <div class="case-col">
-            <h4>The problem</h4>
-            <p>Much of the operations team's week went on manual work: compiling reports, entering the same data into multiple systems, and moving information between tools by hand. The processes worked, but they didn't scale — every new job added more admin.</p>
-            <h4>What Estara built</h4>
-            <p>Custom software that sits across their existing tools and handles the repetitive work: reports compile themselves, data is entered once and flows to where it's needed, and information moves between systems automatically instead of being re-keyed.</p>
+          <div class="case-visual" aria-hidden="true">
+            <svg viewBox="0 0 300 132" xmlns="http://www.w3.org/2000/svg" role="img">
+              <rect x="10" y="48" width="86" height="36" rx="8" fill="rgba(124,156,245,0.10)" stroke="rgba(124,156,245,0.45)"/>
+              <text x="53" y="70" text-anchor="middle" fill="#aebbdf" font-size="10" font-family="Inter,sans-serif">Data entered once</text>
+              <path d="M96 66 h34" stroke="#7c9cf5" stroke-width="1.5" fill="none"/>
+              <path d="M130 66 C150 66 150 24 168 24 M130 66 h38 M130 66 C150 66 150 108 168 108" stroke="rgba(124,156,245,0.6)" stroke-width="1.5" fill="none"/>
+              <rect x="168" y="10" width="122" height="28" rx="7" fill="rgba(17,27,60,0.9)" stroke="rgba(148,168,220,0.28)"/>
+              <text x="229" y="28" text-anchor="middle" fill="#aebbdf" font-size="10" font-family="Inter,sans-serif">Reports — automatic</text>
+              <rect x="168" y="52" width="122" height="28" rx="7" fill="rgba(17,27,60,0.9)" stroke="rgba(148,168,220,0.28)"/>
+              <text x="229" y="70" text-anchor="middle" fill="#aebbdf" font-size="10" font-family="Inter,sans-serif">Systems — synced</text>
+              <rect x="168" y="94" width="122" height="28" rx="7" fill="rgba(17,27,60,0.9)" stroke="rgba(148,168,220,0.28)"/>
+              <text x="229" y="112" text-anchor="middle" fill="#aebbdf" font-size="10" font-family="Inter,sans-serif">Records — up to date</text>
+            </svg>
           </div>
-          <div class="case-col">
-            <h4>The outcome</h4>
-            <ul class="card-list">
-              <li>Hours of manual work removed every single week</li>
-              <li>Reports produced automatically instead of compiled by hand</li>
-              <li>Data entered once, used everywhere</li>
-              <li>Built around how the team actually works — not a template</li>
-            </ul>
-            <blockquote class="case-quote">&ldquo;They took the time to understand how we actually work, which made all the difference.&rdquo;<span>— Kallie Bell, Operations Manager</span></blockquote>
-          </div>
-        </div>
-      </article>
+          <p class="case-metric">Hours of admin removed every week — reports now compile themselves</p>
+          <p class="case-sum-desc">Custom software across their existing tools: data is entered once, then flows automatically to reports, systems and records instead of being re-keyed by hand.</p>
+          <a href="/work/material-reuse-group/" class="card-link">View full case study <span aria-hidden="true">&rarr;</span></a>
+        </article>
 
-      <article class="case panel reveal">
-        <div class="case-head">
+        <article class="case-sum panel reveal">
           <span class="case-tag">Custom software platform</span>
           <h3>Kognitive360</h3>
-          <p class="case-client">Professional services — UK</p>
-        </div>
-        <div class="case-body">
-          <div class="case-col">
-            <h4>The problem</h4>
-            <p>The business needed a software platform of its own — something no off-the-shelf product covered — and a technical partner who would stay involved after launch rather than hand over a codebase and disappear.</p>
-            <h4>What Estara built</h4>
-            <p>A full custom software platform, delivered with regular demos during development and extended continuously since launch. New features and changes are scoped, built and shipped as the business evolves.</p>
+          <p class="case-client">Professional services — Canada</p>
+          <div class="case-visual" aria-hidden="true">
+            <svg viewBox="0 0 300 132" xmlns="http://www.w3.org/2000/svg" role="img">
+              <rect x="20" y="8" width="260" height="116" rx="9" fill="rgba(17,27,60,0.9)" stroke="rgba(148,168,220,0.28)"/>
+              <circle cx="36" cy="21" r="3" fill="rgba(124,156,245,0.55)"/><circle cx="47" cy="21" r="3" fill="rgba(148,168,220,0.3)"/><circle cx="58" cy="21" r="3" fill="rgba(148,168,220,0.3)"/>
+              <line x1="20" y1="32" x2="280" y2="32" stroke="rgba(148,168,220,0.18)"/>
+              <rect x="30" y="42" width="58" height="72" rx="6" fill="rgba(124,156,245,0.08)"/>
+              <rect x="37" y="52" width="44" height="5" rx="2.5" fill="rgba(124,156,245,0.5)"/>
+              <rect x="37" y="64" width="36" height="5" rx="2.5" fill="rgba(148,168,220,0.3)"/>
+              <rect x="37" y="76" width="40" height="5" rx="2.5" fill="rgba(148,168,220,0.3)"/>
+              <rect x="98" y="42" width="82" height="33" rx="6" fill="rgba(124,156,245,0.1)" stroke="rgba(124,156,245,0.35)"/>
+              <rect x="188" y="42" width="82" height="33" rx="6" fill="rgba(124,156,245,0.1)" stroke="rgba(124,156,245,0.35)"/>
+              <rect x="98" y="81" width="172" height="33" rx="6" fill="rgba(124,156,245,0.06)" stroke="rgba(148,168,220,0.22)"/>
+              <path d="M106 104 l18 -10 14 6 20 -12 16 4 22 -8" stroke="#7c9cf5" stroke-width="1.5" fill="none"/>
+            </svg>
           </div>
-          <div class="case-col">
-            <h4>The outcome</h4>
-            <ul class="card-list">
-              <li>The platform is now a core part of how the business runs</li>
-              <li>Changes and new features delivered quickly, without a new procurement cycle each time</li>
-              <li>Ongoing support that hasn't dropped off since launch</li>
-            </ul>
-            <blockquote class="case-quote">&ldquo;James built us a full software platform and has kept developing it with us ever since&hellip; the support has never dropped off.&rdquo;<span>— Okey Anozie, Director</span></blockquote>
-          </div>
-        </div>
-      </article>
+          <p class="case-metric">A full custom platform — extended and supported continuously since launch</p>
+          <p class="case-sum-desc">Built where no off-the-shelf product fit, with regular demos through development. New features are still scoped, built and shipped as the business evolves.</p>
+          <a href="/work/kognitive360/" class="card-link">View full case study <span aria-hidden="true">&rarr;</span></a>
+        </article>
 
-      <article class="case panel reveal">
-        <div class="case-head">
+        <article class="case-sum panel reveal">
           <span class="case-tag">Business-wide AI &amp; automation</span>
           <h3>Lawmens</h3>
           <!-- ✏️ Add Lawmens' sector before "— UK" if they're happy for it to be named -->
           <p class="case-client">United Kingdom</p>
-        </div>
-        <div class="case-body">
-          <div class="case-col">
-            <h4>The problem</h4>
-            <p>Like most established businesses, each department had built up its own ways of working — manual processes, spreadsheets and repeated data entry that quietly absorbed hours every week, with no single view of where technology could help most.</p>
-            <h4>What Estara is doing</h4>
-            <p>An ongoing engagement working through the business department by department: reviewing how each team operates, then designing and implementing AI and software where it genuinely earns its keep — automating repetitive work and improving the systems behind it.</p>
+          <div class="case-visual" aria-hidden="true">
+            <svg viewBox="0 0 300 132" xmlns="http://www.w3.org/2000/svg" role="img">
+              <rect x="10" y="8" width="88" height="28" rx="7" fill="rgba(17,27,60,0.9)" stroke="rgba(148,168,220,0.28)"/>
+              <text x="54" y="26" text-anchor="middle" fill="#aebbdf" font-size="10" font-family="Inter,sans-serif">Outlook</text>
+              <rect x="10" y="52" width="88" height="28" rx="7" fill="rgba(17,27,60,0.9)" stroke="rgba(148,168,220,0.28)"/>
+              <text x="54" y="70" text-anchor="middle" fill="#aebbdf" font-size="10" font-family="Inter,sans-serif">Monday.com</text>
+              <rect x="10" y="96" width="88" height="28" rx="7" fill="rgba(17,27,60,0.9)" stroke="rgba(148,168,220,0.28)"/>
+              <text x="54" y="114" text-anchor="middle" fill="#aebbdf" font-size="10" font-family="Inter,sans-serif">Dropbox</text>
+              <path d="M98 22 C124 22 124 66 138 66 M98 66 h40 M98 110 C124 110 124 66 138 66" stroke="rgba(124,156,245,0.6)" stroke-width="1.5" fill="none"/>
+              <rect x="138" y="48" width="76" height="36" rx="8" fill="rgba(124,156,245,0.12)" stroke="rgba(124,156,245,0.5)"/>
+              <text x="176" y="70" text-anchor="middle" fill="#dce4f7" font-size="10" font-family="Inter,sans-serif">Automation</text>
+              <path d="M214 66 h26" stroke="#7c9cf5" stroke-width="1.5" fill="none"/>
+              <rect x="240" y="42" width="52" height="48" rx="8" fill="rgba(17,27,60,0.9)" stroke="rgba(124,156,245,0.35)"/>
+              <text x="266" y="62" text-anchor="middle" fill="#dce4f7" font-size="11" font-weight="600" font-family="Inter,sans-serif">30&#8211;35</text>
+              <text x="266" y="76" text-anchor="middle" fill="#aebbdf" font-size="8" font-family="Inter,sans-serif">packs/week</text>
+            </svg>
           </div>
-          <div class="case-col">
-            <h4>The outcome</h4>
-            <ul class="card-list">
-              <li>Time recovered across multiple departments as each one is improved</li>
-              <li>Operating costs reduced by removing manual, repeated work</li>
-              <li>New revenue opportunities identified and built alongside the savings</li>
-              <li>A rolling roadmap, so improvements compound rather than stop at one project</li>
-            </ul>
-            <!-- ✏️ Ask Lawmens for a short quote and any figure they'll sign off, then add a
-                 <blockquote class="case-quote"> here matching the two case studies above -->
-          </div>
-        </div>
-      </article>
+          <p class="case-metric">~30&ndash;35 tender packs processed each week &middot; ~20 hours of weekly admin saved</p>
+          <p class="case-sum-desc">An ongoing engagement improving the business department by department — Outlook, Monday.com and Dropbox now connected so tender packs move through automatically.</p>
+          <a href="/work/lawmens/" class="card-link">View full case study <span aria-hidden="true">&rarr;</span></a>
+        </article>
+      </div>
 
       <div class="section-cta reveal">
         <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Book a strategy call <span class="arrow" aria-hidden="true">&rarr;</span></a>
@@ -292,7 +287,7 @@
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">About Estara</span>
-        <h2>Senior expertise, directly involved in every build.</h2>
+        <h2>Founder-led from strategy through delivery.</h2>
       </div>
       <div class="founder-layout reveal">
         <div class="founder-photo panel">
@@ -300,16 +295,16 @@
           <img src="assets/james.jpg" alt="James Gould, Managing Director of Estara AI" onerror="this.style.display='none'" />
         </div>
         <div class="founder-copy">
-          <h3>James Gould — Managing Director</h3>
-          <p>Estara is a London-based AI and software consultancy led by managing director James Gould. Every engagement is overseen by senior leadership from the first call to final delivery — so decisions get made quickly and nothing is lost in handoffs between departments.</p>
-          <p>Estara brings together specialists in automation, software engineering and AI implementation, matched to what each project needs. One team scopes the work, builds it, quality-checks it and remains accountable for the result.</p>
+          <h3>James Gould — Founder &amp; Managing Director</h3>
+          <p>Estara is a London-based AI and software consultancy founded and led by James Gould. James remains directly involved in every engagement — from initial discovery through solution design, development and implementation — so decisions get made quickly and nothing is lost in handoffs.</p>
+          <p>Where a project genuinely requires additional expertise, trusted specialists are brought in for that work — with Estara retaining full responsibility and accountability for delivery from first call to final result.</p>
           <a href="https://www.linkedin.com/in/james-gould-26240a345/" target="_blank" rel="noopener" class="card-link">Connect on LinkedIn <span aria-hidden="true">&rarr;</span></a>
         </div>
       </div>
       <div class="bento bento-about">
         <div class="bento-tile panel reveal">
           <h3>Direct technical access</h3>
-          <p>Questions go straight to the people designing and building your systems — no account managers in between. Decisions get made quickly, and quality stays under one roof.</p>
+          <p>Questions go straight to the technical lead designing and building your systems — no account managers in between. Decisions get made quickly, and accountability stays in one place.</p>
         </div>
         <div class="bento-tile panel reveal">
           <h3>Commercial value before complexity</h3>
@@ -393,7 +388,7 @@
             </tr>
             <tr>
               <td>How you work</td>
-              <td class="compare-hero">Directly with the senior team designing and building your systems</td>
+              <td class="compare-hero">Directly with the technical lead designing and building your systems</td>
               <td>Through account and project managers, with more handovers</td>
               <td>In-house, embedded in your team</td>
               <td>Your own team learns and builds</td>
@@ -433,7 +428,7 @@
         </div>
         <div class="card panel reveal">
           <h3>Ongoing plans</h3>
-          <p>Continuous improvement month after month — guidance on AI Advisory, or hands-on delivery capacity on AI Growth.</p>
+          <p>Continuous implementation aligned to your current priorities — guidance on AI Advisory, or reserved monthly delivery capacity on AI Growth.</p>
         </div>
         <div class="card panel reveal">
           <h3>Fractional AI department</h3>
@@ -484,13 +479,12 @@
           <div class="card-badge">Most popular</div>
           <h3>AI Growth</h3>
           <p class="plan-bestfor">Best for businesses implementing improvements every month</p>
-          <p class="plan-tagline">Consistent monthly delivery — automations, integrations and internal tools shipped and supported, month after month.</p>
+          <p class="plan-tagline">Consistent monthly delivery — automations, integrations and internal tools shipped and supported, focused on the highest-impact opportunities.</p>
           <div class="price"><span class="price-from">from</span>&pound;1,250<span class="price-per">/month</span></div>
-          <p class="plan-term">3-month initial engagement &middot; onboarding &pound;750, waived on 6-month commitment</p>
-          <p class="plan-rate">Works out from ~&pound;125/hour of delivery capacity — below one-off project rates</p>
+          <p class="plan-term">Three-month initial engagement &middot; &pound;500 onboarding</p>
           <ul class="card-list">
-            <li>AI &amp; operations audit included at onboarding <span class="li-sub">(worth &pound;600)</span></li>
-            <li>Monthly delivery capacity for automation, integrations &amp; internal tools <span class="li-sub">(up to ~10 hours/month)</span></li>
+            <li>Initial AI &amp; operations assessment included</li>
+            <li>Includes up to 10 hours of reserved monthly delivery capacity for automation, integrations &amp; internal tools</li>
             <li>Monthly strategy &amp; delivery review</li>
             <li>Quarterly AI roadmap</li>
             <li>Testing, documentation &amp; implementation support</li>
@@ -503,12 +497,11 @@
           <p class="plan-bestfor">Best for businesses needing ongoing technical ownership</p>
           <p class="plan-tagline">Your outsourced AI &amp; software team — proactive technical ownership without hiring internally.</p>
           <div class="price"><span class="price-from">from</span>&pound;2,950<span class="price-per">/month</span></div>
-          <p class="plan-term">3&ndash;6 month initial engagement &middot; onboarding &pound;1,500, waived on 6-month commitment</p>
-          <p class="plan-rate">Works out from ~&pound;105/hour of delivery capacity — our lowest effective rate</p>
+          <p class="plan-term">Three-month initial engagement &middot; &pound;500 onboarding</p>
           <ul class="card-list">
             <li>Dedicated technical lead</li>
-            <li>AI &amp; operations audit included at onboarding <span class="li-sub">(worth &pound;600)</span></li>
-            <li>Flexible monthly delivery capacity allocated to the highest-impact priorities <span class="li-sub">(up to ~28 hours/month)</span></li>
+            <li>Initial AI &amp; operations assessment included</li>
+            <li>Includes up to 24 hours of reserved monthly delivery capacity, allocated to your current priorities</li>
             <li>Proactive identification of operational opportunities</li>
             <li>Monthly delivery &amp; roadmap reviews, quarterly planning</li>
             <li>Staff training &amp; adoption support</li>
@@ -518,9 +511,7 @@
           <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-ghost btn-block">Discuss an AI partnership</a>
         </article>
       </div>
-      <p class="plans-details-link reveal"><a href="#plan-details">View full plan details &darr;</a></p>
-
-      <!-- ======= FULL PLAN COMPARISON ======= -->
+      <!-- ======= CONCISE PLAN COMPARISON (full version lives at /pricing/) ======= -->
       <div class="plan-details reveal" id="plan-details">
         <div class="compare-wrap">
           <table class="compare compare-plans">
@@ -535,29 +526,14 @@
             <tbody>
               <tr><td>Engagement type</td><td>Guidance &amp; continuity</td><td class="compare-hero">Monthly implementation</td><td>Outsourced technical ownership</td></tr>
               <tr><td>Price</td><td>&pound;349/month</td><td class="compare-hero">From &pound;1,250/month</td><td>From &pound;2,950/month</td></tr>
-              <tr><td>Strategy sessions</td><td>Monthly</td><td class="compare-hero">Monthly, with delivery review</td><td>Monthly, plus quarterly planning</td></tr>
-              <tr><td>Delivery capacity</td><td>None — projects quoted separately</td><td class="compare-hero">Up to ~10 hours/month</td><td>Up to ~28 hours/month</td></tr>
-              <tr><td>Effective hourly rate</td><td>&mdash;</td><td class="compare-hero">From ~&pound;125/hour</td><td>From ~&pound;105/hour</td></tr>
-              <tr><td>AI &amp; operations audit</td><td>Available separately (from &pound;600)</td><td class="compare-hero">Included at onboarding</td><td>Included at onboarding</td></tr>
+              <tr><td>Monthly delivery capacity</td><td>None — projects quoted separately</td><td class="compare-hero">Up to 10 hours reserved</td><td>Up to 24 hours reserved</td></tr>
               <tr><td>Support response target</td><td>2 business days</td><td class="compare-hero">1 business day</td><td>4 business hours</td></tr>
-              <tr><td>Roadmap planning</td><td>Recommendations</td><td class="compare-hero">Quarterly AI roadmap</td><td>Quarterly planning, proactively led</td></tr>
-              <tr><td>Team training</td><td>Quarterly enablement session</td><td class="compare-hero">Quarterly enablement session</td><td>Ongoing training &amp; adoption support</td></tr>
-              <tr><td>Client workspace</td><td>Included</td><td class="compare-hero">Included</td><td>Branded workspace for requests, progress &amp; reporting</td></tr>
-              <tr><td>Maintenance</td><td>Guidance for eligible systems</td><td class="compare-hero">Routine maintenance &amp; minor fixes for eligible Estara-built systems</td><td>Routine maintenance &amp; minor fixes for eligible Estara-built systems</td></tr>
-              <tr><td>Minimum term</td><td>Month-to-month</td><td class="compare-hero">3 months</td><td>3&ndash;6 months</td></tr>
-              <tr><td>Onboarding fee</td><td>None</td><td class="compare-hero">&pound;750 — waived on 6-month commitment</td><td>&pound;1,500 — waived on 6-month commitment</td></tr>
-              <tr><td>Capacity rollover</td><td>&mdash;</td><td class="compare-hero">Capacity reserves your place each month and doesn't roll over</td><td>Capacity reserves your place each month and doesn't roll over</td></tr>
-              <tr><td>Extra capacity</td><td>Projects at preferred client rate</td><td class="compare-hero">Available at preferred client rate</td><td>Available at preferred client rate</td></tr>
-              <tr><td>Third-party costs</td><td colspan="3" class="compare-span">Billed separately with your approval — e.g. AI model usage (OpenAI/Anthropic), automation platforms, hosting, databases, SMS/email delivery and other licences</td></tr>
+              <tr><td>Minimum term</td><td>Month-to-month</td><td class="compare-hero">3 months</td><td>3 months</td></tr>
+              <tr><td>Onboarding fee</td><td>None</td><td class="compare-hero">&pound;500</td><td>&pound;500</td></tr>
             </tbody>
           </table>
         </div>
-        <div class="plans-smallprint">
-          <p><strong>Why "from" pricing?</strong> Delivery plans are tailored to the systems, integrations and pace each business needs, so Growth and Fractional pricing is confirmed after a scoping conversation. Advisory is a fixed monthly price.</p>
-          <p><strong>What counts as delivery capacity?</strong> Everything involved in shipping working systems: discovery, meetings, solution design, development, configuration, testing, documentation, deployment, revisions, troubleshooting and project communication.</p>
-          <p><strong>Maintenance</strong> covers routine upkeep and minor fixes for eligible systems built by Estara. Major feature changes, new functionality and work caused by third-party changes are scoped within your capacity or quoted separately.</p>
-          <p><strong>Larger builds</strong> may need a separate project scope alongside your plan — if you're on a plan, your monthly capacity counts towards the work, so your membership is always factored into the final price.</p>
-        </div>
+        <p class="plans-details-link"><a href="/pricing/">See the full plan comparison &amp; details &rarr;</a></p>
       </div>
     </div>
   </section>
@@ -689,8 +665,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <!-- ✏️ Add your company number: e.g. "Company No. 12345678" after "England and Wales" -->
-        <span>&copy; 2026 Estara AI Ltd &middot; Registered in England and Wales</span>
+        <span>&copy; 2026 Estara AI Ltd &middot; Registered in England and Wales &middot; Company No. 17109567</span>
         <span>Fully insured — documentation available on request.</span>
       </div>
     </div>
