@@ -859,7 +859,7 @@
   }
 
   /* ---------- Add a new client (admin) ---------- */
-  var PLAN_DEFAULT_HOURS = { "AI Advisory": 0, "AI Growth": 10, "Fractional AI Department": 28 };
+  var PLAN_DEFAULT_HOURS = { "AI Advisory": 0, "AI Growth": 10, "Fractional AI Department": 24 };
   $("newClientPlan").addEventListener("change", function () {
     $("newClientHours").value = PLAN_DEFAULT_HOURS[this.value] != null ? PLAN_DEFAULT_HOURS[this.value] : 0;
   });
