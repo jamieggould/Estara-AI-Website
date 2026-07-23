@@ -874,3 +874,40 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
 }
+
+/* ---------- v9: full sub-pages (pricing & case studies) ---------- */
+.page-main { padding-top: 118px; }
+.page-main .section:first-child { padding-top: 50px; }
+.section-head h1 { font-size: clamp(2rem, 4.5vw, 2.75rem); line-height: 1.16; }
+.page-back { display: inline-block; color: var(--text-dim); font-size: 0.9rem; margin-bottom: 26px; transition: color 0.2s ease; }
+.page-back:hover { color: var(--accent); }
+.case-stats {
+  display: flex;
+  justify-content: center;
+  gap: 44px;
+  flex-wrap: wrap;
+  margin: 0 auto 56px;
+}
+.deliverable h3 { font-size: 1.05rem; margin-bottom: 10px; }
+.deliverable p { color: var(--text-dim); font-size: 0.92rem; }
+.deliverable .deliv-saving {
+  display: inline-block;
+  margin-top: 14px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--accent);
+}
+@media (max-width: 640px) {
+  .page-main { padding-top: 96px; }
+  .case-stats { gap: 24px; }
+}
+
+/* ---------- v10: text-only About section ---------- */
+.founder-copy-solo {
+  max-width: 720px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+.founder-copy-solo p { font-size: 1rem; }
+.founder-copy-solo .card-link { display: inline-block; margin-top: 4px; }
