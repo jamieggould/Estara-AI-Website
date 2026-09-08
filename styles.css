@@ -177,7 +177,7 @@ strong { font-weight: 600; color: var(--text); }
 .hero-microcopy { color: var(--text-dim); font-size: 0.88rem; margin-top: 16px; }
 
 /* 3D brain stage */
-.brain-stage { position: relative; aspect-ratio: 1 / 1; width: 100%; max-width: 640px; margin-left: auto; }
+.brain-stage { position: relative; aspect-ratio: 1 / 1; width: 100%; max-width: 640px; margin: -70px 0 0 auto; }
 #brainCanvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .brain-caption {
   position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%);
@@ -186,7 +186,8 @@ strong { font-weight: 600; color: var(--text); }
 .hero-fade { display: none; }
 
 /* ---------- Proof: stats + clients + quote (hairline grid) ---------- */
-.proof { padding: 0 0 96px; }
+.proof { padding: 0 0 64px; }
+.proof + .section { border-top: 1px solid var(--line); }
 .proof-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
