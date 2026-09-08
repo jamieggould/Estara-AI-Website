@@ -87,12 +87,13 @@
 
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
-  camera.position.set(0, 0.1, 4.1);
+  camera.position.set(0, 0, 3.9);
 
-  var BASE_X = 0.3, BASE_Y = -0.85;
+  var BASE_X = 0.18, BASE_Y = -1.15;
   var group = new THREE.Group();
   group.rotation.x = BASE_X;
   group.rotation.y = BASE_Y;
+  group.position.y = 0.18;
   scene.add(group);
 
   /* deterministic pseudo-random: the brain looks identical on every load */
@@ -101,7 +102,7 @@
 
   /* cortical folds: layered sines modulate the surface radius */
   function folds(t, p) {
-    return 1 + 0.06 * Math.sin(6 * t + 2 * p) + 0.05 * Math.sin(10 * p + 1.7 * t) + 0.03 * Math.sin(15 * t - 4 * p);
+    return 1 + 0.05 * Math.sin(6 * t + 2 * p) + 0.04 * Math.sin(10 * p + 1.7 * t) + 0.025 * Math.sin(15 * t - 4 * p);
   }
 
   /* a point on the surface of hemisphere s (-1 left, +1 right) at spherical angles (t, p) */
@@ -109,12 +110,15 @@
     var r = folds(t, p);
     var px = Math.sin(p) * Math.cos(t), py = Math.cos(p), pz = Math.sin(p) * Math.sin(t);
     var lateral = px * s > 0;
-    var x = s * (0.05 + Math.abs(px) * (lateral ? 0.56 : 0.14)) * r;
-    var y = py * 0.64 * r + 0.08;
-    var z = pz * 0.98 * r;
-    if (z > 0.5) y -= (z - 0.5) * 0.25;          // frontal lobe slopes down
-    if (z < -0.55) y += (z + 0.55) * 0.35;       // occipital lobe tapers
-    if (y < -0.3) y = -0.3 + (y + 0.3) * 0.55;   // flatter underside
+    var x = s * (0.05 + Math.abs(px) * (lateral ? 0.58 : 0.12)) * r;
+    var y = py * 0.62 * r + 0.12;
+    var z = pz * 1.0 * r;
+    if (z > 0.55) y -= (z - 0.55) * 0.35;        // frontal lobe slopes down at the front
+    if (z < -0.6) y += (z + 0.6) * 0.45;         // occipital lobe tapers at the back
+    if (y < -0.22) y = -0.22 + (y + 0.22) * 0.5; // flat underside
+    // temporal lobe: a bulge low on the side, below the sylvian fissure
+    var tl = Math.exp(-(Math.pow((z - 0.15) / 0.45, 2) + Math.pow((y + 0.25) / 0.2, 2)));
+    if (lateral) { x += s * 0.12 * tl; y -= 0.16 * tl; }
     return [x, y, z];
   }
 
@@ -123,7 +127,7 @@
 
   /* cerebrum surface points */
   for (s = -1; s <= 1; s += 2) {
-    for (i = 0; i < 650; i++) {
+    for (i = 0; i < 900; i++) {
       t = 2 * Math.PI * rand(); p = Math.acos(2 * rand() - 1);
       q = surf(s, t, p); pts.push(q[0], q[1], q[2]);
     }
@@ -131,49 +135,58 @@
 
   /* sulci: wandering curves drawn on each hemisphere */
   for (s = -1; s <= 1; s += 2) {
-    for (i = 0; i < 18; i++) {
-      t = 2 * Math.PI * rand(); p = 0.35 + rand() * 2.2;
-      var dir = rand() * Math.PI * 2;
+    for (i = 0; i < 26; i++) {
+      t = 2 * Math.PI * rand(); p = 0.3 + rand() * 2.3;
+      var dir = (rand() < 0.5 ? 0 : Math.PI) + (rand() - 0.5) * 1.2; // mostly front-to-back, like real gyri
       line = [];
-      for (k = 0; k < 46; k++) {
+      for (k = 0; k < 60; k++) {
         q = surf(s, t, p); line.push(q[0], q[1], q[2]);
-        dir += (rand() - 0.5) * 0.5;
-        t += Math.cos(dir) * 0.05; p += Math.sin(dir) * 0.05;
-        if (p < 0.25) p = 0.25; if (p > 2.6) p = 2.6;
+        dir += (rand() - 0.5) * 0.45;
+        t += Math.cos(dir) * 0.045; p += Math.sin(dir) * 0.045;
+        if (p < 0.2) p = 0.2; if (p > 2.7) p = 2.7;
       }
       curves.push(line);
     }
   }
 
   /* cerebellum: points + horizontal folia rings */
-  for (i = 0; i < 220; i++) {
+  for (i = 0; i < 260; i++) {
     t = 2 * Math.PI * rand(); p = Math.acos(2 * rand() - 1);
     var cr = 1 + 0.05 * Math.sin(12 * t);
-    pts.push(Math.sin(p) * Math.cos(t) * 0.5 * cr, Math.cos(p) * 0.3 * cr - 0.62, Math.sin(p) * Math.sin(t) * 0.4 * cr - 0.75);
+    pts.push(Math.sin(p) * Math.cos(t) * 0.48 * cr, Math.cos(p) * 0.28 * cr - 0.5, Math.sin(p) * Math.sin(t) * 0.42 * cr - 0.72);
   }
-  for (i = 0; i < 7; i++) {
-    var yy = -0.62 + (-0.26 + i * 0.085);
-    var rad = Math.sqrt(Math.max(0, 1 - Math.pow((yy + 0.62) / 0.3, 2)));
+  for (i = 0; i < 8; i++) {
+    var yy = -0.5 + (-0.25 + i * 0.07);
+    var rad = Math.sqrt(Math.max(0, 1 - Math.pow((yy + 0.5) / 0.28, 2)));
     line = [];
-    for (k = 0; k <= 40; k++) {
-      var a = Math.PI * (0.15 + 0.7 * k / 40);
-      var w = 1 + 0.05 * Math.sin(10 * a);
-      line.push(Math.cos(a) * 0.5 * rad * w, yy, -0.75 - Math.sin(a) * 0.4 * rad * w);
+    for (k = 0; k <= 48; k++) {
+      var a = Math.PI * (0.08 + 0.84 * k / 48);
+      var w = 1 + 0.05 * Math.sin(11 * a);
+      line.push(Math.cos(a) * 0.48 * rad * w, yy, -0.72 - Math.sin(a) * 0.42 * rad * w);
     }
     curves.push(line);
   }
 
-  /* brain stem */
-  for (i = 0; i < 70; i++) {
-    var sa = rand() * 6.283, rr = 0.13 * Math.sqrt(rand()), sy = -0.78 - rand() * 0.4;
-    pts.push(Math.cos(sa) * rr, sy, -0.35 + Math.sin(sa) * rr - (sy + 0.78) * 0.3);
+  /* brain stem: below the cerebellum, angled slightly forward */
+  for (i = 0; i < 90; i++) {
+    var sa = rand() * 6.283, rr = 0.12 * Math.sqrt(rand()), sy = -0.62 - rand() * 0.5;
+    pts.push(Math.cos(sa) * rr, sy, -0.38 + Math.sin(sa) * rr + (sy + 0.62) * 0.25);
+  }
+  for (i = 0; i < 4; i++) {
+    var ry = -0.68 - i * 0.12;
+    line = [];
+    for (k = 0; k <= 24; k++) {
+      var ra = k / 24 * 6.283;
+      line.push(Math.cos(ra) * 0.12, ry, -0.38 + Math.sin(ra) * 0.12 + (ry + 0.62) * 0.25);
+    }
+    curves.push(line);
   }
 
   var count = pts.length / 3;
   var positions = new Float32Array(pts);
 
   /* nearest-neighbour synapse network */
-  var LINK = 0.17, LINK2 = LINK * LINK;
+  var LINK = 0.16, LINK2 = LINK * LINK;
   var adj = [], edge = [];
   for (i = 0; i < count; i++) adj.push([]);
   for (var a1 = 0; a1 < count; a1++) {
@@ -196,13 +209,13 @@
   /* geometry */
   var pointGeo = new THREE.BufferGeometry();
   pointGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-  group.add(new THREE.Points(pointGeo, new THREE.PointsMaterial({ color: 0x0a0a0a, size: 0.032, transparent: true, opacity: 0.85, sizeAttenuation: true })));
+  group.add(new THREE.Points(pointGeo, new THREE.PointsMaterial({ color: 0x0a0a0a, size: 0.03, transparent: true, opacity: 0.85, sizeAttenuation: true })));
 
   var lineGeo = new THREE.BufferGeometry();
   lineGeo.setAttribute("position", new THREE.BufferAttribute(linePos, 3));
-  group.add(new THREE.LineSegments(lineGeo, new THREE.LineBasicMaterial({ color: 0x2f5bff, transparent: true, opacity: 0.22 })));
+  group.add(new THREE.LineSegments(lineGeo, new THREE.LineBasicMaterial({ color: 0x2f5bff, transparent: true, opacity: 0.26 })));
 
-  var sulciMat = new THREE.LineBasicMaterial({ color: 0x0a0a0a, transparent: true, opacity: 0.75 });
+  var sulciMat = new THREE.LineBasicMaterial({ color: 0x0a0a0a, transparent: true, opacity: 0.85 });
   curves.forEach(function (c) {
     var g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(c), 3));
@@ -210,7 +223,7 @@
   });
 
   /* travelling signals */
-  var SIGNALS = 48;
+  var SIGNALS = 56;
   var sigPos = new Float32Array(SIGNALS * 3);
   var signals = [];
   for (i = 0; i < SIGNALS; i++) {
@@ -258,16 +271,17 @@
     targetX = ((ev.clientY / window.innerHeight) - 0.5) * 0.5;
   }, { passive: true });
 
-  /* render loop — pauses while the hero is off-screen */
-  var spin = 0, running = true;
+  /* render loop — gentle sway (never spins away from the recognisable profile); pauses off-screen */
+  var t0 = null, running = true;
   if ("IntersectionObserver" in window) {
     new IntersectionObserver(function (entries) { running = entries[0].isIntersecting; }, { threshold: 0 }).observe(canvas);
   }
   function frame() {
     requestAnimationFrame(frame);
     if (!running) return;
-    spin += 0.0022;
-    group.rotation.y += ((BASE_Y + spin + targetY) - group.rotation.y) * 0.05;
+    if (t0 === null) t0 = performance.now();
+    var sway = Math.sin((performance.now() - t0) / 4000) * 0.35;
+    group.rotation.y += ((BASE_Y + sway + targetY * 0.6) - group.rotation.y) * 0.05;
     group.rotation.x += ((BASE_X + targetX) - group.rotation.x) * 0.05;
     stepSignals();
     renderer.render(scene, camera);
