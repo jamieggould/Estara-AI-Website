@@ -11,7 +11,7 @@
   <meta property="og:url" content="https://estaraai.com/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" sizes="any" href="/assets/logo.png?v=2" />
   <link rel="shortcut icon" type="image/png" href="/assets/logo.png?v=2" />
   <link rel="apple-touch-icon" href="/assets/logo.png?v=2" />
@@ -28,10 +28,10 @@
       <nav class="nav-links" id="navLinks">
         <a href="#services">Services</a>
         <a href="#work">Work</a>
-        <a href="#about">About</a>
         <a href="#process">Process</a>
+        <a href="#about">About</a>
         <a href="#plans">Pricing</a>
-        <a href="#faq">FAQ</a>
+        <a href="/pricing/#faq">FAQ</a>
         <a href="/portal/" class="nav-login-mobile">Log in</a>
       </nav>
       <a href="/portal/" class="btn btn-ghost btn-nav btn-nav-login">Log in</a>
@@ -42,103 +42,58 @@
 
   <!-- ======= HERO ======= -->
   <section class="hero" id="top">
-    <canvas id="heroCanvas" aria-hidden="true"></canvas>
-    <div class="hero-fade" aria-hidden="true"></div>
-    <div class="hero-content">
-      <h1 class="hero-title reveal">Custom AI and software that removes the work <span class="accent">slowing your business down.</span></h1>
-      <p class="hero-sub reveal">Estara designs and builds intelligent workflows, internal tools and custom software that reduce manual work, lower operating costs and help growing businesses scale — strategy and implementation from one accountable partner.</p>
-      <div class="hero-ctas reveal">
-        <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Book a strategy call <span class="arrow" aria-hidden="true">&rarr;</span></a>
-        <a href="#work" class="btn btn-ghost btn-lg">View our work</a>
+    <div class="hero-grid">
+      <div class="hero-content">
+        <h1 class="hero-title reveal">Custom AI and software that removes the work <span class="accent">slowing your business down.</span></h1>
+        <p class="hero-sub reveal">Estara designs and builds intelligent workflows, internal tools and custom software that reduce manual work, lower operating costs and help growing businesses scale — strategy and implementation from one accountable partner.</p>
+        <div class="hero-ctas reveal">
+          <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Book a strategy call <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="#work" class="btn btn-ghost btn-lg">View our work</a>
+        </div>
+        <p class="hero-microcopy reveal">Free, 30 minutes. We'll discuss your biggest operational bottleneck and agree the most sensible next step — whether or not that's us.</p>
       </div>
-      <p class="hero-microcopy reveal">Free, 30 minutes. We'll discuss your biggest operational bottleneck and agree the most sensible next step — whether or not that's us.</p>
-      <!-- ✏️ Stats wording is deliberately precise: "estimated annual hours" (projected yearly savings) and
-           "systems, automations & workflow improvements" (counts individual deliverables, not 35 separate clients).
-           If you can evidence stronger claims, tighten the wording — never the other way round. -->
-      <div class="hero-stats reveal">
-        <div class="stat"><span class="stat-num">1,500+</span><span class="stat-label">Estimated annual hours of manual work removed</span></div>
-        <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat"><span class="stat-num">35+</span><span class="stat-label">Systems, automations &amp; workflow improvements delivered</span></div>
-        <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat"><span class="stat-num stat-num-text">Tailored</span><span class="stat-label">Custom-built where it matters, proven tools where appropriate</span></div>
+      <div class="brain-stage" aria-hidden="true">
+        <canvas id="brainCanvas"></canvas>
       </div>
     </div>
   </section>
 
-  <!-- ======= TRUST STRIP ======= -->
-  <section class="trust" aria-label="Client proof">
-    <div class="container trust-inner reveal">
-      <div class="trust-clients">
+  <!-- ======= PROOF ======= -->
+  <!-- ✏️ Stats wording is deliberately precise: "estimated annual hours" (projected yearly savings) and
+       "systems, automations & workflow improvements" (counts individual deliverables, not 35 separate clients).
+       If you can evidence stronger claims, tighten the wording — never the other way round. -->
+  <section class="proof" aria-label="Results and clients">
+    <div class="container">
+      <div class="proof-grid reveal">
+        <div class="stat"><span class="stat-num">1,500+</span><span class="stat-label">Estimated annual hours of manual work removed</span></div>
+        <div class="stat"><span class="stat-num">35+</span><span class="stat-label">Systems, automations &amp; workflow improvements delivered</span></div>
+        <div class="stat"><span class="stat-num stat-num-text">Tailored</span><span class="stat-label">Custom-built where it matters, proven tools where appropriate</span></div>
+      </div>
+      <!-- ✏️ These are text names. If clients supply logo images, swap each <span> for an <img>. Only list clients who've given permission. -->
+      <div class="clients-row reveal">
         <span class="trust-label">Trusted by</span>
-        <!-- ✏️ These are text names. If clients supply logo images, swap each <span> for an <img>. Only list clients who've given permission. -->
         <span class="trust-name">Material Reuse Group</span>
         <span class="trust-name">Kognitive360</span>
         <span class="trust-name">Growth Corporate</span>
         <span class="trust-name">Lawmens</span>
         <span class="trust-name trust-more">and more</span>
       </div>
-      <div class="trust-proof">
-        <p class="trust-quote">&ldquo;The software Estara built handles most of that now and saves us hours every single week.&rdquo;<span class="trust-attrib">— Kallie Bell, Operations Manager, Material Reuse Group</span></p>
-        <a href="#work" class="card-link">View client work <span aria-hidden="true">&rarr;</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======= VALUE STRIP ======= -->
-  <div class="tech-strip" aria-label="How Estara works">
-    <div class="container tech-strip-inner">
-      <span>UK-based &amp; fully insured</span>
-      <span>Founder-led delivery</span>
-      <span>Strategy through implementation</span>
-      <span>GDPR-aware development</span>
-      <span>Build &amp; maintain — not just advise</span>
-    </div>
-  </div>
-
-  <!-- ======= PROBLEM / WHO WE HELP ======= -->
-  <section class="section" id="problem">
-    <div class="container">
-      <div class="problem-layout">
-        <div class="problem-sticky">
-          <span class="eyebrow reveal">Who we help</span>
-          <h2 class="reveal">Built for businesses still running on <span class="accent">spreadsheets, email chains and re-keyed data.</span></h2>
-          <p class="reveal problem-lead">Estara works best with growing UK businesses — particularly operational, service, construction and logistics companies — where valuable processes are still managed through manual admin and disconnected systems. Most businesses know AI matters. Fewer know where it actually pays. That gap is where we work.</p>
-          <p class="reveal problem-lead">In practice, we automate tasks such as lead qualification, quoting, reporting, document processing, approvals, data entry and customer follow-up — and develop custom software where existing systems can't do the job.</p>
-          <div class="reveal"><a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a strategy call <span class="arrow" aria-hidden="true">&rarr;</span></a></div>
-        </div>
-        <div class="problem-cards">
-          <div class="pain-card panel reveal">
-            <div class="pain-num">01</div>
-            <h3>Manual admin absorbs skilled time</h3>
-            <p>Copy-pasting between systems, chasing approvals, re-keying the same data into three places. Hours of skilled salary spent every week on work software should be doing.</p>
-          </div>
-          <div class="pain-card panel reveal">
-            <div class="pain-num">02</div>
-            <h3>Off-the-shelf tools don't quite fit</h3>
-            <p>A stack of subscriptions that each solve 80% of the problem, bridged manually. Sometimes the answer is connecting them properly; sometimes it's building the missing piece.</p>
-          </div>
-          <div class="pain-card panel reveal">
-            <div class="pain-num">03</div>
-            <h3>Strategy that never ships</h3>
-            <p>Workshops and roadmaps with nothing in production. We pair advice with hands-on delivery, so recommendations turn into working systems — with regular demos along the way.</p>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
   <!-- ======= SERVICES ======= -->
-  <section class="section section-alt" id="services">
-    <div class="container">      <div class="section-head reveal">
-        <span class="eyebrow">What we do</span>
-        <h2>Strategy and implementation, from one accountable partner.</h2>
-        <p>Advice, automation and custom software — delivered under one accountable technical lead from discovery through ongoing support.</p>
+  <section class="section" id="services">
+    <div class="container">
+      <div class="split-head reveal">
+        <div class="section-head">
+          <span class="eyebrow">What we build</span>
+          <h2>Strategy and implementation, from one accountable partner.</h2>
+        </div>
+        <p>Built for growing UK businesses still running on spreadsheets, email chains and re-keyed data. We automate tasks such as lead qualification, quoting, reporting, document processing, approvals, data entry and customer follow-up — and develop custom software where existing systems can't do the job.</p>
       </div>
       <div class="cards-3">
         <article class="card panel reveal">
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.1-2.5 5.4-.7.8-1 1.6-1 2.6H8.5c0-1-.3-1.8-1-2.6C6.2 13.1 5 11.4 5 9a7 7 0 0 1 7-7z"/><path d="M9 21h6"/></svg>
-          </div>
+          <div class="card-num">01</div>
           <h3>AI Consulting</h3>
           <p>We work out where AI genuinely pays in your business — and just as importantly, where it doesn't.</p>
           <ul class="card-list">
@@ -152,9 +107,7 @@
         </article>
         <article class="card panel card-featured reveal">
           <div class="card-badge">Most requested</div>
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h13"/><circle cx="20" cy="12" r="1.6"/><circle cx="19.5" cy="17" r="1.6"/><circle cx="21" cy="7" r="1.6" fill="currentColor" stroke="none"/></svg>
-          </div>
+          <div class="card-num">02</div>
           <h3>Workflow Automation</h3>
           <p>We map how work actually flows through your business, then rebuild it so information moves itself and your team does the work only humans can.</p>
           <ul class="card-list">
@@ -167,9 +120,7 @@
           <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="card-link">Book a strategy call <span aria-hidden="true">&rarr;</span></a>
         </article>
         <article class="card panel reveal">
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-5 6 5 6M16 6l5 6-5 6M13.5 4l-3 16"/></svg>
-          </div>
+          <div class="card-num">03</div>
           <h3>Software Development</h3>
           <p>Custom applications built where standard platforms can't meet the requirement — engineered for security, performance and the long haul.</p>
           <ul class="card-list">
@@ -185,14 +136,16 @@
     </div>
   </section>
 
-  <!-- ======= WORK / CASE STUDIES (summaries — full pages live at /work/...) ======= -->
+  <!-- ======= WORK ======= -->
   <!-- ✏️ Each card's diagram can be swapped for a cropped, anonymised screenshot of the real
        system when the client approves one — upload to assets/ and replace the <svg> with an <img>. -->
   <section class="section" id="work">
     <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Our work</span>
-        <h2>Real systems, running in real businesses.</h2>
+      <div class="split-head reveal">
+        <div class="section-head">
+          <span class="eyebrow">Our work</span>
+          <h2>Real systems, running in real businesses.</h2>
+        </div>
         <p>Exact commercial figures stay confidential — these results are shared with each client's permission.</p>
       </div>
 
@@ -203,16 +156,16 @@
           <p class="case-client">Sustainable construction materials — UK</p>
           <div class="case-visual" aria-hidden="true">
             <svg viewBox="0 0 300 132" xmlns="http://www.w3.org/2000/svg" role="img">
-              <rect x="10" y="48" width="86" height="36" rx="8" fill="rgba(124,156,245,0.10)" stroke="rgba(124,156,245,0.45)"/>
-              <text x="53" y="70" text-anchor="middle" fill="#aebbdf" font-size="10" font-family="Inter,sans-serif">Data entered once</text>
-              <path d="M96 66 h34" stroke="#7c9cf5" stroke-width="1.5" fill="none"/>
-              <path d="M130 66 C150 66 150 24 168 24 M130 66 h38 M130 66 C150 66 150 108 168 108" stroke="rgba(124,156,245,0.6)" stroke-width="1.5" fill="none"/>
-              <rect x="168" y="10" width="122" height="28" rx="7" fill="rgba(17,27,60,0.9)" stroke="rgba(148,168,220,0.28)"/>
-              <text x="229" y="28" text-anchor="middle" fill="#aebbdf" font-size="10" font-family="Inter,sans-serif">Reports — automatic</text>
-              <rect x="168" y="52" width="122" height="28" rx="7" fill="rgba(17,27,60,0.9)" stroke="rgba(148,168,220,0.28)"/>
-              <text x="229" y="70" text-anchor="middle" fill="#aebbdf" font-size="10" font-family="Inter,sans-serif">Systems — synced</text>
-              <rect x="168" y="94" width="122" height="28" rx="7" fill="rgba(17,27,60,0.9)" stroke="rgba(148,168,220,0.28)"/>
-              <text x="229" y="112" text-anchor="middle" fill="#aebbdf" font-size="10" font-family="Inter,sans-serif">Records — up to date</text>
+              <rect x="10" y="48" width="86" height="36" rx="8" fill="rgba(47,91,255,0.18)" stroke="rgba(47,91,255,0.7)"/>
+              <text x="53" y="70" text-anchor="middle" fill="#d4d4d8" font-size="10" font-family="Geist,sans-serif">Data entered once</text>
+              <path d="M96 66 h34" stroke="#2f5bff" stroke-width="1.5" fill="none"/>
+              <path d="M130 66 C150 66 150 24 168 24 M130 66 h38 M130 66 C150 66 150 108 168 108" stroke="rgba(47,91,255,0.6)" stroke-width="1.5" fill="none"/>
+              <rect x="168" y="10" width="122" height="28" rx="7" fill="#18181b" stroke="#3f3f46"/>
+              <text x="229" y="28" text-anchor="middle" fill="#d4d4d8" font-size="10" font-family="Geist,sans-serif">Reports — automatic</text>
+              <rect x="168" y="52" width="122" height="28" rx="7" fill="#18181b" stroke="#3f3f46"/>
+              <text x="229" y="70" text-anchor="middle" fill="#d4d4d8" font-size="10" font-family="Geist,sans-serif">Systems — synced</text>
+              <rect x="168" y="94" width="122" height="28" rx="7" fill="#18181b" stroke="#3f3f46"/>
+              <text x="229" y="112" text-anchor="middle" fill="#d4d4d8" font-size="10" font-family="Geist,sans-serif">Records — up to date</text>
             </svg>
           </div>
           <p class="case-metric">~35+ hours of weekly admin removed across two automations</p>
@@ -226,17 +179,17 @@
           <p class="case-client">Professional services — Canada</p>
           <div class="case-visual" aria-hidden="true">
             <svg viewBox="0 0 300 132" xmlns="http://www.w3.org/2000/svg" role="img">
-              <rect x="20" y="8" width="260" height="116" rx="9" fill="rgba(17,27,60,0.9)" stroke="rgba(148,168,220,0.28)"/>
-              <circle cx="36" cy="21" r="3" fill="rgba(124,156,245,0.55)"/><circle cx="47" cy="21" r="3" fill="rgba(148,168,220,0.3)"/><circle cx="58" cy="21" r="3" fill="rgba(148,168,220,0.3)"/>
-              <line x1="20" y1="32" x2="280" y2="32" stroke="rgba(148,168,220,0.18)"/>
-              <rect x="30" y="42" width="58" height="72" rx="6" fill="rgba(124,156,245,0.08)"/>
-              <rect x="37" y="52" width="44" height="5" rx="2.5" fill="rgba(124,156,245,0.5)"/>
-              <rect x="37" y="64" width="36" height="5" rx="2.5" fill="rgba(148,168,220,0.3)"/>
-              <rect x="37" y="76" width="40" height="5" rx="2.5" fill="rgba(148,168,220,0.3)"/>
-              <rect x="98" y="42" width="82" height="33" rx="6" fill="rgba(124,156,245,0.1)" stroke="rgba(124,156,245,0.35)"/>
-              <rect x="188" y="42" width="82" height="33" rx="6" fill="rgba(124,156,245,0.1)" stroke="rgba(124,156,245,0.35)"/>
-              <rect x="98" y="81" width="172" height="33" rx="6" fill="rgba(124,156,245,0.06)" stroke="rgba(148,168,220,0.22)"/>
-              <path d="M106 104 l18 -10 14 6 20 -12 16 4 22 -8" stroke="#7c9cf5" stroke-width="1.5" fill="none"/>
+              <rect x="20" y="8" width="260" height="116" rx="9" fill="#18181b" stroke="#3f3f46"/>
+              <circle cx="36" cy="21" r="3" fill="#2f5bff"/><circle cx="47" cy="21" r="3" fill="#3f3f46"/><circle cx="58" cy="21" r="3" fill="#3f3f46"/>
+              <line x1="20" y1="32" x2="280" y2="32" stroke="#3f3f46"/>
+              <rect x="30" y="42" width="58" height="72" rx="6" fill="rgba(47,91,255,0.12)"/>
+              <rect x="37" y="52" width="44" height="5" rx="2.5" fill="rgba(47,91,255,0.7)"/>
+              <rect x="37" y="64" width="36" height="5" rx="2.5" fill="#3f3f46"/>
+              <rect x="37" y="76" width="40" height="5" rx="2.5" fill="#3f3f46"/>
+              <rect x="98" y="42" width="82" height="33" rx="6" fill="rgba(47,91,255,0.14)" stroke="rgba(47,91,255,0.5)"/>
+              <rect x="188" y="42" width="82" height="33" rx="6" fill="rgba(47,91,255,0.14)" stroke="rgba(47,91,255,0.5)"/>
+              <rect x="98" y="81" width="172" height="33" rx="6" fill="rgba(47,91,255,0.08)" stroke="#3f3f46"/>
+              <path d="M106 104 l18 -10 14 6 20 -12 16 4 22 -8" stroke="#2f5bff" stroke-width="1.5" fill="none"/>
             </svg>
           </div>
           <p class="case-metric">A full AI document-intelligence platform — extended continuously since launch</p>
@@ -251,19 +204,19 @@
           <p class="case-client">United Kingdom</p>
           <div class="case-visual" aria-hidden="true">
             <svg viewBox="0 0 300 132" xmlns="http://www.w3.org/2000/svg" role="img">
-              <rect x="10" y="8" width="88" height="28" rx="7" fill="rgba(17,27,60,0.9)" stroke="rgba(148,168,220,0.28)"/>
-              <text x="54" y="26" text-anchor="middle" fill="#aebbdf" font-size="10" font-family="Inter,sans-serif">Outlook</text>
-              <rect x="10" y="52" width="88" height="28" rx="7" fill="rgba(17,27,60,0.9)" stroke="rgba(148,168,220,0.28)"/>
-              <text x="54" y="70" text-anchor="middle" fill="#aebbdf" font-size="10" font-family="Inter,sans-serif">Monday.com</text>
-              <rect x="10" y="96" width="88" height="28" rx="7" fill="rgba(17,27,60,0.9)" stroke="rgba(148,168,220,0.28)"/>
-              <text x="54" y="114" text-anchor="middle" fill="#aebbdf" font-size="10" font-family="Inter,sans-serif">Dropbox</text>
-              <path d="M98 22 C124 22 124 66 138 66 M98 66 h40 M98 110 C124 110 124 66 138 66" stroke="rgba(124,156,245,0.6)" stroke-width="1.5" fill="none"/>
-              <rect x="138" y="48" width="76" height="36" rx="8" fill="rgba(124,156,245,0.12)" stroke="rgba(124,156,245,0.5)"/>
-              <text x="176" y="70" text-anchor="middle" fill="#dce4f7" font-size="10" font-family="Inter,sans-serif">Automation</text>
-              <path d="M214 66 h26" stroke="#7c9cf5" stroke-width="1.5" fill="none"/>
-              <rect x="240" y="42" width="52" height="48" rx="8" fill="rgba(17,27,60,0.9)" stroke="rgba(124,156,245,0.35)"/>
-              <text x="266" y="62" text-anchor="middle" fill="#dce4f7" font-size="11" font-weight="600" font-family="Inter,sans-serif">30&#8211;35</text>
-              <text x="266" y="76" text-anchor="middle" fill="#aebbdf" font-size="8" font-family="Inter,sans-serif">packs/week</text>
+              <rect x="10" y="8" width="88" height="28" rx="7" fill="#18181b" stroke="#3f3f46"/>
+              <text x="54" y="26" text-anchor="middle" fill="#d4d4d8" font-size="10" font-family="Geist,sans-serif">Outlook</text>
+              <rect x="10" y="52" width="88" height="28" rx="7" fill="#18181b" stroke="#3f3f46"/>
+              <text x="54" y="70" text-anchor="middle" fill="#d4d4d8" font-size="10" font-family="Geist,sans-serif">Monday.com</text>
+              <rect x="10" y="96" width="88" height="28" rx="7" fill="#18181b" stroke="#3f3f46"/>
+              <text x="54" y="114" text-anchor="middle" fill="#d4d4d8" font-size="10" font-family="Geist,sans-serif">Dropbox</text>
+              <path d="M98 22 C124 22 124 66 138 66 M98 66 h40 M98 110 C124 110 124 66 138 66" stroke="rgba(47,91,255,0.6)" stroke-width="1.5" fill="none"/>
+              <rect x="138" y="48" width="76" height="36" rx="8" fill="rgba(47,91,255,0.18)" stroke="rgba(47,91,255,0.7)"/>
+              <text x="176" y="70" text-anchor="middle" fill="#ffffff" font-size="10" font-family="Geist,sans-serif">Automation</text>
+              <path d="M214 66 h26" stroke="#2f5bff" stroke-width="1.5" fill="none"/>
+              <rect x="240" y="42" width="52" height="48" rx="8" fill="#18181b" stroke="rgba(47,91,255,0.5)"/>
+              <text x="266" y="62" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="600" font-family="Geist,sans-serif">30&#8211;35</text>
+              <text x="266" y="76" text-anchor="middle" fill="#d4d4d8" font-size="8" font-family="Geist,sans-serif">packs/week</text>
             </svg>
           </div>
           <p class="case-metric">~30&ndash;35 tender packs processed automatically each week &middot; 30+ hours of weekly admin removed</p>
@@ -271,236 +224,110 @@
           <a href="/work/lawmens/" class="card-link">View full case study <span aria-hidden="true">&rarr;</span></a>
         </article>
       </div>
+    </div>
+  </section>
 
-      <div class="section-cta reveal">
-        <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Book a strategy call <span class="arrow" aria-hidden="true">&rarr;</span></a>
+  <!-- ======= PROCESS ======= -->
+  <section class="section" id="process">
+    <div class="container">
+      <div class="split-head reveal">
+        <div class="section-head">
+          <span class="eyebrow">How it works</span>
+          <h2>From first call to shipped &amp; improving.</h2>
+        </div>
+        <p>Regular demos during development, documentation as standard, and measurement of what each system is actually saving once it's live.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-num">01 <span class="step-when">· Week 1</span></div>
+          <h3>Discover &amp; prioritise</h3>
+          <p>We map your workflows, systems and numbers, then rank the opportunities by likely operational value — so the first thing we build is the thing most worth building.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">02 <span class="step-when">· Weeks 2&ndash;6</span></div>
+          <h3>Design, build &amp; demo</h3>
+          <p>The solution is designed, built and tested — with regular demos during development so you see working software, not status reports. Documentation comes as standard.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">03 <span class="step-when">· Ongoing</span></div>
+          <h3>Deploy, train &amp; improve</h3>
+          <p>Once live, your team is trained on it, adoption is supported, and we measure what it's actually saving. From there, systems are refined and extended as your business grows.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ======= ABOUT / FOUNDER ======= -->
+  <!-- ======= ABOUT ======= -->
   <section class="section section-alt" id="about">
     <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">About Estara</span>
-        <h2>Founder-led from strategy through delivery.</h2>
-      </div>
-      <div class="founder-copy founder-copy-solo reveal">
-        <p>Estara is a London-based AI and software consultancy founded and led by James Gould, Managing Director. The senior technical lead remains directly involved in every engagement — from initial discovery through solution design, development and implementation — so decisions get made quickly and nothing is lost in handoffs.</p>
-        <p>Where a project genuinely requires additional expertise, trusted specialists are brought in for that work — with Estara retaining full responsibility and accountability for delivery from first call to final result.</p>
-        <a href="https://www.linkedin.com/in/james-gould-26240a345/" target="_blank" rel="noopener" class="card-link">Connect with James on LinkedIn <span aria-hidden="true">&rarr;</span></a>
-      </div>
-      <div class="bento bento-about">
-        <div class="bento-tile panel reveal">
-          <h3>Direct technical access</h3>
-          <p>Questions go straight to the technical lead designing and building your systems — no account managers in between. Decisions get made quickly, and accountability stays in one place.</p>
+      <div class="about-grid">
+        <div class="about-copy reveal">
+          <span class="eyebrow">About Estara</span>
+          <h2>Founder-led from strategy through delivery.</h2>
+          <p style="margin-top:22px;">Estara is a London-based AI and software consultancy founded and led by James Gould, Managing Director. The senior technical lead remains directly involved in every engagement — from initial discovery through solution design, development and implementation — so decisions get made quickly and nothing is lost in handoffs.</p>
+          <p>Where a project genuinely requires additional expertise, trusted specialists are brought in for that work — with Estara retaining full responsibility and accountability for delivery from first call to final result.</p>
+          <a href="https://www.linkedin.com/in/james-gould-26240a345/" target="_blank" rel="noopener" class="card-link">Connect with James on LinkedIn <span aria-hidden="true">&rarr;</span></a>
         </div>
-        <div class="bento-tile panel reveal">
-          <h3>Commercial value before complexity</h3>
-          <p>We assess the likely operational value before recommending a build — and we'll tell you when the business case is weak, including "don't build this".</p>
-        </div>
-        <div class="bento-tile panel reveal">
-          <h3>Build vs buy, honestly</h3>
-          <p>Tailored to your business — custom-built where it matters, integrated with proven tools where that's the smarter call. You pay for outcomes, not unnecessary engineering.</p>
-        </div>
-        <div class="bento-tile panel reveal">
-          <h3>Insured &amp; GDPR-aware</h3>
-          <p>Secure development practices, controlled access and encrypted services, supported by Professional Indemnity, Public &amp; Product Liability and Cyber Liability insurance. <a href="/security/" class="tile-link">Security &amp; data &rarr;</a></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======= PROCESS (TIMELINE) ======= -->
-  <section class="section" id="process">
-    <div class="container container-narrow">
-      <div class="section-head reveal">
-        <span class="eyebrow">How it works</span>
-        <h2>From first call to shipped &amp; improving</h2>
-      </div>
-      <div class="timeline" id="timeline">
-        <div class="timeline-line" aria-hidden="true"><span id="timelineFill"></span></div>
-        <div class="tl-step reveal">
-          <div class="tl-node" aria-hidden="true">01</div>
-          <div class="tl-body">
-            <h3>Discover &amp; prioritise <span class="tl-tag">Week 1</span></h3>
-            <p>We map your workflows, systems and numbers, then rank the opportunities by likely operational value — so the first thing we build is the thing most worth building.</p>
-          </div>
-        </div>
-        <div class="tl-step reveal">
-          <div class="tl-node" aria-hidden="true">02</div>
-          <div class="tl-body">
-            <h3>Design, build &amp; demo <span class="tl-tag">Weeks 2&ndash;6</span></h3>
-            <p>The solution is designed, built and tested — with regular demos during development so you see working software, not status reports. Documentation comes as standard.</p>
-          </div>
-        </div>
-        <div class="tl-step reveal">
-          <div class="tl-node" aria-hidden="true">03</div>
-          <div class="tl-body">
-            <h3>Deploy, train &amp; improve <span class="tl-tag">Ongoing</span></h3>
-            <p>Once live, your team is trained on it, adoption is supported, and we measure what it's actually saving. From there, systems are refined and extended as your business grows.</p>
-          </div>
-        </div>
-      </div>
-      <div class="section-cta reveal">
-        <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Book a strategy call <span class="arrow" aria-hidden="true">&rarr;</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======= DELIVERY MODEL COMPARISON ======= -->
-  <section class="section section-alt" id="compare">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">An honest comparison</span>
-        <h2>Choose the right delivery model</h2>
-        <p>Each of these can be the right answer. Here's who each one genuinely suits.</p>
-      </div>
-      <div class="compare-wrap reveal">
-        <table class="compare">
-          <thead>
-            <tr>
-              <th></th>
-              <th class="compare-hero">Estara AI</th>
-              <th>Traditional agency</th>
-              <th>Internal hire</th>
-              <th>DIY tools</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Best suited to</td>
-              <td class="compare-hero">Businesses that need strategy and implementation together, without hiring for it</td>
-              <td>Large engagements needing broad resourcing across many workstreams</td>
-              <td>Continuous, full-time technical demand</td>
-              <td>Simple, low-risk workflows</td>
-            </tr>
-            <tr>
-              <td>How you work</td>
-              <td class="compare-hero">Directly with the technical lead designing and building your systems</td>
-              <td>Through account and project managers, with more handovers</td>
-              <td>In-house, embedded in your team</td>
-              <td>Your own team learns and builds</td>
-            </tr>
-            <tr>
-              <td>Cost structure</td>
-              <td class="compare-hero">Scoped projects or a monthly plan — scaled to what you need</td>
-              <td>Typically larger minimum engagements</td>
-              <td>Salary, employment costs and recruitment time</td>
-              <td>Low licence cost, high internal time cost</td>
-            </tr>
-            <tr>
-              <td>Worth knowing</td>
-              <td class="compare-hero">Capacity is finite — we take on a limited number of clients</td>
-              <td>More layers can mean slower decisions</td>
-              <td>Hard to cover strategy, build and support in one hire</td>
-              <td>You own maintenance when it breaks</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======= ENGAGEMENT MODELS + ONE-OFF PROJECTS ======= -->
-  <section class="section" id="engage">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Ways to work with us</span>
-        <h2>Project, retainer, or your own AI department.</h2>
-        <p>You don't need a subscription to commission a build — choose how much ownership you want Estara to take.</p>
-      </div>
-      <div class="cards-3 engage-cards">
-        <div class="card panel reveal">
-          <h3>One-off projects</h3>
-          <p>A defined build with a defined scope — an automation, an integration, an internal tool or a full platform. Scoped and priced before work begins.</p>
-        </div>
-        <div class="card panel reveal">
-          <h3>Ongoing plans</h3>
-          <p>Continuous implementation aligned to your current priorities — guidance on AI Advisory, or reserved monthly delivery capacity on AI Growth.</p>
-        </div>
-        <div class="card panel reveal">
-          <h3>Fractional AI department</h3>
-          <p>A dedicated technical lead who proactively finds opportunities, builds them and owns your systems — without the cost of hiring internally.</p>
-        </div>
-      </div>
-      <div class="project-prices panel reveal">
-        <h3>One-off project starting points</h3>
-        <p class="project-prices-note">Indicative starting points, not fixed quotes — every project is scoped and priced individually before any work begins.</p>
-        <ul class="price-list">
-          <li><span>AI &amp; operations audit</span><span class="price-list-amt">from &pound;600</span></li>
-          <li><span>Single workflow automation</span><span class="price-list-amt">from &pound;1,250</span></li>
-          <li><span>Multi-system or integrated workflow</span><span class="price-list-amt">from &pound;2,500</span></li>
-          <li><span>Internal software tool</span><span class="price-list-amt">from &pound;4,500</span></li>
-          <li><span>Larger bespoke platforms</span><span class="price-list-amt">individually scoped</span></li>
+        <ul class="principles reveal">
+          <li>
+            <h3>Direct technical access</h3>
+            <p>Questions go straight to the technical lead designing and building your systems — no account managers in between. Decisions get made quickly, and accountability stays in one place.</p>
+          </li>
+          <li>
+            <h3>Commercial value before complexity</h3>
+            <p>We assess the likely operational value before recommending a build — and we'll tell you when the business case is weak, including "don't build this".</p>
+          </li>
+          <li>
+            <h3>Build vs buy, honestly</h3>
+            <p>Tailored to your business — custom-built where it matters, integrated with proven tools where that's the smarter call. You pay for outcomes, not unnecessary engineering.</p>
+          </li>
+          <li>
+            <h3>Insured &amp; GDPR-aware</h3>
+            <p>Secure development practices, controlled access and encrypted services, supported by Professional Indemnity, Public &amp; Product Liability and Cyber Liability insurance. <a href="/security/" class="tile-link">Security &amp; data &rarr;</a></p>
+          </li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- ======= PLANS / PRICING ======= -->
-  <section class="section section-alt" id="plans">
+  <!-- ======= PLANS ======= -->
+  <section class="section" id="plans">
     <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Ongoing plans</span>
-        <h2>Choose how much ownership Estara takes.</h2>
-        <p>From expert direction, to consistent monthly implementation, to a fully outsourced AI &amp; software function.</p>
+      <div class="split-head reveal">
+        <div class="section-head">
+          <span class="eyebrow">Pricing</span>
+          <h2>Project, retainer, or your own AI department.</h2>
+        </div>
+        <p>You don't need a subscription to commission a build — one-off projects are scoped and priced individually. Ongoing plans are for businesses that want continuous improvement.</p>
       </div>
       <div class="plans">
         <article class="price-card panel reveal">
           <h3>AI Advisory</h3>
-          <p class="plan-bestfor">Best for teams needing expert direction</p>
-          <p class="plan-tagline">Guidance and continuity — expert eyes on your operations every month, with implementation quoted separately when you're ready to build.</p>
+          <p class="plan-bestfor">Expert direction, every month</p>
           <div class="price">&pound;349<span class="price-per">/month</span></div>
           <p class="plan-term">Month-to-month &middot; no minimum term</p>
-          <ul class="card-list">
-            <li>Monthly AI strategy session</li>
-            <li>Ongoing AI &amp; software recommendations</li>
-            <li>Quarterly team enablement session</li>
-            <li>Estara client workspace</li>
-            <li>Email guidance — 2-business-day response target</li>
-            <li>Maintenance guidance for eligible Estara-built systems</li>
-          </ul>
-          <p class="plan-foot">Implementation quoted separately, with preferential access for Advisory members.</p>
+          <p class="plan-summary">Monthly strategy session, ongoing recommendations, quarterly team enablement and email guidance — with implementation quoted separately when you're ready to build.</p>
           <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-ghost btn-block">Join AI Advisory</a>
         </article>
         <article class="price-card panel card-featured reveal">
           <div class="card-badge">Most popular</div>
           <h3>AI Growth</h3>
-          <p class="plan-bestfor">Best for businesses implementing improvements every month</p>
-          <p class="plan-tagline">Consistent monthly delivery — automations, integrations and internal tools shipped and supported, focused on the highest-impact opportunities.</p>
+          <p class="plan-bestfor">Consistent monthly implementation</p>
           <div class="price"><span class="price-from">from</span>&pound;1,250<span class="price-per">/month</span></div>
           <p class="plan-term">Three-month initial engagement &middot; &pound;250 onboarding</p>
-          <ul class="card-list">
-            <li>Initial AI &amp; operations assessment included</li>
-            <li>Includes up to 10 hours of reserved monthly delivery capacity for automation, integrations &amp; internal tools</li>
-            <li>Monthly strategy &amp; delivery review</li>
-            <li>Quarterly AI roadmap</li>
-            <li>Testing, documentation &amp; implementation support</li>
-            <li>Priority technical support — 1-business-day response target</li>
-          </ul>
+          <p class="plan-summary">Up to 10 hours of reserved monthly delivery capacity for automations, integrations and internal tools — plus monthly reviews, a quarterly roadmap and priority support.</p>
           <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary btn-block">Book a Growth consultation</a>
         </article>
         <article class="price-card panel reveal">
           <h3>Fractional AI Department</h3>
-          <p class="plan-bestfor">Best for businesses needing ongoing technical ownership</p>
-          <p class="plan-tagline">Your outsourced AI &amp; software team — proactive technical ownership without hiring internally.</p>
+          <p class="plan-bestfor">Outsourced technical ownership</p>
           <div class="price"><span class="price-from">from</span>&pound;2,950<span class="price-per">/month</span></div>
           <p class="plan-term">Three-month initial engagement &middot; &pound;500 onboarding</p>
-          <ul class="card-list">
-            <li>Dedicated technical lead</li>
-            <li>Initial AI &amp; operations assessment included</li>
-            <li>Includes up to 24 hours of reserved monthly delivery capacity, allocated to your current priorities</li>
-            <li>Proactive identification of operational opportunities</li>
-            <li>Monthly delivery &amp; roadmap reviews, quarterly planning</li>
-            <li>Staff training &amp; adoption support</li>
-            <li>Enhanced support — 4-business-hour response target</li>
-          </ul>
-          <p class="plan-foot">A custom AI assistant can be included subject to agreed scope, or delivered as a flagship project.</p>
+          <p class="plan-summary">A dedicated technical lead with up to 24 hours of reserved monthly capacity, proactively finding opportunities, building them and owning your systems.</p>
           <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-ghost btn-block">Discuss an AI partnership</a>
         </article>
       </div>
-      <p class="plans-details-link reveal"><a href="/pricing/">See the full plan comparison &amp; details &rarr;</a></p>
+      <p class="plans-details-link reveal"><a href="/pricing/">See full plan details, one-off project prices and FAQ &rarr;</a></p>
     </div>
   </section>
 
@@ -512,7 +339,7 @@
     2. Replace the name and role in <figcaption>.
     3. Duplicate a whole <figure>...</figure> block to add more, or delete blocks you don't need.
   -->
-  <section class="section" id="testimonials">
+  <section class="section section-alt" id="testimonials">
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Client results</span>
@@ -535,64 +362,24 @@
     </div>
   </section>
 
-  <!-- ======= FAQ ======= -->
-  <section class="section section-alt" id="faq">
-    <div class="container container-narrow">
-      <div class="section-head reveal">
-        <span class="eyebrow">FAQ</span>
-        <h2>Questions? Answers.</h2>
-      </div>
-      <div class="faq-list">
-        <details class="faq-item reveal">
-          <summary>What types of businesses do you work with?<span class="faq-icon" aria-hidden="true"></span></summary>
-          <p>Growing UK businesses — particularly operational, service, construction, logistics and similar companies where valuable processes are still run through spreadsheets, email, repetitive admin or disconnected systems. If that sounds like your week, we can probably help.</p>
-        </details>
-        <details class="faq-item reveal">
-          <summary>Do I need a subscription to commission a project?<span class="faq-icon" aria-hidden="true"></span></summary>
-          <p>No. One-off projects are scoped and priced individually — see the starting points above. Plans exist for businesses that want ongoing guidance or consistent monthly delivery, and plan members get preferential access to project capacity.</p>
-        </details>
-        <details class="faq-item reveal">
-          <summary>Do you build custom software or use existing tools?<span class="faq-icon" aria-hidden="true"></span></summary>
-          <p>Both. We make an honest build-versus-buy call for every problem: custom-built where it matters, integrated with proven tools where that's the smarter option. The goal is the most effective, cost-efficient outcome — not the most billable one.</p>
-        </details>
-        <details class="faq-item reveal">
-          <summary>What counts against monthly delivery capacity?<span class="faq-icon" aria-hidden="true"></span></summary>
-          <p>Everything involved in shipping working systems: discovery, meetings, solution design, development, configuration, testing, documentation, deployment, revisions, troubleshooting and project communication. Capacity reserves your place each month and doesn't roll over — it's what keeps response times fast.</p>
-        </details>
-        <details class="faq-item reveal">
-          <summary>Are there any costs on top of the monthly price?<span class="faq-icon" aria-hidden="true"></span></summary>
-          <p>Third-party costs — AI model usage, automation platform subscriptions, hosting, databases, SMS or email delivery, and other external licences — are billed separately and always with your approval first. Larger builds may need a separate project scope, with your plan capacity counting towards the work.</p>
-        </details>
-        <details class="faq-item reveal">
-          <summary>How long does a typical project take?<span class="faq-icon" aria-hidden="true"></span></summary>
-          <p>Smaller workflow automations ship in a few weeks; larger software builds can take several months. Either way you get clear timelines upfront and regular demos throughout, so you're watching working software take shape — not waiting on a reveal.</p>
-        </details>
-        <details class="faq-item reveal">
-          <summary>Can you improve our existing systems and workflows?<span class="faq-icon" aria-hidden="true"></span></summary>
-          <p>Yes — most of our work enhances what you already have with better design, automation and integration. Full rebuilds only happen when they're genuinely justified.</p>
-        </details>
-        <details class="faq-item reveal">
-          <summary>What does the free strategy call involve?<span class="faq-icon" aria-hidden="true"></span></summary>
-          <p>Thirty minutes on your operations. We'll discuss your biggest operational bottleneck, identify the most promising areas for improvement and agree the most sensible next step — which is sometimes "don't build anything yet". No pitch deck, no pressure.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======= CTA BANNER ======= -->
+  <!-- ======= CTA ======= -->
   <section class="section" id="book">
     <div class="container">
       <div class="cta-panel reveal">
-        <span class="eyebrow">Free 30-minute strategy call</span>
-        <h2>Let's find the work worth removing.</h2>
-        <ul class="cta-list">
-          <li>We'll discuss your biggest operational bottleneck</li>
-          <li>Identify the most promising areas for improvement</li>
-          <li>Agree the most sensible next step — even if it's not us</li>
-        </ul>
-        <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary btn-xl">Book a strategy call <span class="arrow" aria-hidden="true">&rarr;</span></a>
-        <p class="cta-email">Prefer email? Send a short outline of your project to <a href="mailto:jamesgould@estaraai.com">jamesgould@estaraai.com</a></p>
-        <span class="cta-note">Fully insured — Professional Indemnity, Public &amp; Product Liability, Cyber Liability</span>
+        <div>
+          <span class="eyebrow">Free 30-minute strategy call</span>
+          <h2>Let's find the work worth removing.</h2>
+          <p class="cta-email">Prefer email? Send a short outline of your project to <a href="mailto:jamesgould@estaraai.com">jamesgould@estaraai.com</a></p>
+          <span class="cta-note">Fully insured — Professional Indemnity, Public &amp; Product Liability, Cyber Liability</span>
+        </div>
+        <div class="cta-side">
+          <ul class="cta-list">
+            <li>We'll discuss your biggest operational bottleneck</li>
+            <li>Identify the most promising areas for improvement</li>
+            <li>Agree the most sensible next step — even if it's not us</li>
+          </ul>
+          <a href="https://calendly.com/jamesgould-estaraai/30min" target="_blank" rel="noopener" class="btn btn-primary btn-xl">Book a strategy call <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -616,10 +403,10 @@
           <h4>Explore</h4>
           <a href="#services">Services</a>
           <a href="#work">Work</a>
-          <a href="#about">About</a>
           <a href="#process">Process</a>
-          <a href="#plans">Pricing</a>
-          <a href="#faq">FAQ</a>
+          <a href="#about">About</a>
+          <a href="/pricing/">Pricing</a>
+          <a href="/pricing/#faq">FAQ</a>
         </div>
         <div class="footer-col">
           <h4>Legal</h4>
@@ -637,6 +424,7 @@
     </div>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
