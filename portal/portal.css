@@ -5,32 +5,32 @@
    ============================================================ */
 
 :root {
-  --bg: #0a1128;
-  --bg-alt: #0d1530;
-  --surface: #101a38;
-  --surface-hover: #142044;
-  --inset: rgba(148, 163, 190, 0.05);
-  --border: rgba(148, 163, 190, 0.12);
-  --border-strong: rgba(148, 163, 190, 0.22);
-  --text: #e8ebf2;
-  --text-dim: #98a1b6;
-  --text-faint: #6b7488;
-  --accent: #7c9cf5;
-  --accent-deep: #5b7cfa;
-  --accent-soft: rgba(124, 156, 245, 0.1);
-  --green: #86d6ab;
-  --red: #e39aa7;
-  --amber: #e3c584;
+  --bg: #fafafa;
+  --bg-alt: #f3f3f4;
+  --surface: #ffffff;
+  --surface-hover: #ffffff;
+  --inset: rgba(10, 10, 10, 0.03);
+  --border: #e4e4e7;
+  --border-strong: #0a0a0a;
+  --text: #0a0a0a;
+  --text-dim: #6b6b74;
+  --text-faint: #9a9aa3;
+  --accent: #2f5bff;
+  --accent-deep: #1f44e0;
+  --accent-soft: #eef2ff;
+  --green: #1f9d63;
+  --red: #d63a2f;
+  --amber: #c98a12;
   --radius: 14px;
-  --font-display: "Fraunces", "Georgia", serif;
-  --font-body: "Figtree", "Helvetica Neue", sans-serif;
-  --font-mono: "JetBrains Mono", "SF Mono", monospace;
+  --font-display: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-body: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: "Geist", -apple-system, sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
   background:
-    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(124, 156, 245, 0.05) 0%, rgba(10, 17, 40, 0) 65%),
+    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(47, 91, 255, 0.05) 0%, rgba(250, 250, 250, 0) 65%),
     var(--bg);
   color: var(--text);
   font-family: var(--font-body);
@@ -40,7 +40,7 @@ body {
   min-height: 100vh;
 }
 
-h1, h2, h3 { font-family: var(--font-display); line-height: 1.18; letter-spacing: -0.01em; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.12; letter-spacing: -0.03em; font-weight: 600; }
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
 code { font-size: 0.85em; color: var(--accent); }
@@ -80,7 +80,7 @@ code { font-size: 0.85em; color: var(--accent); }
   white-space: nowrap;
 }
 .btn-primary { background: var(--accent-deep); color: #fff; }
-.btn-primary:hover { background: #6a89fb; }
+.btn-primary:hover { background: #0a0a0a; }
 .btn-primary:disabled { opacity: 0.55; cursor: wait; }
 .btn-ghost { border-color: var(--border-strong); color: var(--text-dim); background: transparent; }
 .btn-ghost:hover { border-color: var(--accent); color: var(--text); }
@@ -146,7 +146,7 @@ input, textarea, select {
 input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(124, 156, 245, 0.12);
+  box-shadow: 0 0 0 3px rgba(47, 91, 255, 0.18);
 }
 textarea { resize: vertical; }
 select { appearance: none; -webkit-appearance: none; cursor: pointer; }
@@ -158,8 +158,8 @@ form .btn { margin-top: 20px; }
   padding: 10px 14px;
   margin-top: 16px;
 }
-.form-error { color: var(--red); background: rgba(227, 154, 167, 0.08); border: 1px solid rgba(227, 154, 167, 0.25); }
-.form-ok { color: var(--green); background: rgba(134, 214, 171, 0.08); border: 1px solid rgba(134, 214, 171, 0.25); }
+.form-error { color: var(--red); background: rgba(214, 58, 47, 0.08); border: 1px solid rgba(214, 58, 47, 0.3); }
+.form-ok { color: var(--green); background: rgba(31, 157, 99, 0.08); border: 1px solid rgba(31, 157, 99, 0.3); }
 
 .form-row { display: flex; gap: 12px; }
 .form-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
@@ -169,7 +169,7 @@ form .btn { margin-top: 20px; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(10, 17, 40, 0.85);
+  background: rgba(250, 250, 250, 0.9);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
@@ -191,7 +191,7 @@ form .btn { margin-top: 20px; }
   text-transform: uppercase;
   color: var(--accent);
   background: var(--accent-soft);
-  border: 1px solid rgba(124, 156, 245, 0.25);
+  border: 1px solid rgba(47, 91, 255, 0.3);
   border-radius: 20px;
   padding: 3px 10px;
   margin-left: 4px;
@@ -367,8 +367,8 @@ form .btn { margin-top: 20px; }
   white-space: nowrap;
 }
 .chip-accent { color: var(--accent); background: var(--accent-soft); }
-.chip-green { color: var(--green); background: rgba(134, 214, 171, 0.1); }
-.chip-amber { color: var(--amber); background: rgba(227, 197, 132, 0.1); }
+.chip-green { color: var(--green); background: rgba(31, 157, 99, 0.12); }
+.chip-amber { color: var(--amber); background: rgba(201, 138, 18, 0.12); }
 .chip-dim { color: var(--text-dim); background: var(--inset); }
 
 /* ---------- Lists (updates, tickets, files, bookings, log) ----------
