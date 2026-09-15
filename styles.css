@@ -322,7 +322,9 @@ strong { font-weight: 600; color: var(--text); }
 /* ---------- Testimonials ---------- */
 .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .quotes-rows { grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--line); }
-.quotes-rows .quote { display: grid; grid-template-columns: 1fr 260px; gap: 48px; align-items: start; padding: 40px 0; border-bottom: 1px solid var(--line); }
+.quotes-rows .quote { display: grid; grid-template-columns: 260px 1fr; gap: 48px; align-items: start; padding: 40px 0; border-bottom: 1px solid var(--line); }
+.quotes-rows .quote blockquote { order: 2; }
+.quotes-rows .quote figcaption { order: 1; }
 .quotes-rows .quote blockquote { font-size: 1.2rem; line-height: 1.55; letter-spacing: -0.01em; max-width: 780px; }
 .quotes-rows .quote figcaption { margin: 0; padding: 0; border: none; }
 .quote-logo { height: 32px; width: auto; max-width: 120px; object-fit: contain; align-self: flex-start; margin-bottom: 12px; }
