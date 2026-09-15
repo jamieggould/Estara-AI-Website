@@ -186,18 +186,13 @@ strong { font-weight: 600; color: var(--text); }
 .hero-fade { display: none; }
 
 /* ---------- Proof: stats + clients + quote (hairline grid) ---------- */
-.proof { padding: 0 0 64px; }
+.proof { padding: 8px 0 64px; }
 .proof + .section { border-top: 1px solid var(--line); }
-.proof-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-  overflow: hidden;
-}
-.proof-grid .stat { padding: 34px 36px; border-right: 1px solid var(--line); display: flex; flex-direction: column; align-items: flex-start; }
-.proof-grid .stat:last-child { border-right: none; }
+.stats-strip { display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.stats-strip .stat { flex: 1 1 0; display: flex; flex-direction: row; align-items: baseline; gap: 12px; padding: 22px 28px 22px 0; }
+.stats-strip .stat + .stat { border-left: 1px solid var(--line); padding-left: 28px; }
+.stats-strip .stat-num { font-size: 1.9rem; }
+.stats-strip .stat-label { margin-top: 0; font-size: 0.92rem; max-width: none; }
 .stat-num { font-size: clamp(2.2rem, 3.6vw, 3rem); font-weight: 600; letter-spacing: -0.045em; line-height: 1; color: var(--text); }
 .stat-num-text { color: var(--blue); }
 .stat-label { font-size: 0.92rem; color: var(--text-dim); margin-top: 10px; max-width: 260px; }
@@ -326,6 +321,11 @@ strong { font-weight: 600; color: var(--text); }
 
 /* ---------- Testimonials ---------- */
 .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.quotes-rows { grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--line); }
+.quotes-rows .quote { display: grid; grid-template-columns: 1fr 260px; gap: 48px; align-items: start; padding: 40px 0; border-bottom: 1px solid var(--line); }
+.quotes-rows .quote blockquote { font-size: 1.2rem; line-height: 1.55; letter-spacing: -0.01em; max-width: 780px; }
+.quotes-rows .quote figcaption { margin: 0; padding: 0; border: none; }
+.quote-logo { height: 32px; width: auto; margin-bottom: 12px; }
 .quote { padding: 30px 30px 26px; display: flex; flex-direction: column; }
 .quote blockquote { color: var(--text); font-size: 1.02rem; line-height: 1.6; font-weight: 400; flex: 1; }
 .quote blockquote::before { content: "\201C"; color: var(--blue); }
@@ -485,9 +485,13 @@ section[id], footer[id], .plan-details { scroll-margin-top: 90px; }
 }
 @media (max-width: 900px) {
   .cards-3, .quotes, .plans, .cases-grid { grid-template-columns: 1fr; }
-  .proof-grid, .case-stats { grid-template-columns: 1fr; }
-  .proof-grid .stat, .case-stats .stat { border-right: none; border-bottom: 1px solid var(--line); }
-  .proof-grid .stat:last-child, .case-stats .stat:last-child { border-bottom: none; }
+  .quotes-rows .quote { grid-template-columns: 1fr; gap: 18px; padding: 28px 0; }
+  .case-stats { grid-template-columns: 1fr; }
+  .case-stats .stat { border-right: none; border-bottom: 1px solid var(--line); }
+  .case-stats .stat:last-child { border-bottom: none; }
+  .stats-strip { flex-direction: column; }
+  .stats-strip .stat + .stat { border-left: none; border-top: 1px solid var(--line); padding-left: 0; }
+  .stats-strip .stat { padding: 16px 0; }
   .steps { grid-template-columns: 1fr; }
   .step { border-right: none; margin-right: 0; padding: 28px 0 8px; border-bottom: 1px solid var(--line); }
   .step:last-child { border-bottom: none; }
