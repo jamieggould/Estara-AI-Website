@@ -224,7 +224,7 @@ strong { font-weight: 600; color: var(--text); }
 .case-logo { height: 34px; width: auto; flex: none; }
 .case-brand-lg { margin-top: 16px; gap: 16px; }
 .case-brand-lg .case-logo { height: 52px; }
-.case-site { color: var(--blue); font-weight: 500; white-space: nowrap; }
+.case-site { display: block; color: var(--blue); font-weight: 500; white-space: nowrap; margin-top: 4px; }
 .case-site:hover { text-decoration: underline; }
 
 /* ---------- Services (3 columns, hairline) ---------- */
@@ -327,7 +327,7 @@ strong { font-weight: 600; color: var(--text); }
 /* ---------- Testimonials ---------- */
 .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .quote { padding: 30px 30px 26px; display: flex; flex-direction: column; }
-.quote blockquote { color: var(--text); font-size: 1.02rem; line-height: 1.6; font-weight: 400; }
+.quote blockquote { color: var(--text); font-size: 1.02rem; line-height: 1.6; font-weight: 400; flex: 1; }
 .quote blockquote::before { content: "\201C"; color: var(--blue); }
 .quote blockquote::after { content: "\201D"; color: var(--blue); }
 .quote figcaption { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-direction: column; }
