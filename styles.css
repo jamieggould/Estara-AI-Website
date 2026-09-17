@@ -278,6 +278,9 @@ strong { font-weight: 600; color: var(--text); }
 /* ---------- About ---------- */
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
 .about-copy p { font-size: 1.12rem; color: var(--text-2); margin-bottom: 18px; line-height: 1.6; }
+.about-copy h1 { font-size: clamp(2.2rem, 4.2vw, 3.2rem); }
+.about-teaser { padding: 88px 0; }
+.about-teaser .split-head p { font-size: 1.12rem; color: var(--text-2); max-width: 520px; }
 .about-copy .card-link { margin-top: 6px; }
 .principles { list-style: none; border-top: 1px solid var(--line); }
 .principles li { padding: 22px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 220px 1fr; gap: 24px; }
